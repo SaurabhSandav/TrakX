@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/discover"
+        android:title="@string/drawer_group_discover">
+
+        <item
+            android:id="@+id/category_popular"
+            android:checked="true"
+            android:title="@string/drawer_sort_popular" />
+
+        <item
+            android:id="@+id/category_top_rated"
+            android:title="@string/drawer_sort_top_rated" />
+
+        <item
+            android:id="@+id/category_on_the_air"
+            android:title="@string/drawer_sort_on_the_air" />
+
+        <item
+            android:id="@+id/category_airing_today"
+            android:title="@string/drawer_sort_airing_today" />
+    </group>
+
+    <item
+        android:id="@+id/category_my_shows"
+        android:title="@string/drawer_my_shows" />
+
+</menu>

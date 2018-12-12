@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="tvShow"
+            type="com.redridgeapps.trakx.model.tmdb.TVShow" />
+
+    </data>
+
+    <FrameLayout
+        style="@style/SelectableItemBackground"
+        android:layout_width="@dimen/default_tv_show_poster_width"
+        android:layout_height="@dimen/default_tv_show_poster_height"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/iv_tv_show_list_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription='@{tvShow.name + " Poster"}'
+            android:scaleType="fitXY"
+            app:posterPath='@{tvShow.posterPath}' />
+
+    </FrameLayout>
+
+</layout>

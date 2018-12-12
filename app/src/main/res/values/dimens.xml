@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_tv_show_poster_width">170dp</dimen>
+    <dimen name="default_tv_show_poster_height">255dp</dimen>
+
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="common_margin">8dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+
+    <dimen name="widget_title_size">18sp</dimen>
+    <dimen name="widget_list_row_episode_title">16sp</dimen>
+    <dimen name="widget_list_row_text">14sp</dimen>
+
+</resources>

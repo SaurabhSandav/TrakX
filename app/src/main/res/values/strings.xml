@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">TrakX</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="drawer_group_discover">Discover</string>
+    <string name="drawer_my_shows">My Shows</string>
+    <string name="drawer_sort_popular">Popular</string>
+    <string name="drawer_sort_top_rated">Top Rated</string>
+    <string name="drawer_sort_on_the_air">On the Air</string>
+    <string name="drawer_sort_airing_today">Airing Today</string>
+
+    <string name="text_retry">Retry</string>
+    <string name="text_track">Track</string>
+    <string name="text_stop_tracking">Stop Tracking</string>
+
+    <string name="error_network_request_failure">Network request failed!</string>
 </resources>

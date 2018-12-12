@@ -1,0 +1,119 @@
+package com.redridgeapps.trakx.di.modules
+
+import android.app.Application
+import android.content.SharedPreferences
+import android.content.res.Resources
+import android.preference.PreferenceManager
+import androidx.room.Room
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.readystatesoftware.chuck.ChuckInterceptor
+import com.redridgeapps.trakx.api.TMDbInterceptor
+import com.redridgeapps.trakx.api.TMDbService
+import com.redridgeapps.trakx.db.AppDatabase
+import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
+import com.squareup.moshi.Moshi
+import dagger.Module
+import dagger.Provides
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
+
+@Module
+object AppModule {
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideResources(app: Application): Resources {
+        return app.resources
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(app: Application): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(app)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideTMDbInterceptor(): TMDbInterceptor {
+        return TMDbInterceptor()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideChuckInterceptor(app: Application): ChuckInterceptor {
+        return ChuckInterceptor(app)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(LongDateAdapter())
+            .build()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideCoroutineCallAdapterFactory(): CoroutineCallAdapterFactory {
+        return CoroutineCallAdapterFactory()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
+        return MoshiConverterFactory.create(moshi)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        tmDbInterceptor: TMDbInterceptor,
+        chuckInterceptor: ChuckInterceptor
+    ): OkHttpClient {
+        return OkHttpClient()
+            .newBuilder()
+            .addInterceptor(tmDbInterceptor)
+            .addInterceptor(chuckInterceptor)
+            .build()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        moshiCon: MoshiConverterFactory,
+        coroutineCallAdapter: CoroutineCallAdapterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(TMDbService.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(moshiCon)
+            .addCallAdapterFactory(coroutineCallAdapter)
+            .build()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideTMDbService(retrofit: Retrofit): TMDbService {
+        return retrofit.create(TMDbService::class.java)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideAppDatabase(app: Application): AppDatabase {
+        return Room.databaseBuilder(app, AppDatabase::class.java, AppDatabase.NAME).build()
+    }
+}

@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.redridgeapps.trakx">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,13 +18,73 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".screen.main.MainActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".screen.detail.DetailActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".screen.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".screen.main.MainActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".screen.episodelist.EpisodeListActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".screen.detail.DetailActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".screen.detail.DetailActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".screen.episode.EpisodeActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".screen.episodelist.EpisodeListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".screen.episodelist.EpisodeListActivity" />
+
+        </activity>
+
+        <receiver android:name=".screen.widget.UpcomingEpisodeWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/upcoming_episode_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".screen.widget.UpcomingEpisodeListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+                android:name="androidx.work.impl.WorkManagerInitializer"
+                android:authorities="${applicationId}.workmanager-init"
+                android:enabled="false"
+                android:exported="false"/>
 
     </application>
 
