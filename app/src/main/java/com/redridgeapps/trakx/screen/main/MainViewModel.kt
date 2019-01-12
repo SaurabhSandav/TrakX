@@ -65,12 +65,12 @@ class MainViewModel @Inject constructor(
                 id = it.id,
                 originalName = it.originalName,
                 name = it.name,
-                popularity = it.popularity.toFloat(),
+                popularity = it.popularity,
                 firstAirDate = it.firstAirDate,
                 backdropPath = it.backdropPath,
                 overview = it.overview,
                 posterPath = it.posterPath,
-                voteAverage = it.voteAverage.toFloat()
+                voteAverage = it.voteAverage
             )
         }
     }

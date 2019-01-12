@@ -48,12 +48,12 @@ class DetailViewModel @Inject constructor(
                     id = tvShow.id,
                     originalName = tvShow.originalName,
                     name = tvShow.name,
-                    popularity = tvShow.popularity.toDouble(),
+                    popularity = tvShow.popularity,
                     firstAirDate = tvShow.firstAirDate,
                     backdropPath = tvShow.backdropPath,
                     overview = tvShow.overview,
                     posterPath = tvShow.posterPath,
-                    voteAverage = tvShow.voteAverage.toDouble()
+                    voteAverage = tvShow.voteAverage
                 )
             }
         }
