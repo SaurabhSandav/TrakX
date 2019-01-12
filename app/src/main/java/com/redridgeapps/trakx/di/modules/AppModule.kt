@@ -5,8 +5,8 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
 import androidx.room.Room
+import com.ashokvarma.gander.GanderInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.readystatesoftware.chuck.ChuckInterceptor
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.AppDatabase
@@ -46,8 +46,10 @@ object AppModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideChuckInterceptor(app: Application): ChuckInterceptor {
-        return ChuckInterceptor(app)
+    fun provideGanderInterceptor(app: Application): GanderInterceptor {
+        return GanderInterceptor(app)
+            .showNotification(true)
+            .retainDataFor(GanderInterceptor.Period.FOREVER)
     }
 
     @JvmStatic
@@ -78,12 +80,12 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(
         tmDbInterceptor: TMDbInterceptor,
-        chuckInterceptor: ChuckInterceptor
+        ganderInterceptor: GanderInterceptor
     ): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
             .addInterceptor(tmDbInterceptor)
-            .addInterceptor(chuckInterceptor)
+            .addInterceptor(ganderInterceptor)
             .build()
     }
 

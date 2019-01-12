@@ -9,7 +9,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0-alpha08'
+        classpath 'com.android.tools.build:gradle:3.4.0-alpha10'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,7 +22,8 @@ allprojects {
         mavenCentral()
         jcenter {
             content {
-                includeGroup "com.firebase"
+
+                // LeakCanary
                 includeGroup "org.jetbrains.trove4j"
             }
         }
@@ -38,31 +39,32 @@ task clean(type: Delete) {
 }
 
 ext {
-    coroutines_version = '1.0.1'
+    coroutines_version = '1.1.0'
 
     junit_version = '4.12'
-    test_ext_junit_version = '1.0.0'
-    espresso_version = '3.1.0'
+    test_core_ktx = '1.1.0'
+    test_runner = '1.1.1'
+    test_ext_junit_version = '1.1.0'
+    espresso_version = '3.1.1'
 
-    material_components_version = '1.0.0'
+    material_version = '1.1.0-alpha02'
 
-    jetpack_activity_version = '1.0.0-alpha02'
+    jetpack_activity_ktx_version = '1.0.0-alpha03'
     jetpack_appcompat_version = '1.1.0-alpha01'
-    jetpack_core_version = '1.1.0-alpha02'
-    jetpack_core_ktx_version = '1.0.1'
+    jetpack_core_ktx_version = '1.1.0-alpha03'
+    jetpack_fragment_ktx_version = '1.1.0-alpha03'
     jetpack_recyclerview_version = '1.1.0-alpha01'
-    jetpack_recyclerview_selection_version = '1.1.0-alpha01'
     constraint_layout_version = '1.1.3'
 
-    lifecycle_version = '2.0.0'
+    aac_lifecycle_version = '2.1.0-alpha01'
 
     room_version = '2.1.0-alpha03'
 
     paging_version = '2.1.0-rc01'
 
-    work_version = "1.0.0-alpha13"
+    work_version = "1.0.0-beta01"
 
-    dagger_version = '2.19'
+    dagger_version = '2.20'
 
     moshi_version = '1.8.0'
 
@@ -71,9 +73,9 @@ ext {
 
     picasso_version = '2.71828'
 
-    okhttp_version = '3.12.0'
+    okhttp_version = '3.12.1'
 
-    leak_canary_version = '1.6.2'
+    leak_canary_version = '1.6.3'
 
-    chuck_version = '1.1.0'
+    gander_version = '1.4.0'
 }
