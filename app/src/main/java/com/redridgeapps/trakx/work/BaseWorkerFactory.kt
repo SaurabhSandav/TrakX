@@ -21,14 +21,18 @@ class BaseWorkerFactory @Inject constructor(
         workerParameters: WorkerParameters
     ): ListenableWorker? {
 
-        val modelClass = Class.forName(workerClassName).asSubclass(BaseWorker::class.java)
+        val modelClass: Class<out BaseWorker>
+
+        try {
+            modelClass = Class.forName(workerClassName).asSubclass(BaseWorker::class.java) as Class<out BaseWorker>
+        } catch (e: ClassNotFoundException) {
+            return null
+        }
 
         val creator = creators[modelClass] ?: creators.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)
         }?.value
 
-        creator ?: throw IllegalArgumentException("Unknown Worker class $modelClass")
-
-        return creator.get().create(appContext, workerParameters)
+        return creator?.get()?.create(appContext, workerParameters) ?: return null
     }
 }
