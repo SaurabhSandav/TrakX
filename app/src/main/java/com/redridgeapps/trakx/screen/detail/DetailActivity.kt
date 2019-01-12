@@ -18,7 +18,6 @@ import com.redridgeapps.trakx.screen.widget.UpcomingEpisodeWidget
 class DetailActivity : BaseActivity<DetailViewModel, ActivityDetailBinding>() {
 
     private var isTracked = false
-    private var firstLaunch = true
     private lateinit var tvShow: TVShow
     private lateinit var tvShowDetailAdapter: TVShowDetailAdapter
 
@@ -87,10 +86,6 @@ class DetailActivity : BaseActivity<DetailViewModel, ActivityDetailBinding>() {
     }
 
     private fun updateWidgets() {
-        if (firstLaunch) {
-            firstLaunch = false
-            return
-        }
 
         val name = ComponentName(applicationContext, UpcomingEpisodeWidget::class.java)
         val appWidgetManager = AppWidgetManager.getInstance(applicationContext)

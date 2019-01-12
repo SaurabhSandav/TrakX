@@ -7,6 +7,8 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import com.redridgeapps.trakx.Database
+import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.AppDatabase
 import com.redridgeapps.trakx.model.tmdb.Episode
@@ -19,9 +21,12 @@ import javax.inject.Singleton
 class UpcomingEpisodeSyncWorker @Inject constructor(
     private val tmDbService: TMDbService,
     private val appDatabase: AppDatabase,
+    database: Database,
     appContext: Context,
     params: WorkerParameters
 ) : BaseWorker(appContext, params) {
+
+    private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
 
     override suspend fun doWork(): Result {
 
@@ -33,7 +38,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
             .flatMap { it.episodes }
             .filterUpcoming()
 
-        appDatabase.upcomingEpisodeDao().deleteAllAndInsertOfShow(upcomingEpisodes)
+        upcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes)
 
         return Result.success()
     }
@@ -48,14 +53,34 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
         }
     }
 
+    private fun UpcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes: List<Episode>) = transaction {
+
+        deleteAll()
+
+        upcomingEpisodes.forEach {
+            insert(
+                id = it.id,
+                airDate = it.airDate,
+                episodeNumber = it.episodeNumber,
+                name = it.name,
+                overview = it.overview,
+                seasonNumber = it.seasonNumber,
+                showId = it.showId,
+                stillPath = it.stillPath,
+                voteAverage = it.voteAverage
+            )
+        }
+    }
+
     @Singleton
     class Factory @Inject constructor(
         private val tmDbService: TMDbService,
-        private val appDatabase: AppDatabase
+        private val appDatabase: AppDatabase,
+        private val database: Database
     ) : BaseWorker.Factory {
 
         override fun create(appContext: Context, params: WorkerParameters): UpcomingEpisodeSyncWorker {
-            return UpcomingEpisodeSyncWorker(tmDbService, appDatabase, appContext, params)
+            return UpcomingEpisodeSyncWorker(tmDbService, appDatabase, database, appContext, params)
         }
     }
 

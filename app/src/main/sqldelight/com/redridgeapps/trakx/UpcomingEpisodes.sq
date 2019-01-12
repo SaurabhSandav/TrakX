@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS UpcomingEpisode (
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+airDate INTEGER NOT NULL,
+episodeNumber INTEGER AS Int NOT NULL,
+name TEXT NOT NULL,
+overview TEXT NOT NULL,
+seasonNumber INTEGER AS Int NOT NULL,
+showId INTEGER AS Int NOT NULL,
+stillPath TEXT,
+voteAverage REAL NOT NULL
+);
+
+insert:
+INSERT OR REPLACE
+INTO UpcomingEpisode (id, airDate, episodeNumber, name, overview, seasonNumber, showId, stillPath, voteAverage)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+upcomingEpisodes:
+SELECT * FROM UpcomingEpisode ORDER BY airDate ASC;
+
+deleteOfShowID:
+DELETE FROM UpcomingEpisode WHERE showId = :showId;
+
+deleteAll:
+DELETE FROM UpcomingEpisode;
+

@@ -1,17 +1,13 @@
 package com.redridgeapps.trakx.model.tmdb
 
 import androidx.recyclerview.widget.DiffUtil
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.redridgeapps.trakx.utils.moshi.LongDate
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "UpcomingEpisode")
 data class Episode(
 
-    @PrimaryKey
     @Json(name = "id")
     val id: Int,
 
