@@ -21,9 +21,6 @@ SELECT * FROM TrackedShow;
 getShow:
 SELECT * FROM TrackedShow WHERE id = ?;
 
-deleteWithID:
-DELETE FROM TrackedShow WHERE id = ?;
-
 countTrackedShows:
 SELECT count(*) FROM TrackedShow;
 
@@ -31,3 +28,6 @@ trackedShowPaged:
 SELECT *
 FROM TrackedShow
 LIMIT :limit OFFSET :offset;
+
+deleteWithID:
+DELETE FROM TrackedShow WHERE id = ?;
