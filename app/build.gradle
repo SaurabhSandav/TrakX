@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.squareup.sqldelight'
 
 android {
     compileSdkVersion 28
@@ -111,4 +112,8 @@ dependencies {
     // Gander
     debugImplementation "com.ashokvarma.android:gander:$gander_version"
     releaseImplementation "com.ashokvarma.android:gander-no-op:$gander_version"
+
+    // SQLDelight
+    implementation "com.squareup.sqldelight:android-driver:1.0.0"
+    implementation "com.squareup.sqldelight:android-paging-extensions:1.0.0"
 }

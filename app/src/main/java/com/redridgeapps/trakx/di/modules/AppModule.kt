@@ -7,11 +7,14 @@ import android.preference.PreferenceManager
 import androidx.room.Room
 import com.ashokvarma.gander.GanderInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.AppDatabase
 import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
 import com.squareup.moshi.Moshi
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -117,5 +120,19 @@ object AppModule {
     @Singleton
     fun provideAppDatabase(app: Application): AppDatabase {
         return Room.databaseBuilder(app, AppDatabase::class.java, AppDatabase.NAME).build()
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideSqlDriver(app: Application): SqlDriver {
+        return AndroidSqliteDriver(Database.Schema, app)
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideDatabase(driver: SqlDriver): Database {
+        return Database(driver)
     }
 }
