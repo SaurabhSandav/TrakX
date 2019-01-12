@@ -10,7 +10,6 @@ import androidx.work.WorkerParameters
 import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.db.AppDatabase
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.utils.DateTimeUtils
 import java.util.*
@@ -20,20 +19,20 @@ import javax.inject.Singleton
 
 class UpcomingEpisodeSyncWorker @Inject constructor(
     private val tmDbService: TMDbService,
-    private val appDatabase: AppDatabase,
     database: Database,
     appContext: Context,
     params: WorkerParameters
 ) : BaseWorker(appContext, params) {
 
+    private val trackedShowQueries = database.trackedShowQueries
     private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
 
     override suspend fun doWork(): Result {
 
-        val trackedShows = appDatabase.trackedShowDao().trackedShows()
+        val trackedShows = trackedShowQueries.trackedShows().executeAsList()
 
         val upcomingEpisodes = trackedShows
-            .map { tmDbService.getTVDetail(it.showId).await() }
+            .map { tmDbService.getTVDetail(it.id).await() }
             .map { tmDbService.getSeasonDetail(it.id, it.seasons.last().seasonNumber).await() }
             .flatMap { it.episodes }
             .filterUpcoming()
@@ -75,12 +74,11 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
     @Singleton
     class Factory @Inject constructor(
         private val tmDbService: TMDbService,
-        private val appDatabase: AppDatabase,
         private val database: Database
     ) : BaseWorker.Factory {
 
         override fun create(appContext: Context, params: WorkerParameters): UpcomingEpisodeSyncWorker {
-            return UpcomingEpisodeSyncWorker(tmDbService, appDatabase, database, appContext, params)
+            return UpcomingEpisodeSyncWorker(tmDbService, database, appContext, params)
         }
     }
 

@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS TrackedShow (
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+originalName TEXT NOT NULL,
+name TEXT NOT NULL,
+popularity REAL NOT NULL,
+firstAirDate INTEGER NOT NULL,
+backdropPath TEXT,
+overview TEXT NOT NULL,
+posterPath TEXT,
+voteAverage REAL NOT NULL
+);
+
+insert:
+INSERT OR REPLACE
+INTO TrackedShow (id, originalName, name, popularity, firstAirDate, backdropPath, overview, posterPath, voteAverage)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+trackedShows:
+SELECT * FROM TrackedShow;
+
+getShow:
+SELECT * FROM TrackedShow WHERE id = ?;
+
+deleteWithID:
+DELETE FROM TrackedShow WHERE id = ?;
+
+countTrackedShows:
+SELECT count(*) FROM TrackedShow;
+
+trackedShowPaged:
+SELECT *
+FROM TrackedShow
+LIMIT :limit OFFSET :offset;

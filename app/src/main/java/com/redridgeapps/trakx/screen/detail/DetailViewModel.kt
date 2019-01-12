@@ -2,13 +2,9 @@ package com.redridgeapps.trakx.screen.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.db.AppDatabase
-import com.redridgeapps.trakx.db.TrackedShowDao
-import com.redridgeapps.trakx.model.local.TrackedShow
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
@@ -22,36 +18,53 @@ import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
     private val tmDbService: TMDbService,
-    appDatabase: AppDatabase,
     database: Database
 ) : BaseViewModel() {
 
-    private val trackedShowDao: TrackedShowDao = appDatabase.trackedShowDao()
+    private val trackedShowQueries = database.trackedShowQueries
     private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
+    private val _isShowTrackedLiveData = MutableLiveData<Boolean>()
     private val _upcomingEpisodesUpdatedLiveData = MutableLiveData<Unit>()
     private val _tvShowDetailLiveData = MutableLiveData<TVShowDetail>()
     private lateinit var tvShow: TVShow
 
-    lateinit var isShowTrackedLiveData: LiveData<Boolean>
+    val isShowTrackedLiveData: LiveData<Boolean> = _isShowTrackedLiveData
     val upcomingEpisodeUpdatedLiveData: LiveData<Unit> = _upcomingEpisodesUpdatedLiveData
     val tvShowDetailLiveData: LiveData<TVShowDetail> = _tvShowDetailLiveData
 
     fun setTVShow(newTVShow: TVShow) {
         tvShow = newTVShow
 
-        isShowTrackedLiveData = Transformations.map(trackedShowDao.getShow(newTVShow.id)) { it.isNotEmpty() }
+        launch { isShowTracked() }
         fetchTVShowDetail()
     }
 
     fun trackShow(enableTracking: Boolean) = launch {
-        val trackedShow = TrackedShow(showId = tvShow.id)
 
         withContext(Dispatchers.IO) {
-            if (enableTracking) trackedShowDao.insert(trackedShow)
-            else trackedShowDao.deleteOfShowID(tvShow.id)
+            if (!enableTracking) trackedShowQueries.deleteWithID(tvShow.id)
+            else {
+                trackedShowQueries.insert(
+                    id = tvShow.id,
+                    originalName = tvShow.originalName,
+                    name = tvShow.name,
+                    popularity = tvShow.popularity.toDouble(),
+                    firstAirDate = tvShow.firstAirDate,
+                    backdropPath = tvShow.backdropPath,
+                    overview = tvShow.overview,
+                    posterPath = tvShow.posterPath,
+                    voteAverage = tvShow.voteAverage.toDouble()
+                )
+            }
         }
 
+        _isShowTrackedLiveData.value = enableTracking
         fetchUpcomingEpisodes(enableTracking)
+    }
+
+    private suspend fun isShowTracked() = withContext(Dispatchers.IO) {
+        val trackedShow = trackedShowQueries.getShow(tvShow.id).executeAsOneOrNull()
+        _isShowTrackedLiveData.postValue(trackedShow != null)
     }
 
     private fun fetchTVShowDetail() = launch {

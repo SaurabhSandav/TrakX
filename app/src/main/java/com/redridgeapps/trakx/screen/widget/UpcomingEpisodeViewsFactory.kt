@@ -5,18 +5,15 @@ import android.widget.RemoteViewsService
 import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.UpcomingEpisode
-import com.redridgeapps.trakx.db.AppDatabase
 import com.redridgeapps.trakx.utils.DateTimeUtils
-import kotlinx.coroutines.runBlocking
 
 class UpcomingEpisodeViewsFactory(
     private val packageName: String,
-    appDatabase: AppDatabase,
     database: Database
 ) : RemoteViewsService.RemoteViewsFactory {
 
     private var widgetEpisodeList = mutableListOf<WidgetEpisode>()
-    private val trackedShowDao = appDatabase.trackedShowDao()
+    private val trackedShowQueries = database.trackedShowQueries
     private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
 
     override fun onCreate() {}
@@ -36,16 +33,14 @@ class UpcomingEpisodeViewsFactory(
     }
 
     override fun onDataSetChanged() {
-        runBlocking {
 
-            val episodeList = upcomingEpisodesQueries.upcomingEpisodes().executeAsList()
+        val episodeList = upcomingEpisodesQueries.upcomingEpisodes().executeAsList()
 
-            widgetEpisodeList.clear()
+        widgetEpisodeList.clear()
 
-            episodeList.mapTo(widgetEpisodeList) {
-                val trackedShow = trackedShowDao.getShowSingle(it.showId)
-                WidgetEpisode(trackedShow.name, it)
-            }
+        episodeList.mapTo(widgetEpisodeList) {
+            val trackedShow = trackedShowQueries.getShow(it.showId).executeAsOne()
+            WidgetEpisode(trackedShow.name, it)
         }
     }
 

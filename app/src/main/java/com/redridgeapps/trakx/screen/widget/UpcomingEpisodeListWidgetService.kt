@@ -6,15 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViewsService
 import com.redridgeapps.trakx.Database
-import com.redridgeapps.trakx.db.AppDatabase
 import dagger.android.AndroidInjection
-
 import javax.inject.Inject
 
 class UpcomingEpisodeListWidgetService : RemoteViewsService() {
-
-    @Inject
-    lateinit var appDatabase: AppDatabase
 
     @Inject
     lateinit var database: Database
@@ -25,7 +20,7 @@ class UpcomingEpisodeListWidgetService : RemoteViewsService() {
     }
 
     override fun onGetViewFactory(intent: Intent): RemoteViewsService.RemoteViewsFactory {
-        return UpcomingEpisodeViewsFactory(packageName, appDatabase, database)
+        return UpcomingEpisodeViewsFactory(packageName, database)
     }
 
     companion object {
