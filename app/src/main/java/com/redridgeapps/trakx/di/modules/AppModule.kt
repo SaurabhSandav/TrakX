@@ -126,7 +126,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSqlDriver(app: Application): SqlDriver {
-        return AndroidSqliteDriver(Database.Schema, app)
+        return AndroidSqliteDriver(Database.Schema, app, "AppDatabase.db")
     }
 
     @JvmStatic
