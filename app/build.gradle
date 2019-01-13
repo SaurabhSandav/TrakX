@@ -73,11 +73,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$aac_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$aac_lifecycle_version"
 
-    // Room
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-coroutines:$room_version"
-
     // Paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 

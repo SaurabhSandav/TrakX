@@ -59,8 +59,6 @@ ext {
 
     aac_lifecycle_version = '2.1.0-alpha01'
 
-    room_version = '2.1.0-alpha03'
-
     paging_version = '2.1.0-rc01'
 
     work_version = "1.0.0-beta01"
