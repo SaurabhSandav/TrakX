@@ -64,7 +64,14 @@ class TVShowBoundaryCallback(
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).await().results
-        val cachedCategoryList = tvShowList.map { CachedCategory(it.id, newPage, position++, requestType.name) }
+        val cachedCategoryList = tvShowList.map {
+            CachedCategory(
+                showId = it.id,
+                position = position++,
+                page = newPage,
+                cacheCategory = requestType.name
+            )
+        }
 
         lastPage = newPage
 
