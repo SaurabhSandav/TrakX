@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS CachedShow (
+id INTEGER AS Int NOT NULL PRIMARY KEY,
+originalName TEXT NOT NULL,
+name TEXT NOT NULL,
+popularity REAL AS Float NOT NULL,
+firstAirDate INTEGER NOT NULL,
+backdropPath TEXT,
+overview TEXT NOT NULL,
+posterPath TEXT,
+voteAverage REAL AS Float NOT NULL
+);
+
+insert:
+INSERT OR REPLACE
+INTO CachedShow (id, originalName, name, popularity, firstAirDate, backdropPath, overview, posterPath, voteAverage)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);

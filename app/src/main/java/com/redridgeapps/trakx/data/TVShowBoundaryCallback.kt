@@ -1,10 +1,10 @@
 package com.redridgeapps.trakx.data
 
 import androidx.paging.PagedList
+import com.redridgeapps.trakx.CachedCollectionQueries
+import com.redridgeapps.trakx.CachedShowQueries
+import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.db.AppDatabase
-import com.redridgeapps.trakx.db.CachedCategoryDao
-import com.redridgeapps.trakx.db.ShowCacheDao
 import com.redridgeapps.trakx.model.local.CachedCategory
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowCollection
@@ -22,13 +22,12 @@ import kotlin.coroutines.CoroutineContext
 
 class TVShowBoundaryCallback(
     tmDbService: TMDbService,
-    private val appDatabase: AppDatabase,
+    private val database: Database,
     override val coroutineContext: CoroutineContext,
     private val requestType: RequestType
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope {
 
-    private val showCacheDao: ShowCacheDao = appDatabase.showCacheDao()
-    private val cachedCategoryDao: CachedCategoryDao = appDatabase.cachedCategoryDao()
+    private val cachedCollectionQueries = database.cachedCollectionQueries
     private val request: (Int) -> Deferred<TVShowCollection>
     private var position = 1
     private var lastPage: Int? = null
@@ -59,7 +58,9 @@ class TVShowBoundaryCallback(
 
     private suspend fun fetchTVShows() {
 
-        val previousPage = lastPage ?: cachedCategoryDao.getLastPage(requestType.name)
+        val previousPage = lastPage ?: withContext(Dispatchers.IO) {
+            cachedCollectionQueries.getLastPage(requestType.name).executeAsOneOrNull()
+        }
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).await().results
@@ -67,11 +68,38 @@ class TVShowBoundaryCallback(
 
         lastPage = newPage
 
-        withContext(Dispatchers.IO) {
-            appDatabase.runInTransaction {
-                cachedCategoryDao.insertList(cachedCategoryList)
-                showCacheDao.insertList(tvShowList)
-            }
+        database.cacheCategory(tvShowList, cachedCategoryList)
+    }
+
+    private suspend fun Database.cacheCategory(
+        tvShowList: List<TVShow>,
+        cachedCategoryList: List<CachedCategory>
+    ) = withContext(Dispatchers.IO) {
+        transaction {
+            cachedShowQueries.cacheShowToDB(tvShowList)
+            cachedCollectionQueries.cacheCollectionToDB(cachedCategoryList)
+        }
+    }
+
+    private fun CachedShowQueries.cacheShowToDB(tvShowList: List<TVShow>) {
+        tvShowList.forEach {
+            insert(
+                id = it.id,
+                originalName = it.originalName,
+                name = it.name,
+                popularity = it.popularity,
+                firstAirDate = it.firstAirDate,
+                backdropPath = it.backdropPath,
+                overview = it.overview,
+                posterPath = it.posterPath,
+                voteAverage = it.voteAverage
+            )
+        }
+    }
+
+    private fun CachedCollectionQueries.cacheCollectionToDB(cachedCategoryList: List<CachedCategory>) {
+        cachedCategoryList.forEach {
+            insert(showId = it.showId, position = it.position, page = it.page, cacheCategory = it.cacheCategory)
         }
     }
 }

@@ -4,13 +4,11 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
-import androidx.room.Room
 import com.ashokvarma.gander.GanderInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.db.AppDatabase
 import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.android.AndroidSqliteDriver
@@ -113,13 +111,6 @@ object AppModule {
     @Singleton
     fun provideTMDbService(retrofit: Retrofit): TMDbService {
         return retrofit.create(TMDbService::class.java)
-    }
-
-    @JvmStatic
-    @Provides
-    @Singleton
-    fun provideAppDatabase(app: Application): AppDatabase {
-        return Room.databaseBuilder(app, AppDatabase::class.java, AppDatabase.NAME).build()
     }
 
     @JvmStatic
