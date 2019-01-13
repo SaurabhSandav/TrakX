@@ -28,6 +28,7 @@ class MainViewModel @Inject constructor(
     private lateinit var requestType: RequestType
     private val trackedShowQueries = database.trackedShowQueries
     private val cachedCollectionQueries = database.cachedCollectionQueries
+    private val cachedShowQueries = database.cachedShowQueries
     private val config = Config(pageSize = PAGE_SIZE, initialLoadSizeHint = PAGE_SIZE * 2)
 
     private val shows: DataSource.Factory<Int, TVShow>
@@ -97,6 +98,7 @@ class MainViewModel @Inject constructor(
 
     private suspend fun clearCache() = withContext(Dispatchers.IO) {
         cachedCollectionQueries.deleteAll()
+        cachedShowQueries.deleteAll()
     }
 }
 
