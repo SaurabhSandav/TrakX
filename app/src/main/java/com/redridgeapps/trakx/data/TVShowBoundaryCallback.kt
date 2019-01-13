@@ -5,7 +5,6 @@ import com.redridgeapps.trakx.CachedCollectionQueries
 import com.redridgeapps.trakx.CachedShowQueries
 import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.model.local.CachedCategory
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowCollection
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -110,3 +109,5 @@ class TVShowBoundaryCallback(
         }
     }
 }
+
+private data class CachedCategory(val showId: Int, val position: Int, val page: Int, val cacheCategory: String)
