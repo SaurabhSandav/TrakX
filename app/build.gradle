@@ -109,6 +109,6 @@ dependencies {
     releaseImplementation "com.ashokvarma.android:gander-no-op:$gander_version"
 
     // SQLDelight
-    implementation "com.squareup.sqldelight:android-driver:1.0.0"
-    implementation "com.squareup.sqldelight:android-paging-extensions:1.0.0"
+    implementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
+    implementation "com.squareup.sqldelight:android-paging-extensions:$sqldelight_version"
 }

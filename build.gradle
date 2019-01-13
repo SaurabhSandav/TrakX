@@ -77,4 +77,6 @@ ext {
     leak_canary_version = '1.6.3'
 
     gander_version = '1.4.0'
+
+    sqldelight_version = '1.0.0'
 }
