@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS CachedCategory (
+CREATE TABLE IF NOT EXISTS CachedCollection (
 showId INTEGER AS Int NOT NULL,
 position INTEGER AS Int NOT NULL,
 page INTEGER AS Int NOT NULL,
@@ -6,26 +6,26 @@ cacheCategory TEXT NOT NULL,
 PRIMARY KEY(showId, cacheCategory)
 );
 
-CREATE INDEX CachedCategory_position ON CachedCategory(position);
+CREATE INDEX CachedCollection_position ON CachedCollection(position);
 
 insert:
 INSERT OR REPLACE
-INTO CachedCategory (showId, position, page, cacheCategory)
+INTO CachedCollection (showId, position, page, cacheCategory)
 VALUES (?, ?, ?, ?);
 
 getLastPage:
-SELECT page FROM CachedCategory WHERE cacheCategory = :category ORDER BY page DESC LIMIT 1;
+SELECT page FROM CachedCollection WHERE cacheCategory = :category ORDER BY page DESC LIMIT 1;
 
 countCachedShowPaged:
-SELECT count(*) FROM CachedCategory
-WHERE CachedCategory.cacheCategory = :category;
+SELECT count(*) FROM CachedCollection
+WHERE CachedCollection.cacheCategory = :category;
 
 cachedShowPaged:
 SELECT CachedShow.* FROM CachedShow
-INNER JOIN CachedCategory ON CachedCategory.showId = CachedShow.id
-WHERE CachedCategory.cacheCategory = :category
-ORDER BY CachedCategory.position ASC
+INNER JOIN CachedCollection ON CachedCollection.showId = CachedShow.id
+WHERE CachedCollection.cacheCategory = :category
+ORDER BY CachedCollection.position ASC
 LIMIT :limit OFFSET :offset;
 
 deleteAll:
-DELETE FROM CachedCategory;
+DELETE FROM CachedCollection;

@@ -64,7 +64,7 @@ class TVShowBoundaryCallback(
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).await().results
-        val cachedCategoryList = tvShowList.map {
+        val cachedCollection = tvShowList.map {
             CachedCategory(
                 showId = it.id,
                 position = position++,
@@ -75,16 +75,16 @@ class TVShowBoundaryCallback(
 
         lastPage = newPage
 
-        database.cacheCategory(tvShowList, cachedCategoryList)
+        database.cacheCategory(tvShowList, cachedCollection)
     }
 
     private suspend fun Database.cacheCategory(
         tvShowList: List<TVShow>,
-        cachedCategoryList: List<CachedCategory>
+        cachedCollection: List<CachedCategory>
     ) = withContext(Dispatchers.IO) {
         transaction {
             cachedShowQueries.cacheShowToDB(tvShowList)
-            cachedCollectionQueries.cacheCollectionToDB(cachedCategoryList)
+            cachedCollectionQueries.cacheCollectionToDB(cachedCollection)
         }
     }
 
@@ -104,8 +104,8 @@ class TVShowBoundaryCallback(
         }
     }
 
-    private fun CachedCollectionQueries.cacheCollectionToDB(cachedCategoryList: List<CachedCategory>) {
-        cachedCategoryList.forEach {
+    private fun CachedCollectionQueries.cacheCollectionToDB(cachedCollection: List<CachedCategory>) {
+        cachedCollection.forEach {
             insert(showId = it.showId, position = it.position, page = it.page, cacheCategory = it.cacheCategory)
         }
     }
