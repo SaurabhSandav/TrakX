@@ -6,6 +6,8 @@ cacheCategory TEXT NOT NULL,
 PRIMARY KEY(showId, cacheCategory)
 );
 
+CREATE INDEX CachedCategory_position ON CachedCategory(position);
+
 insert:
 INSERT OR REPLACE
 INTO CachedCategory (showId, position, page, cacheCategory)

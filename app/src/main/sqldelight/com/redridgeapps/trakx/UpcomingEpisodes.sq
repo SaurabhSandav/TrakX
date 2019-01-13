@@ -10,6 +10,10 @@ stillPath TEXT,
 voteAverage REAL NOT NULL
 );
 
+CREATE INDEX UpcomingEpisode_showId ON UpcomingEpisode(showId);
+
+CREATE INDEX UpcomingEpisode_airDate ON UpcomingEpisode(airDate);
+
 insert:
 INSERT OR REPLACE
 INTO UpcomingEpisode (id, airDate, episodeNumber, name, overview, seasonNumber, showId, stillPath, voteAverage)
