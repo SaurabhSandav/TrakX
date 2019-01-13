@@ -3,7 +3,8 @@ showId INTEGER AS Int NOT NULL,
 position INTEGER AS Int NOT NULL,
 page INTEGER AS Int NOT NULL,
 cacheCategory TEXT NOT NULL,
-PRIMARY KEY(showId, cacheCategory)
+PRIMARY KEY(showId, cacheCategory),
+FOREIGN KEY(showId) REFERENCES CachedShow(id)
 );
 
 CREATE INDEX CachedCollection_position ON CachedCollection(position);

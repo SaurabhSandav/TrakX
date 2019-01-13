@@ -124,6 +124,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(driver: SqlDriver): Database {
+        driver.execute(null, "PRAGMA foreign_keys = ON;", 0)
         return Database(driver)
     }
 }
