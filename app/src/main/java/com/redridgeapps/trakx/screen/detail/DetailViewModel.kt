@@ -10,6 +10,7 @@ import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
 import com.redridgeapps.trakx.screen.base.BaseViewModel
 import com.redridgeapps.trakx.utils.DateTimeUtils
+import com.squareup.sqldelight.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -58,13 +59,19 @@ class DetailViewModel @Inject constructor(
             }
         }
 
-        _isShowTrackedLiveData.value = enableTracking
         fetchUpcomingEpisodes(enableTracking)
     }
 
     private suspend fun isShowTracked() = withContext(Dispatchers.IO) {
-        val trackedShow = trackedShowQueries.getShow(tvShow.id).executeAsOneOrNull()
-        _isShowTrackedLiveData.postValue(trackedShow != null)
+        val query = trackedShowQueries.getShow(tvShow.id)
+
+        query.addListener(object : Query.Listener {
+            override fun queryResultsChanged() {
+                _isShowTrackedLiveData.postValue(query.executeAsList().isNotEmpty())
+            }
+        })
+
+        query.notifyDataChanged()
     }
 
     private fun fetchTVShowDetail() = launch {
