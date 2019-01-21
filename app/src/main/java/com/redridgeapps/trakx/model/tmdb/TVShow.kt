@@ -2,19 +2,15 @@ package com.redridgeapps.trakx.model.tmdb
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.redridgeapps.trakx.utils.moshi.LongDate
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity
 @JsonClass(generateAdapter = true)
 data class TVShow(
 
-    @PrimaryKey
     @Json(name = "id")
     val id: Int,
 
