@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.episodelist
+package com.redridgeapps.trakx.ui.episodelist
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityEpisodeListBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.screen.base.BaseActivity
-import com.redridgeapps.trakx.screen.episode.EpisodeActivity
+import com.redridgeapps.trakx.ui.base.BaseActivity
+import com.redridgeapps.trakx.ui.episode.EpisodeActivity
 
 class EpisodeListActivity : BaseActivity<EpisodeListViewModel, ActivityEpisodeListBinding>() {
 

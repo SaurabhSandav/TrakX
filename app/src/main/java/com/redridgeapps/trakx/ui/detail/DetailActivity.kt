@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.detail
+package com.redridgeapps.trakx.ui.detail
 
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.screen.base.BaseActivity
-import com.redridgeapps.trakx.screen.episodelist.EpisodeListActivity
-import com.redridgeapps.trakx.screen.widget.UpcomingEpisodeWidget
+import com.redridgeapps.trakx.ui.base.BaseActivity
+import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
+import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 
 class DetailActivity : BaseActivity<DetailViewModel, ActivityDetailBinding>() {
 

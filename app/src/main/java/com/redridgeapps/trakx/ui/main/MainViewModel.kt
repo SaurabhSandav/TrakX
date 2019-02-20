@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.main
+package com.redridgeapps.trakx.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.paging.Config
@@ -9,7 +9,7 @@ import com.redridgeapps.trakx.Database
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.screen.base.BaseViewModel
+import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
 import com.squareup.sqldelight.android.paging.QueryDataSourceFactory

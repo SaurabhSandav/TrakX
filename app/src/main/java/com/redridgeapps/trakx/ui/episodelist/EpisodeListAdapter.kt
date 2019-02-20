@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.episodelist
+package com.redridgeapps.trakx.ui.episodelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

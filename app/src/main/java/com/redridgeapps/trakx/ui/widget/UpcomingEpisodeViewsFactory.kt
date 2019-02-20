@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.widget
+package com.redridgeapps.trakx.ui.widget
 
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService

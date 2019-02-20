@@ -1,10 +1,10 @@
 package com.redridgeapps.trakx.di.modules
 
-import com.redridgeapps.trakx.screen.detail.DetailActivity
-import com.redridgeapps.trakx.screen.episode.EpisodeActivity
-import com.redridgeapps.trakx.screen.episodelist.EpisodeListActivity
-import com.redridgeapps.trakx.screen.main.MainActivity
-import com.redridgeapps.trakx.screen.widget.UpcomingEpisodeListWidgetService
+import com.redridgeapps.trakx.ui.detail.DetailActivity
+import com.redridgeapps.trakx.ui.episode.EpisodeActivity
+import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
+import com.redridgeapps.trakx.ui.main.MainActivity
+import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeListWidgetService
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.ClassKey

@@ -1,11 +1,11 @@
-package com.redridgeapps.trakx.screen.base
+package com.redridgeapps.trakx.ui.base
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.redridgeapps.trakx.screen.common.ActivityErrorActions
+import com.redridgeapps.trakx.ui.common.ActivityErrorActions
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 

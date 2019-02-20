@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.episode
+package com.redridgeapps.trakx.ui.episode
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import androidx.core.content.ContextCompat
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityEpisodeBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.screen.base.BaseActivity
+import com.redridgeapps.trakx.ui.base.BaseActivity
 
 class EpisodeActivity : BaseActivity<EpisodeViewModel, ActivityEpisodeBinding>() {
 

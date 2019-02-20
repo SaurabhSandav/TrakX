@@ -1,10 +1,10 @@
-package com.redridgeapps.trakx.screen.common
+package com.redridgeapps.trakx.ui.common
 
 import android.view.View
 import androidx.lifecycle.LiveData
 import com.google.android.material.snackbar.Snackbar
 import com.redridgeapps.trakx.R
-import com.redridgeapps.trakx.screen.base.BaseActivity
+import com.redridgeapps.trakx.ui.base.BaseActivity
 import com.redridgeapps.trakx.utils.RetryableError
 
 object ActivityErrorActions {

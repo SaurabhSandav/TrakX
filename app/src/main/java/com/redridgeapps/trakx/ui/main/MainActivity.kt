@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.main
+package com.redridgeapps.trakx.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityMainBinding
-import com.redridgeapps.trakx.screen.base.BaseActivity
-import com.redridgeapps.trakx.screen.detail.DetailActivity
+import com.redridgeapps.trakx.ui.base.BaseActivity
+import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker

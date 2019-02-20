@@ -2,11 +2,11 @@ package com.redridgeapps.trakx.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.redridgeapps.trakx.screen.base.ViewModelFactory
-import com.redridgeapps.trakx.screen.detail.DetailViewModel
-import com.redridgeapps.trakx.screen.episode.EpisodeViewModel
-import com.redridgeapps.trakx.screen.episodelist.EpisodeListViewModel
-import com.redridgeapps.trakx.screen.main.MainViewModel
+import com.redridgeapps.trakx.ui.base.ViewModelFactory
+import com.redridgeapps.trakx.ui.detail.DetailViewModel
+import com.redridgeapps.trakx.ui.episode.EpisodeViewModel
+import com.redridgeapps.trakx.ui.episodelist.EpisodeListViewModel
+import com.redridgeapps.trakx.ui.main.MainViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

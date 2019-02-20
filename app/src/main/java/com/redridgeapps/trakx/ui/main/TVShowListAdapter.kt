@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.main
+package com.redridgeapps.trakx.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

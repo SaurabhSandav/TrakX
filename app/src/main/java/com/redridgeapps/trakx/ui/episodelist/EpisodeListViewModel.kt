@@ -1,10 +1,10 @@
-package com.redridgeapps.trakx.screen.episodelist
+package com.redridgeapps.trakx.ui.episodelist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.SeasonDetail
-import com.redridgeapps.trakx.screen.base.BaseViewModel
+import com.redridgeapps.trakx.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

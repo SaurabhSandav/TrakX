@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.common
+package com.redridgeapps.trakx.ui.common
 
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner

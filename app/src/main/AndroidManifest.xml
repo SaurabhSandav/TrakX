@@ -19,7 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".screen.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -32,41 +32,41 @@
         </activity>
 
         <activity
-            android:name=".screen.detail.DetailActivity"
+            android:name=".ui.detail.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".screen.main.MainActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".screen.main.MainActivity" />
+                android:value=".ui.main.MainActivity" />
 
         </activity>
 
         <activity
-            android:name=".screen.episodelist.EpisodeListActivity"
+            android:name=".ui.episodelist.EpisodeListActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".screen.detail.DetailActivity">
+            android:parentActivityName=".ui.detail.DetailActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".screen.detail.DetailActivity" />
+                android:value=".ui.detail.DetailActivity" />
 
         </activity>
 
         <activity
-            android:name=".screen.episode.EpisodeActivity"
+            android:name=".ui.episode.EpisodeActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".screen.episodelist.EpisodeListActivity"
+            android:parentActivityName=".ui.episodelist.EpisodeListActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".screen.episodelist.EpisodeListActivity" />
+                android:value=".ui.episodelist.EpisodeListActivity" />
 
         </activity>
 
-        <receiver android:name=".screen.widget.UpcomingEpisodeWidget">
+        <receiver android:name=".ui.widget.UpcomingEpisodeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -77,7 +77,7 @@
         </receiver>
 
         <service
-            android:name=".screen.widget.UpcomingEpisodeListWidgetService"
+            android:name=".ui.widget.UpcomingEpisodeListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <provider

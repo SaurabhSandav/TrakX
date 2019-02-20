@@ -1,7 +1,7 @@
-package com.redridgeapps.trakx.screen.base
+package com.redridgeapps.trakx.ui.base
 
 import androidx.lifecycle.ViewModel
-import com.redridgeapps.trakx.screen.common.SingleLiveEvent
+import com.redridgeapps.trakx.ui.common.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

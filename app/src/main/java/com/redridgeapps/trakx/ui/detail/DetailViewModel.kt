@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.detail
+package com.redridgeapps.trakx.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
-import com.redridgeapps.trakx.screen.base.BaseViewModel
+import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.DateTimeUtils
 import com.squareup.sqldelight.Query
 import kotlinx.coroutines.Dispatchers

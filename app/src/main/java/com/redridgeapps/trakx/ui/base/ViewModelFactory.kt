@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.screen.base
+package com.redridgeapps.trakx.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
