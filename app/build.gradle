@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'com.squareup.sqldelight'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -73,6 +74,10 @@ dependencies {
     implementation Lifecycle.LIVEDATA_KTX
     implementation Lifecycle.VIEWMODEL_KTX
     implementation Lifecycle.COMMON_JAVA8
+
+    // Navigation
+    implementation Navigation.FRAGMENT_KTX
+    implementation Navigation.UI_KTX
 
     // Paging
     implementation Paging.RUNTIME_KTX

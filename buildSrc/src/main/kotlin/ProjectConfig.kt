@@ -66,6 +66,14 @@ object Lifecycle {
     const val COMMON_JAVA8 = "androidx.lifecycle:lifecycle-common-java8:$VERSION"
 }
 
+object Navigation {
+    private const val VERSION = "1.0.0-beta02"
+
+    const val FRAGMENT_KTX = "android.arch.navigation:navigation-fragment-ktx:$VERSION"
+    const val UI_KTX = "android.arch.navigation:navigation-ui-ktx:$VERSION"
+    const val SAFE_ARGS_GRADLE_PLUGIN = "android.arch.navigation:navigation-safe-args-gradle-plugin:$VERSION"
+}
+
 object Paging {
     private const val VERSION = "2.1.0"
 
