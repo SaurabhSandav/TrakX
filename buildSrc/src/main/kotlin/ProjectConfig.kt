@@ -54,7 +54,6 @@ object Jetpack {
     const val CORE_KTX = "androidx.core:core-ktx:$CORE_KTX_VERSION"
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:$FRAGMENT_KTX_VERSION"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview:$RECYCLERVIEW_VERSION"
-    const val RECYCLERVIEW_SELECTION = "androidx.recyclerview:recyclerview-selection:$RECYCLERVIEW_VERSION"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 }
 
