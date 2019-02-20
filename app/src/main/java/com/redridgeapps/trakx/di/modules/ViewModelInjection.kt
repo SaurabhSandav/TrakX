@@ -6,7 +6,7 @@ import com.redridgeapps.trakx.ui.base.ViewModelFactory
 import com.redridgeapps.trakx.ui.detail.DetailViewModel
 import com.redridgeapps.trakx.ui.episode.EpisodeViewModel
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListViewModel
-import com.redridgeapps.trakx.ui.main.MainViewModel
+import com.redridgeapps.trakx.ui.tvshowlist.TVShowListViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -32,8 +32,8 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ViewModelKey(TVShowListViewModel::class)
+    abstract fun bindMainViewModel(viewModel: TVShowListViewModel): ViewModel
 
     @Binds
     @IntoMap

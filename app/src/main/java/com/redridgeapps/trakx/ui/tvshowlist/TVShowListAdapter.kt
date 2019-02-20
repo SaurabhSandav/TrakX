@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.ui.main
+package com.redridgeapps.trakx.ui.tvshowlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -19,7 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.tvshowlist.TVShowListActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -34,12 +34,12 @@
         <activity
             android:name=".ui.detail.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.main.MainActivity"
+            android:parentActivityName=".ui.tvshowlist.TVShowListActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity" />
+                android:value=".ui.tvshowlist.TVShowListActivity" />
 
         </activity>
 

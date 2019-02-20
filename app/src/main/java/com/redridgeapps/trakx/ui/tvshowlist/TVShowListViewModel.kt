@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.ui.main
+package com.redridgeapps.trakx.ui.tvshowlist
 
 import androidx.lifecycle.LiveData
 import androidx.paging.Config
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class TVShowListViewModel @Inject constructor(
     private val tmDbService: TMDbService,
     private val database: Database
 ) : BaseViewModel() {

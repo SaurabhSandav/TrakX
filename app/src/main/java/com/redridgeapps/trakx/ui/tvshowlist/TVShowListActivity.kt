@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.ui.main
+package com.redridgeapps.trakx.ui.tvshowlist
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -7,21 +7,21 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
-import com.redridgeapps.trakx.databinding.ActivityMainBinding
+import com.redridgeapps.trakx.databinding.ActivityTvShowListBinding
 import com.redridgeapps.trakx.ui.base.BaseActivity
 import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
+class TVShowListActivity : BaseActivity<TVShowListViewModel, ActivityTvShowListBinding>(),
     NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var tvShowListAdapter: TVShowListAdapter
 
-    override val layoutResId = R.layout.activity_main
+    override val layoutResId = R.layout.activity_tv_show_list
 
-    override val viewModelClass = MainViewModel::class.java
+    override val viewModelClass = TVShowListViewModel::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,9 +61,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
 
         tvShowListAdapter.submitList(null)
         viewModel.apply {
-            tvShowPagedListLiveData.removeObservers(this@MainActivity)
+            tvShowPagedListLiveData.removeObservers(this@TVShowListActivity)
             setRequestType(requestType)
-            tvShowPagedListLiveData.observe(this@MainActivity, tvShowListAdapter::submitList)
+            tvShowPagedListLiveData.observe(this@TVShowListActivity, tvShowListAdapter::submitList)
         }
 
 
@@ -100,18 +100,18 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(),
         val itemWidth = fullWidth / columns
 
         tvShowListAdapter = TVShowListAdapter(itemWidth) {
-            startActivity(DetailActivity.createIntent(this@MainActivity, it))
+            startActivity(DetailActivity.createIntent(this@TVShowListActivity, it))
         }
 
         binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(this@MainActivity, columns)
+            layoutManager = GridLayoutManager(this@TVShowListActivity, columns)
             setHasFixedSize(true)
             adapter = tvShowListAdapter
         }
 
         viewModel.tvShowPagedListLiveData.apply {
-            removeObservers(this@MainActivity)
-            observe(this@MainActivity, tvShowListAdapter::submitList)
+            removeObservers(this@TVShowListActivity)
+            observe(this@TVShowListActivity, tvShowListAdapter::submitList)
         }
     }
 }
