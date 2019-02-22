@@ -2,7 +2,7 @@ package com.redridgeapps.trakx.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.redridgeapps.trakx.ui.base.DaggerViewModelFactory
+import com.redridgeapps.trakx.ui.base.dagger.DaggerViewModelFactory
 import com.redridgeapps.trakx.ui.detail.DetailViewModel
 import com.redridgeapps.trakx.ui.episode.EpisodeViewModel
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListViewModel
