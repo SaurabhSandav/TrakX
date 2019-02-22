@@ -12,7 +12,6 @@ import com.redridgeapps.trakx.ui.base.BaseActivity
 import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
-import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker
 
 class TVShowListActivity : BaseActivity<TVShowListViewModel, ActivityTvShowListBinding>(),
     NavigationView.OnNavigationItemSelectedListener {
@@ -25,9 +24,6 @@ class TVShowListActivity : BaseActivity<TVShowListViewModel, ActivityTvShowListB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Schedule Sync
-        UpcomingEpisodeSyncWorker.scheduleDaily()
 
         viewModel.setRequestType(Constants.DEFAULT_CATEGORY_MAIN)
 

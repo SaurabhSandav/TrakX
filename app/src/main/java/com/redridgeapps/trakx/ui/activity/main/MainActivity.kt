@@ -14,6 +14,7 @@ import com.redridgeapps.trakx.utils.Constants.RequestType.ON_THE_AIR
 import com.redridgeapps.trakx.utils.Constants.RequestType.POPULAR
 import com.redridgeapps.trakx.utils.Constants.RequestType.TOP_RATED
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
+import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker
 import dagger.android.AndroidInjection
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AndroidInjection.inject(this)
 
         super.onCreate(savedInstanceState)
+
+        // Schedule Sync
+        UpcomingEpisodeSyncWorker.scheduleDaily()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
