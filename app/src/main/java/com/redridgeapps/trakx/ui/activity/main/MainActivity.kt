@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentFactory
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityMainBinding
@@ -16,14 +17,19 @@ import com.redridgeapps.trakx.utils.Constants.RequestType.TOP_RATED
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
 import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker
 import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    @Inject
+    lateinit var fragmentFactory: FragmentFactory
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
+        supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)
 
