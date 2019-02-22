@@ -4,6 +4,7 @@ import android.app.Application
 import com.redridgeapps.trakx.App
 import com.redridgeapps.trakx.di.modules.AndroidComponentBuilder
 import com.redridgeapps.trakx.di.modules.AppModule
+import com.redridgeapps.trakx.di.modules.FragmentBuilder
 import com.redridgeapps.trakx.di.modules.ViewModelFactoryModule
 import com.redridgeapps.trakx.di.modules.WorkerFactoryModule
 import dagger.BindsInstance
@@ -17,6 +18,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         AndroidComponentBuilder::class,
+        FragmentBuilder::class,
         AppModule::class,
         ViewModelFactoryModule::class,
         WorkerFactoryModule::class
