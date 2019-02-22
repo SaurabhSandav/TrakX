@@ -1,5 +1,5 @@
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha04"
+    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha05"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "1.0.0-beta02"
+    private const val VERSION = "1.0.0-rc01"
 
     const val FRAGMENT_KTX = "android.arch.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "android.arch.navigation:navigation-ui-ktx:$VERSION"
@@ -81,7 +81,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "1.0.0-rc01"
+    private const val VERSION = "1.0.0-rc02"
 
     const val RUNTIME_KTX = "android.arch.work:work-runtime-ktx:$VERSION"
 }
