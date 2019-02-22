@@ -5,7 +5,6 @@ import com.redridgeapps.trakx.ui.activity.main.MainActivity
 import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.ui.episode.EpisodeActivity
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
-import com.redridgeapps.trakx.ui.tvshowlist.TVShowListActivity
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeListWidgetService
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -20,10 +19,6 @@ abstract class AndroidComponentBuilder {
     @PerActivity
     @ContributesAndroidInjector
     abstract fun bindMainActivity(): MainActivity
-
-    @ClassKey(TVShowListActivity::class)
-    @ContributesAndroidInjector
-    abstract fun bindTVShowListActivity(): TVShowListActivity
 
     @ClassKey(DetailActivity::class)
     @ContributesAndroidInjector
