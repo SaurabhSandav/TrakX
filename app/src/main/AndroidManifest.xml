@@ -19,8 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.tvshowlist.TVShowListActivity"
-            android:launchMode="singleTop"
+            android:name=".ui.activity.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -30,6 +29,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".ui.tvshowlist.TVShowListActivity"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".ui.detail.DetailActivity"
@@ -81,10 +84,10 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <provider
-                android:name="androidx.work.impl.WorkManagerInitializer"
-                android:authorities="${applicationId}.workmanager-init"
-                android:enabled="false"
-                android:exported="false"/>
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            android:enabled="false"
+            android:exported="false" />
 
     </application>
 

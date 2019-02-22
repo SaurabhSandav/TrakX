@@ -1,5 +1,7 @@
 package com.redridgeapps.trakx.di.modules
 
+import com.redridgeapps.trakx.di.PerActivity
+import com.redridgeapps.trakx.ui.activity.main.MainActivity
 import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.ui.episode.EpisodeActivity
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
@@ -14,6 +16,10 @@ import dagger.multibindings.ClassKey
 abstract class AndroidComponentBuilder {
 
     // Activities
+
+    @PerActivity
+    @ContributesAndroidInjector
+    abstract fun bindMainActivity(): MainActivity
 
     @ClassKey(TVShowListActivity::class)
     @ContributesAndroidInjector
