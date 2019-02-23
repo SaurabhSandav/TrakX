@@ -31,25 +31,14 @@
         </activity>
 
         <activity
-            android:name=".ui.episodelist.EpisodeListActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".ui.activity.main.MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.main.MainActivity" />
-
-        </activity>
-
-        <activity
             android:name=".ui.episode.EpisodeActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.episodelist.EpisodeListActivity"
+            android:parentActivityName=".ui.activity.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.episodelist.EpisodeListActivity" />
+                android:value=".ui.activity.main.MainActivity" />
 
         </activity>
 

@@ -10,13 +10,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
-import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
 
@@ -90,8 +90,7 @@ class DetailFragment @Inject constructor(
     }
 
     private fun launchEpisodeListActivity(seasonNumber: Int) {
-        val intent = EpisodeListActivity.createIntent(requireContext(), args.tvShow, seasonNumber)
-        startActivity(intent)
+        findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
     }
 
     private fun updateWidgets() {
