@@ -8,6 +8,23 @@
     <fragment
         android:id="@+id/TVShowListFragment"
         android:name="com.redridgeapps.trakx.ui.tvshowlist.TVShowListFragment"
-        tools:layout="@layout/fragment_tv_show_list" />
+        tools:layout="@layout/fragment_tv_show_list">
+
+        <action
+            android:id="@+id/to_DetailFragment"
+            app:destination="@id/DetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailFragment"
+        android:name="com.redridgeapps.trakx.ui.detail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="tvShow"
+            app:argType="com.redridgeapps.trakx.model.tmdb.TVShow" />
+
+    </fragment>
 
 </navigation>

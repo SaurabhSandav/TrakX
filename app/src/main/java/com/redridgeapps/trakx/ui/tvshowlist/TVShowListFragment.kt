@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.activity.main.MainViewModel
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
-import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import javax.inject.Inject
@@ -58,7 +58,7 @@ class TVShowListFragment @Inject constructor(
         val itemWidth = fullWidth / columns
 
         tvShowListAdapter = TVShowListAdapter(itemWidth) {
-            startActivity(DetailActivity.createIntent(requireContext(), it))
+            findNavController().navigate(TVShowListFragmentDirections.toDetailFragment(it))
         }
 
         binding.recyclerView.apply {

@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.redridgeapps.trakx.ui.base.CustomNavHostFragment
 import com.redridgeapps.trakx.ui.base.dagger.DaggerFragmentFactory
+import com.redridgeapps.trakx.ui.detail.DetailFragment
 import com.redridgeapps.trakx.ui.tvshowlist.TVShowListFragment
 import dagger.Binds
 import dagger.MapKey
@@ -36,4 +37,9 @@ abstract class FragmentBuilder {
     @IntoMap
     @FragmentKey(TVShowListFragment::class)
     abstract fun bindTVShowListFragment(fragment: TVShowListFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(DetailFragment::class)
+    abstract fun bindDetailFragment(fragment: DetailFragment): Fragment
 }

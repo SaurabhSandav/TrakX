@@ -2,7 +2,6 @@ package com.redridgeapps.trakx.di.modules
 
 import com.redridgeapps.trakx.di.PerActivity
 import com.redridgeapps.trakx.ui.activity.main.MainActivity
-import com.redridgeapps.trakx.ui.detail.DetailActivity
 import com.redridgeapps.trakx.ui.episode.EpisodeActivity
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListActivity
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeListWidgetService
@@ -19,10 +18,6 @@ abstract class AndroidComponentBuilder {
     @PerActivity
     @ContributesAndroidInjector
     abstract fun bindMainActivity(): MainActivity
-
-    @ClassKey(DetailActivity::class)
-    @ContributesAndroidInjector
-    abstract fun bindDetailActivity(): DetailActivity
 
     @ClassKey(EpisodeListActivity::class)
     @ContributesAndroidInjector
