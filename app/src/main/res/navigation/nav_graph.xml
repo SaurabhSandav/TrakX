@@ -44,6 +44,29 @@
             android:name="seasonNumber"
             app:argType="integer" />
 
+        <action
+            android:id="@+id/to_EpisodeFragment"
+            app:destination="@id/episodeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/episodeFragment"
+        android:name="com.redridgeapps.trakx.ui.episode.EpisodeFragment"
+        tools:layout="@layout/fragment_episode">
+
+        <argument
+            android:name="tvShow"
+            app:argType="com.redridgeapps.trakx.model.tmdb.TVShow" />
+
+        <argument
+            android:name="seasonNumber"
+            app:argType="integer" />
+
+        <argument
+            android:name="episodeNumber"
+            app:argType="integer" />
+
     </fragment>
 
 </navigation>

@@ -30,18 +30,6 @@
 
         </activity>
 
-        <activity
-            android:name=".ui.episode.EpisodeActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".ui.activity.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.main.MainActivity" />
-
-        </activity>
-
         <receiver android:name=".ui.widget.UpcomingEpisodeWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

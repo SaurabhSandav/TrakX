@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
-import com.redridgeapps.trakx.ui.episode.EpisodeActivity
 import javax.inject.Inject
 
 class EpisodeListFragment @Inject constructor(
@@ -61,7 +61,8 @@ class EpisodeListFragment @Inject constructor(
     }
 
     private fun launchEpisodeActivity(episodeNumber: Int) {
-        val intent = EpisodeActivity.createIntent(requireContext(), args.tvShow, args.seasonNumber, episodeNumber)
-        startActivity(intent)
+        findNavController().navigate(
+            EpisodeListFragmentDirections.toEpisodeFragment(args.tvShow, args.seasonNumber, episodeNumber)
+        )
     }
 }
