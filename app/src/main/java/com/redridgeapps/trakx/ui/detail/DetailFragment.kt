@@ -77,8 +77,9 @@ class DetailFragment @Inject constructor(
             viewModel.trackShow(isTracked)
         }
 
-        tvShowDetailAdapter =
-            TVShowDetailAdapter(args.tvShow, resources, trackShowListener, this::launchEpisodeListActivity)
+        tvShowDetailAdapter = TVShowDetailAdapter(args.tvShow, resources, trackShowListener) { seasonNumber ->
+            findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
+        }
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -87,10 +88,6 @@ class DetailFragment @Inject constructor(
         }
 
         viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner, tvShowDetailAdapter::submitTVShowDetail)
-    }
-
-    private fun launchEpisodeListActivity(seasonNumber: Int) {
-        findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
     }
 
     private fun updateWidgets() {

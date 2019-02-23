@@ -45,7 +45,11 @@ class EpisodeListFragment @Inject constructor(
 
     private fun setupRecyclerView() {
 
-        val episodeListAdapter = EpisodeListAdapter(this::launchEpisodeActivity)
+        val episodeListAdapter = EpisodeListAdapter { episodeNumber ->
+            findNavController().navigate(
+                EpisodeListFragmentDirections.toEpisodeFragment(args.tvShow, args.seasonNumber, episodeNumber)
+            )
+        }
 
         val linearLayoutManager = LinearLayoutManager(requireContext())
         val itemDecoration = DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
@@ -58,11 +62,5 @@ class EpisodeListFragment @Inject constructor(
         }
 
         viewModel.seasonDetailLiveData.observe(viewLifecycleOwner) { episodeListAdapter.submitList(it.episodes) }
-    }
-
-    private fun launchEpisodeActivity(episodeNumber: Int) {
-        findNavController().navigate(
-            EpisodeListFragmentDirections.toEpisodeFragment(args.tvShow, args.seasonNumber, episodeNumber)
-        )
     }
 }
