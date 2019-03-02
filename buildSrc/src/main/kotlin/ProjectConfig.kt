@@ -1,5 +1,5 @@
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha05"
+    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha06"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -36,7 +36,7 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha03"
+    private const val VERSION = "1.1.0-alpha04"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "1.0.0-rc01"
+    private const val VERSION = "1.0.0-rc02"
 
     const val FRAGMENT_KTX = "android.arch.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "android.arch.navigation:navigation-ui-ktx:$VERSION"
@@ -139,7 +139,7 @@ object Gander {
 }
 
 object SQLDelight {
-    private const val VERSION = "1.0.3"
+    private const val VERSION = "1.1.1"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
