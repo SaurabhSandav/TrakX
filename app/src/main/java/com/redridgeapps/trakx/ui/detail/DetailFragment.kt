@@ -1,11 +1,13 @@
 package com.redridgeapps.trakx.ui.detail
 
+import android.animation.ObjectAnimator
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
+import com.redridgeapps.trakx.ui.activity.ToolbarOperations
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
@@ -49,15 +52,32 @@ class DetailFragment @Inject constructor(
         viewModel.upcomingEpisodeUpdatedLiveData.observe(viewLifecycleOwner) { updateWidgets() }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        (requireActivity() as ToolbarOperations).hideToolbar()
+
+        val drawerArrowDrawable = DrawerArrowDrawable(binding.toolbar.context).apply { progress = 1f }
+
+        binding.toolbar.apply {
+            setNavigationContentDescription(androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description)
+            navigationIcon = drawerArrowDrawable
+            setNavigationOnClickListener { navigateUp(drawerArrowDrawable) }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        (requireActivity() as ToolbarOperations).showToolbar()
+    }
+
     private fun setupLayout(tvShow: TVShow) {
 
+        val expandedTitleColor = ContextCompat.getColor(requireContext(), android.R.color.transparent)
+
         binding.collapsingToolbar.title = tvShow.name
-        binding.collapsingToolbar.setExpandedTitleColor(
-            ContextCompat.getColor(
-                requireContext(),
-                android.R.color.transparent
-            )
-        )
+        binding.collapsingToolbar.setExpandedTitleColor(expandedTitleColor)
 
         // Set backdrop aspect ratio to 16:9
         val fullWidth = resources.displayMetrics.widthPixels
@@ -98,5 +118,14 @@ class DetailFragment @Inject constructor(
         for (widgetId in appWidgetManager.getAppWidgetIds(name)) {
             UpcomingEpisodeWidget.updateAppWidget(requireContext(), appWidgetManager, widgetId)
         }
+    }
+
+    private fun navigateUp(drawerArrowDrawable: DrawerArrowDrawable) {
+
+        ObjectAnimator
+            .ofFloat(drawerArrowDrawable, "progress", drawerArrowDrawable.progress, 0f)
+            .start()
+
+        findNavController().navigateUp()
     }
 }
