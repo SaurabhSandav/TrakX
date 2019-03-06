@@ -27,6 +27,3 @@ INNER JOIN CachedCollection ON CachedCollection.showId = CachedShow.id
 WHERE CachedCollection.cacheCategory = :category
 ORDER BY CachedCollection.position ASC
 LIMIT :limit OFFSET :offset;
-
-deleteAll:
-DELETE FROM CachedCollection;

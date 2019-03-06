@@ -14,9 +14,6 @@ import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
 import com.squareup.sqldelight.android.paging.QueryDataSourceFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TVShowListViewModel @Inject constructor(
@@ -30,7 +27,6 @@ class TVShowListViewModel @Inject constructor(
     private lateinit var requestType: RequestType
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
-    private val cachedShowQueries = inMemoryCacheDatabase.cachedShowQueries
     private val config = Config(pageSize = PAGE_SIZE, initialLoadSizeHint = PAGE_SIZE * 2)
 
     private val shows: DataSource.Factory<Int, TVShow>
@@ -38,10 +34,6 @@ class TVShowListViewModel @Inject constructor(
             TRACKED -> buildTrackedDataSource()
             else -> buildCachedCollectionDataSource()
         }
-
-    init {
-        launch { clearCache() }
-    }
 
     fun setRequestType(newRequestType: RequestType) {
         if (this::requestType.isInitialized && newRequestType === requestType) return
@@ -97,11 +89,6 @@ class TVShowListViewModel @Inject constructor(
                 voteAverage = it.voteAverage
             )
         }
-    }
-
-    private suspend fun clearCache() = withContext(Dispatchers.IO) {
-        cachedCollectionQueries.deleteAll()
-        cachedShowQueries.deleteAll()
     }
 }
 
