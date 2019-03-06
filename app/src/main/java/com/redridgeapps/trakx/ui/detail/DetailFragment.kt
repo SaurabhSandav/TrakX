@@ -56,12 +56,16 @@ class DetailFragment @Inject constructor(
 
         (requireActivity() as ToolbarOperations).hideToolbar()
 
-        val drawerArrowDrawable = DrawerArrowDrawable(binding.toolbar.context).apply { progress = 1f }
+        val drawerArrowDrawable = DrawerArrowDrawable(binding.toolbar.context).apply { progress = 0f }
+
+        ObjectAnimator
+            .ofFloat(drawerArrowDrawable, "progress", drawerArrowDrawable.progress, 1f)
+            .start()
 
         binding.toolbar.apply {
             setNavigationContentDescription(androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description)
             navigationIcon = drawerArrowDrawable
-            setNavigationOnClickListener { navigateUp(drawerArrowDrawable) }
+            setNavigationOnClickListener { findNavController().navigateUp() }
         }
     }
 
@@ -124,15 +128,6 @@ class DetailFragment @Inject constructor(
         for (widgetId in appWidgetManager.getAppWidgetIds(name)) {
             UpcomingEpisodeWidget.updateAppWidget(requireContext(), appWidgetManager, widgetId)
         }
-    }
-
-    private fun navigateUp(drawerArrowDrawable: DrawerArrowDrawable) {
-
-        ObjectAnimator
-            .ofFloat(drawerArrowDrawable, "progress", drawerArrowDrawable.progress, 0f)
-            .start()
-
-        findNavController().navigateUp()
     }
 
     private fun setTracked(isTracked: Boolean) {
