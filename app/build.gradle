@@ -44,6 +44,21 @@ androidExtensions {
     experimental = true
 }
 
+sqldelight {
+
+    InMemoryCacheDatabase {
+        packageName = "com.redridgeapps.trakx"
+        sourceFolders = ["inmemorycache"]
+        schemaOutputDirectory = file("build/inmemorycache")
+    }
+
+    AppDatabase {
+        packageName = "com.redridgeapps.trakx"
+        sourceFolders = ["appdatabase"]
+        schemaOutputDirectory = file("build/appdatabase")
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

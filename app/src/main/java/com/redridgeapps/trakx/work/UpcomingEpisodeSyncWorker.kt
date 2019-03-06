@@ -7,7 +7,7 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import com.redridgeapps.trakx.Database
+import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.Episode
@@ -19,13 +19,13 @@ import javax.inject.Singleton
 
 class UpcomingEpisodeSyncWorker @Inject constructor(
     private val tmDbService: TMDbService,
-    database: Database,
+    appDatabase: AppDatabase,
     appContext: Context,
     params: WorkerParameters
 ) : BaseWorker(appContext, params) {
 
-    private val trackedShowQueries = database.trackedShowQueries
-    private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
+    private val trackedShowQueries = appDatabase.trackedShowQueries
+    private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
 
     override suspend fun doWork(): Result {
 
@@ -74,11 +74,11 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
     @Singleton
     class Factory @Inject constructor(
         private val tmDbService: TMDbService,
-        private val database: Database
+        private val appDatabase: AppDatabase
     ) : BaseWorker.Factory {
 
         override fun create(appContext: Context, params: WorkerParameters): UpcomingEpisodeSyncWorker {
-            return UpcomingEpisodeSyncWorker(tmDbService, database, appContext, params)
+            return UpcomingEpisodeSyncWorker(tmDbService, appDatabase, appContext, params)
         }
     }
 

@@ -2,19 +2,19 @@ package com.redridgeapps.trakx.ui.widget
 
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.redridgeapps.trakx.Database
+import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.UpcomingEpisode
 import com.redridgeapps.trakx.utils.DateTimeUtils
 
 class UpcomingEpisodeViewsFactory(
     private val packageName: String,
-    database: Database
+    appDatabase: AppDatabase
 ) : RemoteViewsService.RemoteViewsFactory {
 
     private var widgetEpisodeList = mutableListOf<WidgetEpisode>()
-    private val trackedShowQueries = database.trackedShowQueries
-    private val upcomingEpisodesQueries = database.upcomingEpisodesQueries
+    private val trackedShowQueries = appDatabase.trackedShowQueries
+    private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
 
     override fun onCreate() {}
 

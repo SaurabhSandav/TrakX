@@ -5,7 +5,8 @@ import androidx.paging.Config
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.redridgeapps.trakx.Database
+import com.redridgeapps.trakx.AppDatabase
+import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
@@ -20,15 +21,16 @@ import javax.inject.Inject
 
 class TVShowListViewModel @Inject constructor(
     private val tmDbService: TMDbService,
-    private val database: Database
+    private val inMemoryCacheDatabase: InMemoryCacheDatabase,
+    appDatabase: AppDatabase
 ) : BaseViewModel() {
 
     lateinit var tvShowPagedListLiveData: LiveData<PagedList<TVShow>>
 
     private lateinit var requestType: RequestType
-    private val trackedShowQueries = database.trackedShowQueries
-    private val cachedCollectionQueries = database.cachedCollectionQueries
-    private val cachedShowQueries = database.cachedShowQueries
+    private val trackedShowQueries = appDatabase.trackedShowQueries
+    private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
+    private val cachedShowQueries = inMemoryCacheDatabase.cachedShowQueries
     private val config = Config(pageSize = PAGE_SIZE, initialLoadSizeHint = PAGE_SIZE * 2)
 
     private val shows: DataSource.Factory<Int, TVShow>
@@ -48,7 +50,8 @@ class TVShowListViewModel @Inject constructor(
         val livePagedListBuilder = LivePagedListBuilder(shows, config)
 
         if (newRequestType !== TRACKED) {
-            val boundaryCallback = TVShowBoundaryCallback(tmDbService, database, coroutineContext, newRequestType)
+            val boundaryCallback =
+                TVShowBoundaryCallback(tmDbService, inMemoryCacheDatabase, coroutineContext, newRequestType)
 
             livePagedListBuilder.setBoundaryCallback(boundaryCallback)
         }

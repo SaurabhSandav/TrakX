@@ -4,15 +4,16 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ashokvarma.gander.GanderInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.redridgeapps.trakx.Database
+import com.redridgeapps.trakx.AppDatabase
+import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -116,15 +117,35 @@ object AppModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideSqlDriver(app: Application): SqlDriver {
-        return AndroidSqliteDriver(Database.Schema, app, "AppDatabase.db")
+    fun provideAndroidSqliteDriverCallback(): AndroidSqliteDriver.Callback =
+        object : AndroidSqliteDriver.Callback(InMemoryCacheDatabase.Schema) {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+
+                db.execSQL("PRAGMA foreign_keys=ON;")
+            }
+        }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideInMemoryCacheDatabase(
+        app: Application,
+        callback: AndroidSqliteDriver.Callback
+    ): InMemoryCacheDatabase {
+
+        val driver = AndroidSqliteDriver(InMemoryCacheDatabase.Schema, app, callback = callback)
+
+        return InMemoryCacheDatabase(driver)
     }
 
     @JvmStatic
     @Provides
     @Singleton
-    fun provideDatabase(driver: SqlDriver): Database {
-        driver.execute(null, "PRAGMA foreign_keys = ON;", 0)
-        return Database(driver)
+    fun provideAppDatabase(app: Application, callback: AndroidSqliteDriver.Callback): AppDatabase {
+
+        val driver = AndroidSqliteDriver(AppDatabase.Schema, app, "AppDatabase.db", callback = callback)
+
+        return AppDatabase(driver)
     }
 }
