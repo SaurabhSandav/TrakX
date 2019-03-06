@@ -50,7 +50,6 @@
             android:id="@+id/tv_show_season"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_margin"
             android:layout_marginBottom="@dimen/large_margin"
             android:text="@{seasonTitle}"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -28,7 +28,6 @@ class DetailFragment @Inject constructor(
 ) : Fragment() {
 
     private var isTracked = false
-    private lateinit var tvShowDetailAdapter: TVShowDetailAdapter
     private lateinit var binding: FragmentDetailBinding
     private val viewModel by viewModels<DetailViewModel> { viewModelFactory }
     private val args: DetailFragmentArgs by navArgs()
@@ -47,7 +46,7 @@ class DetailFragment @Inject constructor(
 
         viewModel.isShowTrackedLiveData.observe(viewLifecycleOwner) {
             isTracked = it
-            tvShowDetailAdapter.submitTracked(it)
+            setTracked(it)
         }
         viewModel.upcomingEpisodeUpdatedLiveData.observe(viewLifecycleOwner) { updateWidgets() }
     }
@@ -87,27 +86,34 @@ class DetailFragment @Inject constructor(
 
         binding.tvShow = tvShow
 
+        // Calculate poster size to be relative to screen size with 3:2 aspect ratio.
+        val presetItemWidth = resources.getDimension(R.dimen.default_tv_show_poster_width)
+        val columns = Math.ceil((fullWidth / presetItemWidth).toDouble()).toInt()
+        val itemWidth = fullWidth / columns
+
+        binding.tvShowPoster.layoutParams.width = itemWidth
+        binding.tvShowPoster.layoutParams.height = (itemWidth * 1.5).toInt()
+
+        binding.btTrackShow.setOnClickListener {
+            isTracked = !isTracked
+            viewModel.trackShow(isTracked)
+        }
+
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
 
-        val trackShowListener = View.OnClickListener {
-            isTracked = !isTracked
-            viewModel.trackShow(isTracked)
-        }
-
-        tvShowDetailAdapter = TVShowDetailAdapter(args.tvShow, resources, trackShowListener) { seasonNumber ->
-            findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
-        }
-
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-            adapter = tvShowDetailAdapter
+            setHasFixedSize(false)
         }
 
-        viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner, tvShowDetailAdapter::submitTVShowDetail)
+        viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner) {
+            binding.recyclerView.adapter = SeasonListAdapter(it.seasons) { seasonNumber ->
+                findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
+            }
+        }
     }
 
     private fun updateWidgets() {
@@ -127,5 +133,12 @@ class DetailFragment @Inject constructor(
             .start()
 
         findNavController().navigateUp()
+    }
+
+    private fun setTracked(isTracked: Boolean) {
+        val trackText = if (isTracked) R.string.text_stop_tracking else R.string.text_track
+
+        binding.btTrackShow.setText(trackText)
+        binding.btTrackShow.visibility = View.VISIBLE
     }
 }

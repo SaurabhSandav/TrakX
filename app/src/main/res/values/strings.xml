@@ -14,6 +14,7 @@
     <string name="text_retry">Retry</string>
     <string name="text_track">Track</string>
     <string name="text_stop_tracking">Stop Tracking</string>
+    <string name="text_seasons">Seasons</string>
 
     <string name="error_network_request_failure">Network request failed!</string>
 </resources>
