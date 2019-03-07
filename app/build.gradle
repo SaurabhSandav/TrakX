@@ -70,7 +70,7 @@ dependencies {
     testImplementation JUnit.JUNIT
     androidTestImplementation AndroidXTest.CORE_KTX
     androidTestImplementation AndroidXTest.RUNNER
-    androidTestImplementation AndroidXTest.EXT_JUNIT
+    androidTestImplementation AndroidXTest.EXT_JUNIT_KTX
     androidTestImplementation Espresso.CORE
 
     // Material

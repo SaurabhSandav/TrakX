@@ -20,13 +20,13 @@ object JUnit {
 }
 
 object AndroidXTest {
-    private const val TEST_CORE_KTX_VERSION = "1.1.0"
-    private const val TEST_RUNNER_VERSION = "1.1.1"
-    private const val TEST_EXT_JUNIT_VERSION = "1.1.0"
+    private const val CORE_KTX_VERSION = "1.1.0"
+    private const val RUNNER_VERSION = "1.1.1"
+    private const val EXT_JUNIT_KTX_VERSION = "1.1.0"
 
-    const val CORE_KTX = "androidx.test:core-ktx:$TEST_CORE_KTX_VERSION"
-    const val RUNNER = "androidx.test:runner:$TEST_RUNNER_VERSION"
-    const val EXT_JUNIT = "androidx.test.ext:junit:$TEST_EXT_JUNIT_VERSION"
+    const val CORE_KTX = "androidx.test:core-ktx:$CORE_KTX_VERSION"
+    const val RUNNER = "androidx.test:runner:$RUNNER_VERSION"
+    const val EXT_JUNIT_KTX = "androidx.test.ext:junit-ktx:$EXT_JUNIT_KTX_VERSION"
 }
 
 object Espresso {
@@ -67,11 +67,11 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "1.0.0-rc02"
+    private const val VERSION = "2.0.0-rc02"
 
-    const val FRAGMENT_KTX = "android.arch.navigation:navigation-fragment-ktx:$VERSION"
-    const val UI_KTX = "android.arch.navigation:navigation-ui-ktx:$VERSION"
-    const val SAFE_ARGS_GRADLE_PLUGIN = "android.arch.navigation:navigation-safe-args-gradle-plugin:$VERSION"
+    const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
+    const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
+    const val SAFE_ARGS_GRADLE_PLUGIN = "androidx.navigation:navigation-safe-args-gradle-plugin:$VERSION"
 }
 
 object Paging {
@@ -81,7 +81,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "1.0.0-rc02"
+    private const val VERSION = "1.0.0"
 
     const val RUNTIME_KTX = "android.arch.work:work-runtime-ktx:$VERSION"
 }
