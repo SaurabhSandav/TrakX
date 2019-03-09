@@ -6,9 +6,12 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.redridgeapps.trakx.AppDatabase
+import com.redridgeapps.trakx.CachedShow
 import com.redridgeapps.trakx.InMemoryCacheDatabase
+import com.redridgeapps.trakx.TrackedShow
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
+import com.redridgeapps.trakx.db.mapper.toTVShow
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -55,19 +58,7 @@ class TVShowListViewModel @Inject constructor(
         return QueryDataSourceFactory(
             queryProvider = trackedShowQueries::trackedShowPaged,
             countQuery = trackedShowQueries.countTrackedShows()
-        ).map {
-            TVShow(
-                id = it.id,
-                originalName = it.originalName,
-                name = it.name,
-                popularity = it.popularity,
-                firstAirDate = it.firstAirDate,
-                backdropPath = it.backdropPath,
-                overview = it.overview,
-                posterPath = it.posterPath,
-                voteAverage = it.voteAverage
-            )
-        }
+        ).map(TrackedShow::toTVShow)
     }
 
     private fun buildCachedCollectionDataSource(): DataSource.Factory<Int, TVShow> {
@@ -76,19 +67,7 @@ class TVShowListViewModel @Inject constructor(
                 cachedCollectionQueries.cachedShowPaged(category = requestType.name, limit = limit, offset = offset)
             },
             countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
-        ).map {
-            TVShow(
-                id = it.id,
-                originalName = it.originalName,
-                name = it.name,
-                popularity = it.popularity,
-                firstAirDate = it.firstAirDate,
-                backdropPath = it.backdropPath,
-                overview = it.overview,
-                posterPath = it.posterPath,
-                voteAverage = it.voteAverage
-            )
-        }
+        ).map(CachedShow::toTVShow)
     }
 }
 

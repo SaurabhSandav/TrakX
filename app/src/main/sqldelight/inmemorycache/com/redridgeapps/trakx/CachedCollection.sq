@@ -11,8 +11,8 @@ CREATE INDEX CachedCollection_position ON CachedCollection(position);
 
 insert:
 INSERT OR REPLACE
-INTO CachedCollection (showId, position, page, cacheCategory)
-VALUES (?, ?, ?, ?);
+INTO CachedCollection
+VALUES ?;
 
 getLastPage:
 SELECT page FROM CachedCollection WHERE cacheCategory = :category ORDER BY page DESC LIMIT 1;

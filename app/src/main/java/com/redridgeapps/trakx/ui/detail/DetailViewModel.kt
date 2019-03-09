@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
+import com.redridgeapps.trakx.db.mapper.toTrackedShow
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
@@ -44,19 +45,7 @@ class DetailViewModel @Inject constructor(
 
         withContext(Dispatchers.IO) {
             if (!enableTracking) trackedShowQueries.deleteWithID(tvShow.id)
-            else {
-                trackedShowQueries.insert(
-                    id = tvShow.id,
-                    originalName = tvShow.originalName,
-                    name = tvShow.name,
-                    popularity = tvShow.popularity,
-                    firstAirDate = tvShow.firstAirDate,
-                    backdropPath = tvShow.backdropPath,
-                    overview = tvShow.overview,
-                    posterPath = tvShow.posterPath,
-                    voteAverage = tvShow.voteAverage
-                )
-            }
+            else trackedShowQueries.insert(tvShow.toTrackedShow())
         }
 
         fetchUpcomingEpisodes(enableTracking)

@@ -1,10 +1,10 @@
 package com.redridgeapps.trakx.data
 
 import androidx.paging.PagedList
-import com.redridgeapps.trakx.CachedCollectionQueries
-import com.redridgeapps.trakx.CachedShowQueries
+import com.redridgeapps.trakx.CachedCollection
 import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
+import com.redridgeapps.trakx.db.mapper.toCachedShow
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowCollection
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -63,8 +63,8 @@ class TVShowBoundaryCallback(
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).await().results
-        val cachedCollection = tvShowList.map {
-            CachedCategory(
+        val cachedCollection = tvShowList.map<TVShow, CachedCollection> {
+            CachedCollection.Impl(
                 showId = it.id,
                 position = position++,
                 page = newPage,
@@ -79,35 +79,11 @@ class TVShowBoundaryCallback(
 
     private suspend fun InMemoryCacheDatabase.cacheCategory(
         tvShowList: List<TVShow>,
-        cachedCollection: List<CachedCategory>
+        cachedCollection: List<CachedCollection>
     ) = withContext(Dispatchers.IO) {
         transaction {
-            cachedShowQueries.cacheShowToDB(tvShowList)
-            cachedCollectionQueries.cacheCollectionToDB(cachedCollection)
-        }
-    }
-
-    private fun CachedShowQueries.cacheShowToDB(tvShowList: List<TVShow>) {
-        tvShowList.forEach {
-            insert(
-                id = it.id,
-                originalName = it.originalName,
-                name = it.name,
-                popularity = it.popularity,
-                firstAirDate = it.firstAirDate,
-                backdropPath = it.backdropPath,
-                overview = it.overview,
-                posterPath = it.posterPath,
-                voteAverage = it.voteAverage
-            )
-        }
-    }
-
-    private fun CachedCollectionQueries.cacheCollectionToDB(cachedCollection: List<CachedCategory>) {
-        cachedCollection.forEach {
-            insert(showId = it.showId, position = it.position, page = it.page, cacheCategory = it.cacheCategory)
+            tvShowList.map(TVShow::toCachedShow).forEach(cachedShowQueries::insert)
+            cachedCollection.forEach(cachedCollectionQueries::insert)
         }
     }
 }
-
-private data class CachedCategory(val showId: Int, val position: Int, val page: Int, val cacheCategory: String)

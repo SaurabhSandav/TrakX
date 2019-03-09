@@ -12,8 +12,8 @@ voteAverage REAL AS Float NOT NULL
 
 insert:
 INSERT OR REPLACE
-INTO TrackedShow (id, originalName, name, popularity, firstAirDate, backdropPath, overview, posterPath, voteAverage)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INTO TrackedShow
+VALUES ?;
 
 trackedShows:
 SELECT * FROM TrackedShow;

@@ -12,5 +12,5 @@ voteAverage REAL AS Float NOT NULL
 
 insert:
 INSERT OR REPLACE
-INTO CachedShow (id, originalName, name, popularity, firstAirDate, backdropPath, overview, posterPath, voteAverage)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INTO CachedShow
+VALUES ?;
