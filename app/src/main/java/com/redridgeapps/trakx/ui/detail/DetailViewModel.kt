@@ -6,6 +6,7 @@ import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toTrackedShow
+import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
@@ -89,22 +90,8 @@ class DetailViewModel @Inject constructor(
         _upcomingEpisodesUpdatedLiveData.postValue(Unit)
     }
 
-    private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(upcomingEpisodes: List<Episode>) = transaction {
-
+    private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(episodes: List<Episode>) = transaction {
         deleteOfShowID(tvShow.id)
-
-        upcomingEpisodes.forEach {
-            insert(
-                id = it.id,
-                airDate = it.airDate,
-                episodeNumber = it.episodeNumber,
-                name = it.name,
-                overview = it.overview,
-                seasonNumber = it.seasonNumber,
-                showId = it.showId,
-                stillPath = it.stillPath,
-                voteAverage = it.voteAverage
-            )
-        }
+        episodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
 }

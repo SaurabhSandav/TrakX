@@ -10,6 +10,7 @@ import androidx.work.WorkerParameters
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
+import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.utils.DateTimeUtils
 import java.util.*
@@ -53,22 +54,8 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
     }
 
     private fun UpcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes: List<Episode>) = transaction {
-
         deleteAll()
-
-        upcomingEpisodes.forEach {
-            insert(
-                id = it.id,
-                airDate = it.airDate,
-                episodeNumber = it.episodeNumber,
-                name = it.name,
-                overview = it.overview,
-                seasonNumber = it.seasonNumber,
-                showId = it.showId,
-                stillPath = it.stillPath,
-                voteAverage = it.voteAverage
-            )
-        }
+        upcomingEpisodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
 
     @Singleton

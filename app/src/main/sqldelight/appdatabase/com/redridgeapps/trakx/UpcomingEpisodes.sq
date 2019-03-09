@@ -16,8 +16,8 @@ CREATE INDEX UpcomingEpisode_airDate ON UpcomingEpisode(airDate);
 
 insert:
 INSERT OR REPLACE
-INTO UpcomingEpisode (id, airDate, episodeNumber, name, overview, seasonNumber, showId, stillPath, voteAverage)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+INTO UpcomingEpisode
+VALUES ?;
 
 upcomingEpisodes:
 SELECT * FROM UpcomingEpisode ORDER BY airDate ASC;
