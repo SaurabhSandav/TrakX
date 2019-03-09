@@ -48,13 +48,13 @@ sqldelight {
 
     InMemoryCacheDatabase {
         packageName = "com.redridgeapps.trakx"
-        sourceFolders = ["inmemorycache"]
+        sourceFolders = ["sqldelight/inmemorycache"]
         schemaOutputDirectory = file("build/inmemorycache")
     }
 
     AppDatabase {
         packageName = "com.redridgeapps.trakx"
-        sourceFolders = ["appdatabase"]
+        sourceFolders = ["sqldelight/appdatabase"]
         schemaOutputDirectory = file("build/appdatabase")
     }
 }
