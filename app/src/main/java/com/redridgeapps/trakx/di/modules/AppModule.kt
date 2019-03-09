@@ -10,7 +10,7 @@ import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
-import com.redridgeapps.trakx.utils.SqLiteDriverCallback
+import com.redridgeapps.trakx.db.SqLiteDriverCallback
 import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.android.AndroidSqliteDriver

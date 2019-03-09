@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.utils
+package com.redridgeapps.trakx.db
 
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.squareup.sqldelight.android.AndroidSqliteDriver
