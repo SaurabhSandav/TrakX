@@ -1,5 +1,5 @@
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha06"
+    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha07"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -42,11 +42,11 @@ object Material {
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.0.0-alpha04"
-    private const val APPCOMPAT_VERSION = "1.1.0-alpha02"
-    private const val CORE_KTX_VERSION = "1.1.0-alpha04"
-    private const val FRAGMENT_KTX_VERSION = "1.1.0-alpha04"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-alpha02"
+    private const val ACTIVITY_KTX_VERSION = "1.0.0-alpha05"
+    private const val APPCOMPAT_VERSION = "1.1.0-alpha03"
+    private const val CORE_KTX_VERSION = "1.1.0-alpha05"
+    private const val FRAGMENT_KTX_VERSION = "1.1.0-alpha05"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-alpha03"
     private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-alpha3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
@@ -58,7 +58,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.1.0-alpha02"
+    private const val VERSION = "2.1.0-alpha03"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.0.0-rc02"
+    private const val VERSION = "2.0.0"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -81,9 +81,9 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "1.0.0"
+    private const val VERSION = "2.0.0-rc01"
 
-    const val RUNTIME_KTX = "android.arch.work:work-runtime-ktx:$VERSION"
+    const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
 
 object Dagger {
@@ -119,7 +119,7 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "3.13.1"
+    private const val VERSION = "3.14.0"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
