@@ -6,12 +6,9 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.redridgeapps.trakx.AppDatabase
-import com.redridgeapps.trakx.CachedShow
 import com.redridgeapps.trakx.InMemoryCacheDatabase
-import com.redridgeapps.trakx.TrackedShow
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
-import com.redridgeapps.trakx.db.mapper.toTVShow
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -56,18 +53,18 @@ class TVShowListViewModel @Inject constructor(
 
     private fun buildTrackedDataSource(): DataSource.Factory<Int, TVShow> {
         return QueryDataSourceFactory(
-            queryProvider = trackedShowQueries::trackedShowPaged,
+            queryProvider = { limit, offset -> trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow) },
             countQuery = trackedShowQueries.countTrackedShows()
-        ).map(TrackedShow::toTVShow)
+        )
     }
 
     private fun buildCachedCollectionDataSource(): DataSource.Factory<Int, TVShow> {
         return QueryDataSourceFactory(
             queryProvider = { limit, offset ->
-                cachedCollectionQueries.cachedShowPaged(category = requestType.name, limit = limit, offset = offset)
+                cachedCollectionQueries.cachedShowPaged(requestType.name, limit, offset, ::TVShow)
             },
             countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
-        ).map(CachedShow::toTVShow)
+        )
     }
 }
 
