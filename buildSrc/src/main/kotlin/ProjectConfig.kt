@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.0.0"
+    private const val VERSION = "2.1.0-alpha01"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
