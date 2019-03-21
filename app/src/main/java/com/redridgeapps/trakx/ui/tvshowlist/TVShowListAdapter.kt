@@ -10,7 +10,6 @@ import com.redridgeapps.trakx.databinding.ItemTvShowListBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 
 class TVShowListAdapter(
-    private val itemWidth: Int,
     private val clickListener: (TVShow) -> Unit
 ) : PagedListAdapter<TVShow, TVShowListAdapter.TVShowListViewHolder>(TVShow.DiffCallback) {
 
@@ -22,9 +21,6 @@ class TVShowListAdapter(
             parent,
             false
         )
-
-        // Set item aspect ratio to 3:2
-        binding.root.layoutParams = ViewGroup.LayoutParams(itemWidth, (itemWidth * 1.5).toInt())
 
         val viewHolder = TVShowListViewHolder(binding)
 

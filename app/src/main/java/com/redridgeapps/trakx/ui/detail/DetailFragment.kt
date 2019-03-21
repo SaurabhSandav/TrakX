@@ -90,14 +90,6 @@ class DetailFragment @Inject constructor(
 
         binding.tvShow = tvShow
 
-        // Calculate poster size to be relative to screen size with 3:2 aspect ratio.
-        val presetItemWidth = resources.getDimension(R.dimen.default_tv_show_poster_width)
-        val columns = Math.ceil((fullWidth / presetItemWidth).toDouble()).toInt()
-        val itemWidth = fullWidth / columns
-
-        binding.tvShowPoster.layoutParams.width = itemWidth
-        binding.tvShowPoster.layoutParams.height = (itemWidth * 1.5).toInt()
-
         binding.btTrackShow.setOnClickListener {
             isTracked = !isTracked
             viewModel.trackShow(isTracked)

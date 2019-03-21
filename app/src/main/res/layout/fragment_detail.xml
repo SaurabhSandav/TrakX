@@ -86,10 +86,11 @@
 
                 <ImageView
                     android:id="@+id/tv_show_poster"
-                    android:layout_width="@dimen/default_tv_show_poster_width"
-                    android:layout_height="@dimen/default_tv_show_poster_height"
+                    android:layout_width="@dimen/small_tv_show_poster_width"
+                    android:layout_height="0dp"
                     android:contentDescription='@{tvShow.name + " Poster"}'
                     android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="2:3"
                     app:layout_constraintStart_toStartOf="@+id/start_guideline"
                     app:layout_constraintTop_toTopOf="@+id/top_guideline"
                     app:posterPath="@{tvShow.posterPath}"

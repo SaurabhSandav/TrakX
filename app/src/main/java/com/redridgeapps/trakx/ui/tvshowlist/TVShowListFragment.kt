@@ -9,10 +9,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.activity.main.MainViewModel
+import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -51,18 +51,14 @@ class TVShowListFragment @Inject constructor(
 
     private fun setupRecyclerView() {
 
-        // Calculate poster size to be relative to screen size
-        val presetItemWidth = resources.getDimension(R.dimen.default_tv_show_poster_width)
-        val fullWidth = resources.displayMetrics.widthPixels
-        val columns = Math.ceil((fullWidth / presetItemWidth).toDouble()).toInt()
-        val itemWidth = fullWidth / columns
-
-        tvShowListAdapter = TVShowListAdapter(itemWidth) {
+        tvShowListAdapter = TVShowListAdapter {
             findNavController().navigate(TVShowListFragmentDirections.toDetailFragment(it))
         }
 
         binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), columns)
+            val maxColumnWidth = resources.getDimension(R.dimen.default_tv_show_poster_width)
+
+            layoutManager = AutoFitGridLayoutManager(requireContext(), maxColumnWidth)
             setHasFixedSize(true)
             adapter = tvShowListAdapter
         }
