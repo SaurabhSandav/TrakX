@@ -1,13 +1,11 @@
 package com.redridgeapps.trakx.ui.detail
 
-import android.animation.ObjectAnimator
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -47,22 +45,6 @@ class DetailFragment @Inject constructor(
             setTracked(it)
         }
         viewModel.upcomingEpisodeUpdatedLiveData.observe(viewLifecycleOwner) { updateWidgets() }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val drawerArrowDrawable = DrawerArrowDrawable(binding.toolbar.context).apply { progress = 0f }
-
-        ObjectAnimator
-            .ofFloat(drawerArrowDrawable, "progress", drawerArrowDrawable.progress, 1f)
-            .start()
-
-        binding.toolbar.apply {
-            setNavigationContentDescription(androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description)
-            navigationIcon = drawerArrowDrawable
-            setNavigationOnClickListener { findNavController().navigateUp() }
-        }
     }
 
     private fun setupLayout(tvShow: TVShow) {
