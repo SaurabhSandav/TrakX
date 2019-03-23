@@ -66,75 +66,81 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/top_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="@dimen/large_margin"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/start_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/large_margin"
-                app:layout_constraintStart_toStartOf="parent" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/large_margin"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/end_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintGuide_end="@dimen/large_margin" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/large_margin"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_show_title"
-                style="@style/TextAppearance.AppCompat.Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/common_margin"
-                android:text="@{episodeDetail.name}"
-                app:layout_constraintEnd_toEndOf="@+id/end_guideline"
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/top_guideline"
-                tools:text="Avengers: Infinity War" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end_guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintGuide_end="@dimen/large_margin" />
 
-            <RatingBar
-                android:id="@+id/tv_show_rating"
-                style="?android:ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:isIndicator="true"
-                android:numStars="10"
-                android:rating="@{episodeDetail.voteAverage}"
-                android:stepSize="0.1"
-                app:layout_constraintStart_toEndOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_show_title"
-                tools:rating="7.5" />
+                <TextView
+                    android:id="@+id/tv_show_title"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:text="@{episodeDetail.name}"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/top_guideline"
+                    tools:text="Avengers: Infinity War" />
 
-            <TextView
-                android:id="@+id/tv_show_description"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                android:text="@{episodeDetail.overview}"
-                app:layout_constraintEnd_toEndOf="@+id/end_guideline"
-                app:layout_constraintStart_toStartOf="@+id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_show_rating"
-                tools:text="@tools:sample/lorem/random" />
+                <RatingBar
+                    android:id="@+id/tv_show_rating"
+                    style="?android:ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:isIndicator="true"
+                    android:numStars="10"
+                    android:rating="@{episodeDetail.voteAverage}"
+                    android:stepSize="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_show_title"
+                    tools:rating="7.5" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_show_description"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:text="@{episodeDetail.overview}"
+                    app:layout_constraintEnd_toEndOf="@+id/end_guideline"
+                    app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_show_rating"
+                    tools:text="@tools:sample/lorem/random" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
