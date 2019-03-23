@@ -24,7 +24,7 @@ data class SeasonDetail(
     val name: String,
 
     @Json(name = "overview")
-    val overview: String,
+    val overview: String?,
 
     @Json(name = "poster_path")
     val posterPath: String?,
