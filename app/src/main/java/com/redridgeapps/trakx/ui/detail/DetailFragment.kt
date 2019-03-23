@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.ui.activity.ToolbarOperations
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
@@ -53,8 +52,6 @@ class DetailFragment @Inject constructor(
     override fun onStart() {
         super.onStart()
 
-        (requireActivity() as ToolbarOperations).hideToolbar()
-
         val drawerArrowDrawable = DrawerArrowDrawable(binding.toolbar.context).apply { progress = 0f }
 
         ObjectAnimator
@@ -66,12 +63,6 @@ class DetailFragment @Inject constructor(
             navigationIcon = drawerArrowDrawable
             setNavigationOnClickListener { findNavController().navigateUp() }
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        (requireActivity() as ToolbarOperations).showToolbar()
     }
 
     private fun setupLayout(tvShow: TVShow) {

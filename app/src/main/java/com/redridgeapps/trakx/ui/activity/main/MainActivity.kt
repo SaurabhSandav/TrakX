@@ -2,7 +2,6 @@ package com.redridgeapps.trakx.ui.activity.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -17,7 +16,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ActivityMainBinding
-import com.redridgeapps.trakx.ui.activity.ToolbarOperations
 import com.redridgeapps.trakx.utils.Constants.RequestType.AIRING_TODAY
 import com.redridgeapps.trakx.utils.Constants.RequestType.ON_THE_AIR
 import com.redridgeapps.trakx.utils.Constants.RequestType.POPULAR
@@ -28,8 +26,7 @@ import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener,
-    ToolbarOperations {
+    NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var fragmentFactory: FragmentFactory
@@ -85,15 +82,6 @@ class MainActivity : AppCompatActivity(),
         viewModel.setRequestType(requestType)
 
         return true
-    }
-
-    override fun hideToolbar() {
-        binding.toolbar.visibility = View.GONE
-    }
-
-    override fun showToolbar() {
-        binding.toolbar.visibility = View.VISIBLE
-        setSupportActionBar(binding.toolbar)
     }
 
     private fun setupNavigation() {
