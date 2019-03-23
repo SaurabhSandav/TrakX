@@ -1,7 +1,6 @@
 package com.redridgeapps.trakx.ui.activity.main
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentFactory
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var fragmentFactory: FragmentFactory
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

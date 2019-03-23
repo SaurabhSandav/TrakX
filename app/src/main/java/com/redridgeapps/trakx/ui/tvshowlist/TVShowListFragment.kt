@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
-import com.redridgeapps.trakx.ui.activity.main.MainViewModel
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.utils.Constants
@@ -29,7 +27,6 @@ class TVShowListFragment @Inject constructor(
     private lateinit var tvShowListAdapter: TVShowListAdapter
     private lateinit var binding: FragmentTvShowListBinding
     private val viewModel by viewModels<TVShowListViewModel> { viewModelFactory }
-    private val activityViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflater.dataBindingInflate(R.layout.fragment_tv_show_list, container)
