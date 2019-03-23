@@ -10,7 +10,7 @@ import com.redridgeapps.trakx.model.tmdb.Season
 
 class SeasonListAdapter(
     private val seasonList: List<Season>,
-    private val seasonClickListener: (Int) -> Unit
+    private val seasonClickListener: (Season) -> Unit
 ) : RecyclerView.Adapter<SeasonListAdapter.SeasonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
@@ -26,7 +26,7 @@ class SeasonListAdapter(
 
         binding.root.setOnClickListener {
             if (viewHolder.adapterPosition != RecyclerView.NO_POSITION)
-                seasonClickListener(seasonList[viewHolder.adapterPosition].seasonNumber)
+                seasonClickListener(seasonList[viewHolder.adapterPosition])
         }
 
         return viewHolder

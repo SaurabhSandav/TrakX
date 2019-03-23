@@ -42,7 +42,6 @@ class EpisodeFragment @Inject constructor(
         )
 
         viewModel.episodeDetailLiveData.observe(viewLifecycleOwner) {
-            requireActivity().title = it.name
             binding.episodeDetail = it
         }
     }

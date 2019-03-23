@@ -38,17 +38,20 @@ class EpisodeListFragment @Inject constructor(
     }
 
     private fun setupLayout() {
-        requireActivity().title = "Season ${args.seasonNumber}"
-
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
 
-        val episodeListAdapter = EpisodeListAdapter { episodeNumber ->
-            findNavController().navigate(
-                EpisodeListFragmentDirections.toEpisodeFragment(args.tvShow, args.seasonNumber, episodeNumber)
+        val episodeListAdapter = EpisodeListAdapter { episode ->
+            val direction = EpisodeListFragmentDirections.toEpisodeFragment(
+                args.tvShow,
+                args.seasonNumber,
+                episode.episodeNumber,
+                episode.name
             )
+
+            findNavController().navigate(direction)
         }
 
         val linearLayoutManager = LinearLayoutManager(requireContext())

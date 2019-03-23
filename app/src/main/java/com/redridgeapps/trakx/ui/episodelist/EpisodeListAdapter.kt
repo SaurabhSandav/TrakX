@@ -10,7 +10,7 @@ import com.redridgeapps.trakx.databinding.ItemEpisodeBinding
 import com.redridgeapps.trakx.model.tmdb.Episode
 
 class EpisodeListAdapter(
-    private val episodeClickListener: (Int) -> Unit
+    private val episodeClickListener: (Episode) -> Unit
 ) : ListAdapter<Episode, EpisodeListAdapter.EpisodeItemViewHolder>(Episode.DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeItemViewHolder {
@@ -26,7 +26,7 @@ class EpisodeListAdapter(
 
         binding.root.setOnClickListener {
             if (viewHolder.adapterPosition != RecyclerView.NO_POSITION)
-                episodeClickListener(getItem(viewHolder.adapterPosition).episodeNumber)
+                episodeClickListener(getItem(viewHolder.adapterPosition))
         }
 
         return viewHolder

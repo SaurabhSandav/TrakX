@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(),
         (0 until size).forEach { binding.navView.menu.getItem(it).isChecked = false }
 
         item.isChecked = true
-        binding.toolbar.title = item.title
+        title = item.title
 
         val requestType = when (item.itemId) {
             R.id.category_my_shows -> TRACKED

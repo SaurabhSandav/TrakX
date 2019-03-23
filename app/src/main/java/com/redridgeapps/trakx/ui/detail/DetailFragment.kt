@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -77,11 +76,6 @@ class DetailFragment @Inject constructor(
 
     private fun setupLayout(tvShow: TVShow) {
 
-        val expandedTitleColor = ContextCompat.getColor(requireContext(), android.R.color.transparent)
-
-        binding.collapsingToolbar.title = tvShow.name
-        binding.collapsingToolbar.setExpandedTitleColor(expandedTitleColor)
-
         binding.tvShow = tvShow
 
         binding.btTrackShow.setOnClickListener {
@@ -100,8 +94,14 @@ class DetailFragment @Inject constructor(
         }
 
         viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner) {
-            binding.recyclerView.adapter = SeasonListAdapter(it.seasons) { seasonNumber ->
-                findNavController().navigate(DetailFragmentDirections.toEpisodeListFragment(args.tvShow, seasonNumber))
+            binding.recyclerView.adapter = SeasonListAdapter(it.seasons) { season ->
+                val direction = DetailFragmentDirections.toEpisodeListFragment(
+                    args.tvShow,
+                    season.seasonNumber,
+                    season.name
+                )
+
+                findNavController().navigate(direction)
             }
         }
     }

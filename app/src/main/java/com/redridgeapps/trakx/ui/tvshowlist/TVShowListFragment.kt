@@ -52,7 +52,7 @@ class TVShowListFragment @Inject constructor(
     private fun setupRecyclerView() {
 
         tvShowListAdapter = TVShowListAdapter {
-            findNavController().navigate(TVShowListFragmentDirections.toDetailFragment(it))
+            findNavController().navigate(TVShowListFragmentDirections.toDetailFragment(it, it.name))
         }
 
         binding.recyclerView.apply {
