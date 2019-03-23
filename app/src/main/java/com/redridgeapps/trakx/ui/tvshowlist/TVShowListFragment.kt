@@ -2,13 +2,16 @@ package com.redridgeapps.trakx.ui.tvshowlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.activity.main.MainViewModel
@@ -20,7 +23,8 @@ import javax.inject.Inject
 
 class TVShowListFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : Fragment() {
+) : Fragment(),
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var tvShowListAdapter: TVShowListAdapter
     private lateinit var binding: FragmentTvShowListBinding
@@ -40,11 +44,41 @@ class TVShowListFragment @Inject constructor(
 
         setupLayout()
 
-        activityViewModel.requestTypeLiveData.observe(viewLifecycleOwner, this::requestTypeChanged)
+        requireActivity().addOnBackPressedCallback {
+            val isDrawerOpen = binding.drawerLayout.isDrawerOpen(GravityCompat.START)
+            if (isDrawerOpen) binding.drawerLayout.closeDrawer(GravityCompat.START)
+
+            isDrawerOpen
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+
+        val size = binding.navView.menu.size()
+        (0 until size).forEach { binding.navView.menu.getItem(it).isChecked = false }
+
+        item.isChecked = true
+        requireActivity().title = item.title
+
+        val requestType = when (item.itemId) {
+            R.id.category_my_shows -> Constants.RequestType.TRACKED
+            R.id.category_popular -> Constants.RequestType.POPULAR
+            R.id.category_top_rated -> Constants.RequestType.TOP_RATED
+            R.id.category_on_the_air -> Constants.RequestType.ON_THE_AIR
+            R.id.category_airing_today -> Constants.RequestType.AIRING_TODAY
+            else -> return false
+        }
+
+        requestTypeChanged(requestType)
+
+        return true
     }
 
     private fun setupLayout() {
         requireActivity().setTitle(R.string.drawer_sort_popular)
+
+        binding.navView.setNavigationItemSelectedListener(this)
 
         setupRecyclerView()
     }
