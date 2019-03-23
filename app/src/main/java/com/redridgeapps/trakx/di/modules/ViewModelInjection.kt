@@ -33,7 +33,7 @@ abstract class ViewModelFactoryModule {
     @Binds
     @IntoMap
     @ViewModelKey(TVShowListViewModel::class)
-    abstract fun bindMainViewModel(viewModel: TVShowListViewModel): ViewModel
+    abstract fun bindTVShowListViewModel(viewModel: TVShowListViewModel): ViewModel
 
     @Binds
     @IntoMap
