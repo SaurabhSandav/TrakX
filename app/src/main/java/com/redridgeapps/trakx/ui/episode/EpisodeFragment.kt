@@ -41,12 +41,6 @@ class EpisodeFragment @Inject constructor(
             ContextCompat.getColor(requireContext(), android.R.color.transparent)
         )
 
-        // Set backdrop aspect ratio to 16:9
-        val fullWidth = resources.displayMetrics.widthPixels
-        val layoutParams = binding.tvShowBackdrop.layoutParams
-        layoutParams.width = fullWidth
-        layoutParams.height = (fullWidth * 0.56).toInt()
-
         viewModel.episodeDetailLiveData.observe(viewLifecycleOwner) {
             requireActivity().title = it.name
             binding.episodeDetail = it

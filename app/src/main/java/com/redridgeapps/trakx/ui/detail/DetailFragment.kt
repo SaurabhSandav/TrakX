@@ -82,12 +82,6 @@ class DetailFragment @Inject constructor(
         binding.collapsingToolbar.title = tvShow.name
         binding.collapsingToolbar.setExpandedTitleColor(expandedTitleColor)
 
-        // Set backdrop aspect ratio to 16:9
-        val fullWidth = resources.displayMetrics.widthPixels
-        val layoutParams = binding.tvShowBackdrop.layoutParams
-        layoutParams.width = fullWidth
-        layoutParams.height = (fullWidth * 0.56).toInt()
-
         binding.tvShow = tvShow
 
         binding.btTrackShow.setOnClickListener {
