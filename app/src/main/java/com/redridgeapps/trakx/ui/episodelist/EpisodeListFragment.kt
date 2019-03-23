@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
+import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import javax.inject.Inject
 
 class EpisodeListFragment @Inject constructor(
@@ -38,6 +39,9 @@ class EpisodeListFragment @Inject constructor(
     }
 
     private fun setupLayout() {
+
+        setupToolbarWithNavigation(binding.toolbar)
+
         setupRecyclerView()
     }
 

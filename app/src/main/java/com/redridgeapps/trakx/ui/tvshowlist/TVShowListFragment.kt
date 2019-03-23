@@ -15,6 +15,7 @@ import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
+import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import javax.inject.Inject
@@ -73,6 +74,9 @@ class TVShowListFragment @Inject constructor(
     }
 
     private fun setupLayout() {
+
+        setupToolbarWithNavigation(binding.toolbar, binding.drawerLayout)
+
         requireActivity().setTitle(R.string.drawer_sort_popular)
 
         binding.navView.setNavigationItemSelectedListener(this)

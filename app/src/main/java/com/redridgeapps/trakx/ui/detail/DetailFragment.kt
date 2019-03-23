@@ -16,6 +16,7 @@ import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
+import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
 
@@ -48,6 +49,8 @@ class DetailFragment @Inject constructor(
     }
 
     private fun setupLayout(tvShow: TVShow) {
+
+        setupCollapsingToolbarWithNavigation(binding.collapsingToolbar, binding.toolbar)
 
         binding.tvShow = tvShow
 
