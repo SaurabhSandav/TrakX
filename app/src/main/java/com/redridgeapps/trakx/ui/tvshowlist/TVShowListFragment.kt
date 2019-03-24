@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -51,10 +52,9 @@ class TVShowListFragment @Inject constructor(
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
 
-        val size = binding.navView.menu.size()
-        (0 until size).forEach { binding.navView.menu.getItem(it).isChecked = false }
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        binding.navView.menu.forEach { it.isChecked = false }
 
         item.isChecked = true
         requireActivity().title = item.title
