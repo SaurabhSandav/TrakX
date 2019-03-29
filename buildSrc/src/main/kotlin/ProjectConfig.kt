@@ -1,5 +1,5 @@
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha07"
+    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha09"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -36,7 +36,7 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha04"
+    private const val VERSION = "1.1.0-alpha05"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
