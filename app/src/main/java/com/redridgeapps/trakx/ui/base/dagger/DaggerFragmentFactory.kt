@@ -25,7 +25,7 @@ class DaggerFragmentFactory @Inject constructor(
             modelClass.isAssignableFrom(it.key)
         }?.value
 
-        creator ?: throw IllegalArgumentException("Unknown Fragment class $modelClass")
+        requireNotNull(creator) { "Unknown Fragment class $modelClass" }
 
         return creator.get()
     }

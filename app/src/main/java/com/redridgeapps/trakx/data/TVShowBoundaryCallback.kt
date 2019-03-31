@@ -51,7 +51,7 @@ class TVShowBoundaryCallback(
             TOP_RATED -> { page -> tmDbService.getTopRated(page) }
             ON_THE_AIR -> { page -> tmDbService.getOnTheAir(page) }
             AIRING_TODAY -> { page -> tmDbService.getAiringToday(page) }
-            else -> throw IllegalArgumentException()
+            else -> error("Invalid Request type!")
         }
     }
 
