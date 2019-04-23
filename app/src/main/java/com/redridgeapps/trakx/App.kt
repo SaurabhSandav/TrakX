@@ -4,7 +4,6 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.redridgeapps.trakx.di.DaggerAppComponent
 import com.redridgeapps.trakx.work.BaseWorkerFactory
-import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import javax.inject.Inject
@@ -16,9 +15,6 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
-        if (LeakCanary.isInAnalyzerProcess(this)) return
-        LeakCanary.install(this)
 
         setupWorkManager()
     }

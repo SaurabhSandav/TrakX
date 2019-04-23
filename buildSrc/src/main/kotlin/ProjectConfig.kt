@@ -125,10 +125,9 @@ object OkHttp {
 }
 
 object LeakCanary {
-    private const val VERSION = "1.6.3"
+    private const val VERSION = "2.0-alpha-1"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
-    const val ANDROID_NO_OP = "com.squareup.leakcanary:leakcanary-android-no-op:$VERSION"
 }
 
 object Gander {
