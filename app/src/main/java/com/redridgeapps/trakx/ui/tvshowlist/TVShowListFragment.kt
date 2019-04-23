@@ -43,7 +43,7 @@ class TVShowListFragment @Inject constructor(
 
         setupLayout()
 
-        requireActivity().addOnBackPressedCallback {
+        requireActivity().onBackPressedDispatcher.addCallback {
             val isDrawerOpen = binding.drawerLayout.isDrawerOpen(GravityCompat.START)
             if (isDrawerOpen) binding.drawerLayout.closeDrawer(GravityCompat.START)
 
