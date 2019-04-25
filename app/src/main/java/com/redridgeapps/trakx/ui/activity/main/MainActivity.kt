@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Schedule Sync
-        UpcomingEpisodeSyncWorker.scheduleDaily()
+        UpcomingEpisodeSyncWorker.scheduleDaily(applicationContext)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }

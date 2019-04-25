@@ -13,6 +13,8 @@ import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.utils.DateTimeUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -28,7 +30,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
 
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
 
         val trackedShows = trackedShowQueries.trackedShows().executeAsList()
 
@@ -40,7 +42,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
 
         upcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes)
 
-        return Result.success()
+        return@withContext Result.success()
     }
 
     private fun List<Episode>.filterUpcoming(): List<Episode> {
@@ -73,7 +75,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
 
         private const val TAG_COMPLETE_SYNC = "TAG_COMPLETE_SYNC"
 
-        fun scheduleDaily() {
+        fun scheduleDaily(appContext: Context) {
 
             val constraints = Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.UNMETERED)
@@ -85,7 +87,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
                 TimeUnit.DAYS
             ).setConstraints(constraints).build()
 
-            WorkManager.getInstance().enqueueUniquePeriodicWork(
+            WorkManager.getInstance(appContext).enqueueUniquePeriodicWork(
                 TAG_COMPLETE_SYNC,
                 ExistingPeriodicWorkPolicy.KEEP,
                 upcomingEpisodeSyncWork

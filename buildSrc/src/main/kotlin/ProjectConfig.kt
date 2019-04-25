@@ -81,7 +81,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.0.1-rc01"
+    private const val VERSION = "2.1.0-alpha01"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
