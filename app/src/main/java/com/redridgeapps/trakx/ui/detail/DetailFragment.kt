@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
+import com.redridgeapps.trakx.ui.common.navigateFrom
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
 import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
@@ -71,13 +71,9 @@ class DetailFragment @Inject constructor(
 
         viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner) {
             binding.recyclerView.adapter = SeasonListAdapter(it.seasons) { season ->
-                val direction = DetailFragmentDirections.toEpisodeListFragment(
-                    args.tvShow,
-                    season.seasonNumber,
-                    season.name
-                )
-
-                findNavController().navigate(direction)
+                DetailFragmentDirections
+                    .toEpisodeListFragment(args.tvShow, season.seasonNumber, season.name)
+                    .navigateFrom(this)
             }
         }
     }

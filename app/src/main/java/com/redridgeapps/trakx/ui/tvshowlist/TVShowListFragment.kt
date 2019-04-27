@@ -11,12 +11,12 @@ import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
+import com.redridgeapps.trakx.ui.common.navigateFrom
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import com.redridgeapps.trakx.utils.Constants
 import com.redridgeapps.trakx.utils.Constants.RequestType
@@ -85,8 +85,8 @@ class TVShowListFragment @Inject constructor(
 
     private fun setupRecyclerView() {
 
-        tvShowListAdapter = TVShowListAdapter {
-            findNavController().navigate(TVShowListFragmentDirections.toDetailFragment(it, it.name))
+        tvShowListAdapter = TVShowListAdapter { tvShow ->
+            TVShowListFragmentDirections.toDetailFragment(tvShow, tvShow.name).navigateFrom(this)
         }
 
         binding.recyclerView.apply {
