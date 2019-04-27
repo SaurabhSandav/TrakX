@@ -5,8 +5,8 @@ object Android {
 }
 
 object Kotlin {
-    private const val VERSION = "1.3.21"
-    private const val COROUTINES_VERSION = "1.1.1"
+    private const val VERSION = "1.3.31"
+    private const val COROUTINES_VERSION = "1.2.1"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
     const val STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$VERSION"
@@ -42,12 +42,12 @@ object Material {
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.0.0-alpha06"
+    private const val ACTIVITY_KTX_VERSION = "1.0.0-alpha07"
     private const val APPCOMPAT_VERSION = "1.1.0-alpha04"
     private const val CORE_KTX_VERSION = "1.1.0-alpha05"
-    private const val FRAGMENT_KTX_VERSION = "1.1.0-alpha06"
+    private const val FRAGMENT_KTX_VERSION = "1.1.0-alpha07"
     private const val RECYCLERVIEW_VERSION = "1.1.0-alpha04"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-alpha3"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-alpha5"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -87,7 +87,7 @@ object WorkManager {
 }
 
 object Dagger {
-    private const val VERSION = "2.21"
+    private const val VERSION = "2.22.1"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"
@@ -119,7 +119,7 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "3.14.0"
+    private const val VERSION = "3.14.1"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
@@ -138,7 +138,7 @@ object Gander {
 }
 
 object SQLDelight {
-    private const val VERSION = "1.1.1"
+    private const val VERSION = "1.1.3"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"

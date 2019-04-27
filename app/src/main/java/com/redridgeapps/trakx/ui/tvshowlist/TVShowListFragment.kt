@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
@@ -46,8 +47,6 @@ class TVShowListFragment @Inject constructor(
         requireActivity().onBackPressedDispatcher.addCallback {
             val isDrawerOpen = binding.drawerLayout.isDrawerOpen(GravityCompat.START)
             if (isDrawerOpen) binding.drawerLayout.closeDrawer(GravityCompat.START)
-
-            isDrawerOpen
         }
     }
 
