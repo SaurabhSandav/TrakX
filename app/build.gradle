@@ -42,6 +42,7 @@ android {
 
 androidExtensions {
     experimental = true
+    features = ["parcelize"]
 }
 
 sqldelight {
