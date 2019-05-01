@@ -12,10 +12,10 @@ import com.redridgeapps.trakx.utils.Constants.RequestType.AIRING_TODAY
 import com.redridgeapps.trakx.utils.Constants.RequestType.ON_THE_AIR
 import com.redridgeapps.trakx.utils.Constants.RequestType.POPULAR
 import com.redridgeapps.trakx.utils.Constants.RequestType.TOP_RATED
+import com.redridgeapps.trakx.utils.suspendAsOneOrNull
+import com.redridgeapps.trakx.utils.suspendedTransaction
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class TVShowBoundaryCallback(
@@ -56,9 +56,7 @@ class TVShowBoundaryCallback(
 
     private suspend fun fetchTVShows() {
 
-        val previousPage = lastPage ?: withContext(Dispatchers.IO) {
-            cachedCollectionQueries.getLastPage(requestType.name).executeAsOneOrNull()
-        }
+        val previousPage = lastPage ?: cachedCollectionQueries.getLastPage(requestType.name).suspendAsOneOrNull()
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).results
@@ -79,10 +77,8 @@ class TVShowBoundaryCallback(
     private suspend fun InMemoryCacheDatabase.cacheCategory(
         tvShowList: List<TVShow>,
         cachedCollection: List<CachedCollection>
-    ) = withContext(Dispatchers.IO) {
-        transaction {
+    ) = suspendedTransaction {
             tvShowList.map(TVShow::toCachedShow).forEach(cachedShowQueries::insert)
             cachedCollection.forEach(cachedCollectionQueries::insert)
-        }
     }
 }
