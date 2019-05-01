@@ -103,7 +103,7 @@ object Moshi {
 }
 
 object Retrofit {
-    private const val VERSION = "2.5.0"
+    private const val VERSION = "2.6.0-SNAPSHOT"
     private const val COROUTINES_ADAPTER_VERSION = "0.9.2"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
