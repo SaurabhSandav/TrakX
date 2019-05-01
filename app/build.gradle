@@ -114,7 +114,6 @@ dependencies {
     // Retrofit + ( Converters and Adapters )
     implementation Retrofit.RETROFIT
     implementation Retrofit.CONVERTER_MOSHI
-    implementation Retrofit.ADAPTER_COROUTINES
 
     // Picasso
     implementation Picasso.PICASSO

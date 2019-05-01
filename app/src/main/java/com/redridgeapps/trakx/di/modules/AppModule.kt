@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.preference.PreferenceManager
 import com.ashokvarma.gander.GanderInterceptor
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbInterceptor
@@ -66,13 +65,6 @@ object AppModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideCoroutineCallAdapterFactory(): CoroutineCallAdapterFactory {
-        return CoroutineCallAdapterFactory()
-    }
-
-    @JvmStatic
-    @Provides
-    @Singleton
     fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
         return MoshiConverterFactory.create(moshi)
     }
@@ -96,14 +88,12 @@ object AppModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        moshiCon: MoshiConverterFactory,
-        coroutineCallAdapter: CoroutineCallAdapterFactory
+        moshiCon: MoshiConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(TMDbService.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(moshiCon)
-            .addCallAdapterFactory(coroutineCallAdapter)
             .build()
     }
 

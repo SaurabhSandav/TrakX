@@ -104,12 +104,9 @@ object Moshi {
 
 object Retrofit {
     private const val VERSION = "2.6.0-SNAPSHOT"
-    private const val COROUTINES_ADAPTER_VERSION = "0.9.2"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
     const val CONVERTER_MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
-    const val ADAPTER_COROUTINES =
-        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$COROUTINES_ADAPTER_VERSION"
 }
 
 object Picasso {
