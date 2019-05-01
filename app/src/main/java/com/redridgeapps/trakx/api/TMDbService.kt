@@ -5,7 +5,6 @@ import com.redridgeapps.trakx.model.tmdb.EpisodeDetail
 import com.redridgeapps.trakx.model.tmdb.SeasonDetail
 import com.redridgeapps.trakx.model.tmdb.TVShowCollection
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
-import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -13,42 +12,42 @@ import retrofit2.http.Query
 interface TMDbService {
 
     @GET("tv/top_rated")
-    fun getTopRated(
+    suspend fun getTopRated(
         @Query("page") page: Int
-    ): Deferred<TVShowCollection>
+    ): TVShowCollection
 
     @GET("tv/popular")
-    fun getPopular(
+    suspend fun getPopular(
         @Query("page") page: Int
-    ): Deferred<TVShowCollection>
+    ): TVShowCollection
 
     @GET("tv/on_the_air")
-    fun getOnTheAir(
+    suspend fun getOnTheAir(
         @Query("page") page: Int
-    ): Deferred<TVShowCollection>
+    ): TVShowCollection
 
     @GET("tv/airing_today")
-    fun getAiringToday(
+    suspend fun getAiringToday(
         @Query("page") page: Int
-    ): Deferred<TVShowCollection>
+    ): TVShowCollection
 
     @GET("tv/{tvId}")
-    fun getTVDetail(
+    suspend fun getTVDetail(
         @Path("tvId") tvId: Int
-    ): Deferred<TVShowDetail>
+    ): TVShowDetail
 
     @GET("tv/{tv_id}/season/{season_number}")
-    fun getSeasonDetail(
+    suspend fun getSeasonDetail(
         @Path("tv_id") tvId: Int,
         @Path("season_number") seasonNumber: Int
-    ): Deferred<SeasonDetail>
+    ): SeasonDetail
 
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    fun getEpisodeDetail(
+    suspend fun getEpisodeDetail(
         @Path("tv_id") tvId: Int,
         @Path("season_number") seasonNumber: Int,
         @Path("episode_number") episodeNumber: Int
-    ): Deferred<EpisodeDetail>
+    ): EpisodeDetail
 
     companion object {
 

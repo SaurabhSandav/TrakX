@@ -13,7 +13,6 @@ import com.redridgeapps.trakx.utils.Constants.RequestType.ON_THE_AIR
 import com.redridgeapps.trakx.utils.Constants.RequestType.POPULAR
 import com.redridgeapps.trakx.utils.Constants.RequestType.TOP_RATED
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,7 +26,7 @@ class TVShowBoundaryCallback(
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope {
 
     private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
-    private val request: (Int) -> Deferred<TVShowCollection>
+    private val request: suspend (Int) -> TVShowCollection
     private var position = 1
     private var lastPage: Int? = null
 
@@ -45,7 +44,7 @@ class TVShowBoundaryCallback(
         launch { fetchTVShows() }
     }
 
-    private fun buildRequest(tmDbService: TMDbService): (Int) -> Deferred<TVShowCollection> {
+    private fun buildRequest(tmDbService: TMDbService): suspend (Int) -> TVShowCollection {
         return when (requestType) {
             POPULAR -> { page -> tmDbService.getPopular(page) }
             TOP_RATED -> { page -> tmDbService.getTopRated(page) }
@@ -62,7 +61,7 @@ class TVShowBoundaryCallback(
         }
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
-        val tvShowList = request(newPage).await().results
+        val tvShowList = request(newPage).results
         val cachedCollection = tvShowList.map<TVShow, CachedCollection> {
             CachedCollection.Impl(
                 showId = it.id,

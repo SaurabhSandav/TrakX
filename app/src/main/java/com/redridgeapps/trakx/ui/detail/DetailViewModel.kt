@@ -65,7 +65,7 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun fetchTVShowDetail() = launch {
-        val tvShowDetail = tmDbService.getTVDetail(tvShow.id).await()
+        val tvShowDetail = tmDbService.getTVDetail(tvShow.id)
         _tvShowDetailLiveData.setValue(tvShowDetail)
     }
 
@@ -74,7 +74,7 @@ class DetailViewModel @Inject constructor(
             upcomingEpisodesQueries.deleteOfShowID(tvShow.id)
         } else {
             val lastSeason = tvShowDetailLiveData.value!!.seasons.last()
-            val seasonDetail = tmDbService.getSeasonDetail(tvShow.id, lastSeason.seasonNumber).await()
+            val seasonDetail = tmDbService.getSeasonDetail(tvShow.id, lastSeason.seasonNumber)
 
             val todayCalendar = DateTimeUtils.todayDateInstance
             val airCalendar = Calendar.getInstance()

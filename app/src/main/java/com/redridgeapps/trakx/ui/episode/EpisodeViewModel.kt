@@ -20,7 +20,7 @@ class EpisodeViewModel @Inject constructor(
     }
 
     private fun fetchEpisodeDetail(tvShowId: Int, seasonNumber: Int, episodeNumber: Int) = launch {
-        val episodeDetail = tmDbService.getEpisodeDetail(tvShowId, seasonNumber, episodeNumber).await()
+        val episodeDetail = tmDbService.getEpisodeDetail(tvShowId, seasonNumber, episodeNumber)
         _episodeDetailLiveData.setValue(episodeDetail)
     }
 }

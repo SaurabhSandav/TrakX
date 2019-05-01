@@ -35,8 +35,8 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
         val trackedShows = trackedShowQueries.trackedShows().executeAsList()
 
         val upcomingEpisodes = trackedShows
-            .map { tmDbService.getTVDetail(it.id).await() }
-            .map { tmDbService.getSeasonDetail(it.id, it.seasons.last().seasonNumber).await() }
+            .map { tmDbService.getTVDetail(it.id) }
+            .map { tmDbService.getSeasonDetail(it.id, it.seasons.last().seasonNumber) }
             .flatMap { it.episodes }
             .filterUpcoming()
 
