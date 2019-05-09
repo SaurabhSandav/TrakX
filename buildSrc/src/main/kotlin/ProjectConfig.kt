@@ -1,5 +1,5 @@
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.5.0-alpha13"
+    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha03"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -20,9 +20,9 @@ object JUnit {
 }
 
 object AndroidXTest {
-    private const val CORE_KTX_VERSION = "1.1.0"
-    private const val RUNNER_VERSION = "1.1.1"
-    private const val EXT_JUNIT_KTX_VERSION = "1.1.0"
+    private const val CORE_KTX_VERSION = "1.2.0"
+    private const val RUNNER_VERSION = "1.2.0"
+    private const val EXT_JUNIT_KTX_VERSION = "1.1.1"
 
     const val CORE_KTX = "androidx.test:core-ktx:$CORE_KTX_VERSION"
     const val RUNNER = "androidx.test:runner:$RUNNER_VERSION"
@@ -30,24 +30,24 @@ object AndroidXTest {
 }
 
 object Espresso {
-    private const val VERSION = "3.1.1"
+    private const val VERSION = "3.2.0"
 
     const val CORE = "androidx.test.espresso:espresso-core:$VERSION"
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha05"
+    private const val VERSION = "1.1.0-alpha07"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.0.0-alpha07"
-    private const val APPCOMPAT_VERSION = "1.1.0-alpha04"
-    private const val CORE_KTX_VERSION = "1.1.0-alpha05"
-    private const val FRAGMENT_KTX_VERSION = "1.1.0-alpha07"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-alpha04"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-alpha5"
+    private const val ACTIVITY_KTX_VERSION = "1.0.0-beta01"
+    private const val APPCOMPAT_VERSION = "1.1.0-beta01"
+    private const val CORE_KTX_VERSION = "1.1.0-rc01"
+    private const val FRAGMENT_KTX_VERSION = "1.1.0-beta01"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-alpha06"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta1"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -58,7 +58,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.1.0-alpha04"
+    private const val VERSION = "2.2.0-alpha01"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.1.0-alpha02"
+    private const val VERSION = "2.1.0-alpha05"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -81,13 +81,13 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.1.0-alpha01"
+    private const val VERSION = "2.1.0-alpha03"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
 
 object Dagger {
-    private const val VERSION = "2.22.1"
+    private const val VERSION = "2.23.1"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"
@@ -103,7 +103,7 @@ object Moshi {
 }
 
 object Retrofit {
-    private const val VERSION = "2.6.0-SNAPSHOT"
+    private const val VERSION = "2.6.0"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
     const val CONVERTER_MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
@@ -116,19 +116,19 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "3.14.1"
+    private const val VERSION = "3.14.2"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
 
 object LeakCanary {
-    private const val VERSION = "2.0-alpha-1"
+    private const val VERSION = "2.0-alpha-2"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
 
 object Gander {
-    private const val VERSION = "1.4.0"
+    private const val VERSION = "2.0.3"
 
     const val GANDER = "com.ashokvarma.android:gander:$VERSION"
     const val GANDER_NO_OP = "com.ashokvarma.android:gander-no-op:$VERSION"
