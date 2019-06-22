@@ -5,8 +5,8 @@ object Android {
 }
 
 object Kotlin {
-    private const val VERSION = "1.3.31"
-    private const val COROUTINES_VERSION = "1.2.1"
+    private const val VERSION = "1.3.41"
+    private const val COROUTINES_VERSION = "1.2.2"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
     const val STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$VERSION"
@@ -42,12 +42,12 @@ object Material {
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.0.0-beta01"
-    private const val APPCOMPAT_VERSION = "1.1.0-beta01"
-    private const val CORE_KTX_VERSION = "1.1.0-rc01"
-    private const val FRAGMENT_KTX_VERSION = "1.1.0-beta01"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-alpha06"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta1"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha01"
+    private const val APPCOMPAT_VERSION = "1.1.0-rc01"
+    private const val CORE_KTX_VERSION = "1.2.0-alpha02"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha01"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-beta01"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta2"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -58,7 +58,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-alpha01"
+    private const val VERSION = "2.2.0-alpha02"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -67,7 +67,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.1.0-alpha05"
+    private const val VERSION = "2.1.0-alpha06"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -81,13 +81,13 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.1.0-alpha03"
+    private const val VERSION = "2.1.0-rc01"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
 
 object Dagger {
-    private const val VERSION = "2.23.1"
+    private const val VERSION = "2.23.2"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"
@@ -122,7 +122,7 @@ object OkHttp {
 }
 
 object LeakCanary {
-    private const val VERSION = "2.0-alpha-2"
+    private const val VERSION = "2.0-alpha-3"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
