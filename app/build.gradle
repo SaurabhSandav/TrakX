@@ -130,6 +130,7 @@ dependencies {
 
     // Gander
     debugImplementation Gander.GANDER
+    debugImplementation Gander.GANDER_PERSISTENCE
     releaseImplementation Gander.GANDER_NO_OP
 
     // SQLDelight

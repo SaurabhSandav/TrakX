@@ -128,10 +128,11 @@ object LeakCanary {
 }
 
 object Gander {
-    private const val VERSION = "2.0.3"
+    private const val VERSION = "3.0.1"
 
     const val GANDER = "com.ashokvarma.android:gander:$VERSION"
     const val GANDER_NO_OP = "com.ashokvarma.android:gander-no-op:$VERSION"
+    const val GANDER_PERSISTENCE = "com.ashokvarma.android:gander-persistence:$VERSION"
 }
 
 object SQLDelight {
