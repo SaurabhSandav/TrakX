@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.transition.TransitionManager;
 
 import java.lang.ref.WeakReference;
 
@@ -65,6 +66,9 @@ public class ToolbarOnDestinationChangedListener extends AbstractAppBarOnDestina
         if (toolbar != null) {
             toolbar.setNavigationIcon(icon);
             toolbar.setNavigationContentDescription(contentDescription);
+            if (icon == null) {
+                TransitionManager.beginDelayedTransition(toolbar);
+            }
         }
     }
 }

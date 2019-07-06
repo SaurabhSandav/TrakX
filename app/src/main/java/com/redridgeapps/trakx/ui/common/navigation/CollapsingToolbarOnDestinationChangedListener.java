@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.transition.TransitionManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.lang.ref.WeakReference;
@@ -76,6 +77,9 @@ public class CollapsingToolbarOnDestinationChangedListener extends AbstractAppBa
         if (toolbar != null) {
             toolbar.setNavigationIcon(icon);
             toolbar.setNavigationContentDescription(contentDescription);
+            if (icon == null) {
+                TransitionManager.beginDelayedTransition(toolbar);
+            }
         }
     }
 }

@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.FloatingWindow;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -65,9 +66,48 @@ abstract class AbstractAppBarOnDestinationChangedListener implements NavControll
 
     protected abstract void setNavigationIcon(Drawable icon, @StringRes int contentDescription);
 
+    private static boolean matchDestinations(@NonNull NavDestination destination,
+                                             @NonNull Set<Integer> destinationIds) {
+        NavDestination currentDestination = destination;
+        do {
+            if (destinationIds.contains(currentDestination.getId())) {
+                return true;
+            }
+            currentDestination = currentDestination.getParent();
+        } while (currentDestination != null);
+        return false;
+    }
+
+    private void setActionBarUpIndicator(boolean showAsDrawerIndicator) {
+        boolean animate = true;
+        if (mArrowDrawable == null) {
+            mArrowDrawable = new DrawerArrowDrawable(mContext);
+            // We're setting the initial state, so skip the animation
+            animate = false;
+        }
+        setNavigationIcon(mArrowDrawable, showAsDrawerIndicator
+                ? androidx.navigation.ui.R.string.nav_app_bar_open_drawer_description
+                : androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description);
+        float endValue = showAsDrawerIndicator ? 0f : 1f;
+        if (animate) {
+            float startValue = mArrowDrawable.getProgress();
+            if (mAnimator != null) {
+                mAnimator.cancel();
+            }
+            mAnimator = ObjectAnimator.ofFloat(mArrowDrawable, "progress",
+                    startValue, endValue);
+            mAnimator.start();
+        } else {
+            mArrowDrawable.setProgress(endValue);
+        }
+    }
+
     @Override
     public void onDestinationChanged(@NonNull NavController controller,
                                      @NonNull NavDestination destination, @Nullable Bundle arguments) {
+        if (destination instanceof FloatingWindow) {
+            return;
+        }
         DrawerLayout drawerLayout = mDrawerLayoutWeakReference != null
                 ? mDrawerLayoutWeakReference.get()
                 : null;
@@ -103,41 +143,5 @@ abstract class AbstractAppBarOnDestinationChangedListener implements NavControll
         } else {
             setActionBarUpIndicator(drawerLayout != null && isTopLevelDestination);
         }
-    }
-
-    private void setActionBarUpIndicator(boolean showAsDrawerIndicator) {
-        boolean animate = true;
-        if (mArrowDrawable == null) {
-            mArrowDrawable = new DrawerArrowDrawable(mContext);
-            // We're setting the initial state, so skip the animation
-            animate = false;
-        }
-        setNavigationIcon(mArrowDrawable, showAsDrawerIndicator
-                ? androidx.navigation.ui.R.string.nav_app_bar_open_drawer_description
-                : androidx.navigation.ui.R.string.nav_app_bar_navigate_up_description);
-        float endValue = showAsDrawerIndicator ? 0f : 1f;
-        if (animate) {
-            float startValue = mArrowDrawable.getProgress();
-            if (mAnimator != null) {
-                mAnimator.cancel();
-            }
-            mAnimator = ObjectAnimator.ofFloat(mArrowDrawable, "progress",
-                    startValue, endValue);
-            mAnimator.start();
-        } else {
-            mArrowDrawable.setProgress(endValue);
-        }
-    }
-
-    private boolean matchDestinations(@NonNull NavDestination destination,
-                                      @NonNull Set<Integer> destinationIds) {
-        NavDestination currentDestination = destination;
-        do {
-            if (destinationIds.contains(currentDestination.getId())) {
-                return true;
-            }
-            currentDestination = currentDestination.getParent();
-        } while (currentDestination != null);
-        return false;
     }
 }
