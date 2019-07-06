@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -43,11 +44,7 @@ class TVShowListFragment @Inject constructor(
         viewModel.setRequestType(Constants.DEFAULT_CATEGORY_MAIN)
 
         setupLayout()
-
-        requireActivity().onBackPressedDispatcher.addCallback {
-            val isDrawerOpen = binding.drawerLayout.isDrawerOpen(GravityCompat.START)
-            if (isDrawerOpen) binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }
+        setupDrawer()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -101,6 +98,23 @@ class TVShowListFragment @Inject constructor(
             removeObservers(viewLifecycleOwner)
             observe(viewLifecycleOwner, tvShowListAdapter::submitList)
         }
+    }
+
+    private fun setupDrawer() {
+        val callback = object : OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+                isEnabled = false
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+            override fun onDrawerOpened(drawerView: View) {
+                callback.isEnabled = true
+            }
+        })
     }
 
     private fun requestTypeChanged(requestType: RequestType) {
