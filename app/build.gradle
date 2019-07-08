@@ -86,6 +86,7 @@ dependencies {
     implementation Jetpack.APPCOMPAT
     implementation Jetpack.CORE_KTX
     implementation Jetpack.FRAGMENT_KTX
+    implementation Jetpack.PREFERENCE_KTX
     implementation Jetpack.DRAWERLAYOUT
     implementation Jetpack.RECYCLERVIEW
     implementation Jetpack.CONSTRAINT_LAYOUT

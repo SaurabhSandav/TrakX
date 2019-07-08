@@ -3,7 +3,7 @@ package com.redridgeapps.trakx.di.modules
 import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.ashokvarma.gander.GanderInterceptor
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.InMemoryCacheDatabase
