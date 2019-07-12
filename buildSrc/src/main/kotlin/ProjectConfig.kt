@@ -140,9 +140,10 @@ object Gander {
 }
 
 object SQLDelight {
-    private const val VERSION = "1.1.3"
+    private const val VERSION = "1.1.4"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
     const val ANDROID_PAGING_EXTENSIONS = "com.squareup.sqldelight:android-paging-extensions:$VERSION"
+    const val COROUTINES_EXTENSIONS = "com.squareup.sqldelight:coroutines-extensions-jvm:$VERSION"
 }

@@ -13,7 +13,6 @@ import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.utils.DateTimeUtils
-import com.redridgeapps.trakx.utils.suspendAsList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -33,7 +32,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
 
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
 
-        val trackedShows = trackedShowQueries.trackedShows().suspendAsList()
+        val trackedShows = trackedShowQueries.trackedShows().executeAsList()
 
         val upcomingEpisodes = trackedShows
             .map { tmDbService.getTVDetail(it.id) }

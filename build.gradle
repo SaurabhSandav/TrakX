@@ -42,7 +42,11 @@ allprojects {
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions.freeCompilerArgs += ['-progressive', '-Xnew-inference', '-Xuse-experimental=kotlinx.coroutines.FlowPreview']
+        kotlinOptions.freeCompilerArgs += [
+                '-progressive',
+                '-Xnew-inference',
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi'
+        ]
     }
 }
 
