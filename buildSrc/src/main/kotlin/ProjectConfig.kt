@@ -36,7 +36,7 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha07"
+    private const val VERSION = "1.1.0-alpha08"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
@@ -85,7 +85,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.1.0-rc01"
+    private const val VERSION = "2.1.0"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
