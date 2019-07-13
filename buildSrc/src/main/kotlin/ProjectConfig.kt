@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 object Android {
     private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha03"
 
