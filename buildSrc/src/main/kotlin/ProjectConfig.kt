@@ -122,7 +122,7 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "3.14.2"
+    private const val VERSION = "4.0.1"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
@@ -134,7 +134,7 @@ object LeakCanary {
 }
 
 object Gander {
-    private const val VERSION = "3.0.1"
+    private const val VERSION = "3.1.0"
 
     const val GANDER = "com.ashokvarma.android:gander:$VERSION"
     const val GANDER_NO_OP = "com.ashokvarma.android:gander-no-op:$VERSION"

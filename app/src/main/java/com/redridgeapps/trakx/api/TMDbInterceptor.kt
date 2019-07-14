@@ -11,10 +11,10 @@ class TMDbInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
 
-        if (original.url().toString().contains(TMDbService.BASE_URL)) {
+        if (original.url.toString().contains(TMDbService.BASE_URL)) {
 
             val request = original.newBuilder()
-                .url(original.url().withAPIKey())
+                .url(original.url.withAPIKey())
                 .build()
 
             return chain.proceed(request)
