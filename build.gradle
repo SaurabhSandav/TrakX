@@ -29,16 +29,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter {
-            content {
-
-                // LeakCanary
-                includeGroup "org.jetbrains.trove4j"
-            }
-        }
-
-        // Retrofit Snapshots
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
