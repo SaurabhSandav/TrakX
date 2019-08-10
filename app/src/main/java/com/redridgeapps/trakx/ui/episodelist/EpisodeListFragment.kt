@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentEpisodeListBinding
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
-import com.redridgeapps.trakx.ui.common.navigateFrom
+import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import javax.inject.Inject
 
@@ -49,10 +50,12 @@ class EpisodeListFragment @Inject constructor(
 
     private fun setupRecyclerView() {
 
+        val navController = findNavController()
+
         val episodeListAdapter = EpisodeListAdapter { episode ->
             EpisodeListFragmentDirections
                 .toEpisodeFragment(args.tvShow, args.seasonNumber, episode.episodeNumber, episode.name)
-                .navigateFrom(this)
+                .navigateWith(navController)
         }
 
         val linearLayoutManager = LinearLayoutManager(requireContext())
