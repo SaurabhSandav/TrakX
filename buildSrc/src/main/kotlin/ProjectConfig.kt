@@ -38,19 +38,19 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha08"
+    private const val VERSION = "1.1.0-alpha09"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha01"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha02"
     private const val APPCOMPAT_VERSION = "1.1.0-rc01"
-    private const val CORE_KTX_VERSION = "1.2.0-alpha02"
-    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha01"
+    private const val CORE_KTX_VERSION = "1.2.0-alpha03"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha02"
     private const val PREFERENCE_KTX_VERSION = "1.1.0-rc01"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha02"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-beta01"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-beta02"
     private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta2"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
@@ -64,7 +64,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-alpha02"
+    private const val VERSION = "2.2.0-alpha03"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -73,7 +73,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.1.0-alpha06"
+    private const val VERSION = "2.2.0-alpha01"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -87,13 +87,13 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.1.0"
+    private const val VERSION = "2.2.0-rc01"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
 
 object Dagger {
-    private const val VERSION = "2.23.2"
+    private const val VERSION = "2.24"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"
@@ -109,7 +109,7 @@ object Moshi {
 }
 
 object Retrofit {
-    private const val VERSION = "2.6.0"
+    private const val VERSION = "2.6.1"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
     const val CONVERTER_MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
@@ -128,7 +128,7 @@ object OkHttp {
 }
 
 object LeakCanary {
-    private const val VERSION = "2.0-alpha-3"
+    private const val VERSION = "2.0-beta-2"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
