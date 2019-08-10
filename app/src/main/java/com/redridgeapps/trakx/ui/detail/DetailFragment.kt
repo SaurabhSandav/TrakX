@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
+import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateFrom
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
@@ -25,7 +26,7 @@ class DetailFragment @Inject constructor(
 ) : Fragment() {
 
     private var isTracked = false
-    private lateinit var binding: FragmentDetailBinding
+    private var binding by AutoClearedValue<FragmentDetailBinding>()
     private val viewModel by viewModels<DetailViewModel> { viewModelFactory }
     private val args: DetailFragmentArgs by navArgs()
 

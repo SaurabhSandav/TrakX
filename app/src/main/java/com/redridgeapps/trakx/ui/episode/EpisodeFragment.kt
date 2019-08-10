@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentEpisodeBinding
+import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
 import javax.inject.Inject
@@ -18,7 +19,7 @@ class EpisodeFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : Fragment() {
 
-    private lateinit var binding: FragmentEpisodeBinding
+    private var binding by AutoClearedValue<FragmentEpisodeBinding>()
     private val viewModel by viewModels<EpisodeViewModel> { viewModelFactory }
     private val args: EpisodeFragmentArgs by navArgs()
 

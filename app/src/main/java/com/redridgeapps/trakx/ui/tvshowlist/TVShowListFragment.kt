@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
+import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateFrom
@@ -28,8 +29,8 @@ class TVShowListFragment @Inject constructor(
 ) : Fragment(),
     NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var tvShowListAdapter: TVShowListAdapter
-    private lateinit var binding: FragmentTvShowListBinding
+    private var tvShowListAdapter by AutoClearedValue<TVShowListAdapter>()
+    private var binding by AutoClearedValue<FragmentTvShowListBinding>()
     private val viewModel by viewModels<TVShowListViewModel> { viewModelFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

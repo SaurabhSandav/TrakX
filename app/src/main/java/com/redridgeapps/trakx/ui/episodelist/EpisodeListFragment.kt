@@ -11,6 +11,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
+import com.redridgeapps.trakx.databinding.FragmentEpisodeListBinding
+import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateFrom
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
@@ -20,7 +22,7 @@ class EpisodeListFragment @Inject constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : Fragment() {
 
-    private lateinit var binding: com.redridgeapps.trakx.databinding.FragmentEpisodeListBinding
+    private var binding by AutoClearedValue<FragmentEpisodeListBinding>()
     private val viewModel by viewModels<EpisodeListViewModel> { viewModelFactory }
     private val args: EpisodeListFragmentArgs by navArgs()
 
