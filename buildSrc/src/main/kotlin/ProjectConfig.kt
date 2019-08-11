@@ -113,9 +113,12 @@ object Moshi {
 
 object Retrofit {
     private const val VERSION = "2.6.1"
+    private const val SERIALIZATION_VERSION = "0.4.0"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
     const val CONVERTER_MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
+    const val CONVERTER_SERIALIZATION =
+        "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$SERIALIZATION_VERSION"
 }
 
 object Picasso {
