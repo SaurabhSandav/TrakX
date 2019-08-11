@@ -30,14 +30,14 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven { url "https://kotlin.bintray.com/kotlinx" } // TODO (REMOVE) For Serialization
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions.freeCompilerArgs += [
                 '-progressive',
                 '-Xnew-inference',
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi'
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi' // TODO (REMOVE) For Kotlin Flow
         ]
     }
 }
