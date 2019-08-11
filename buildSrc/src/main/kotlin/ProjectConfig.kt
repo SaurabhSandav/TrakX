@@ -104,13 +104,6 @@ object Dagger {
     const val ANDROID_PROCESSOR = "com.google.dagger:dagger-android-processor:$VERSION"
 }
 
-object Moshi {
-    private const val VERSION = "1.8.0"
-
-    const val MOSHI = "com.squareup.moshi:moshi:$VERSION"
-    const val KOTLIN_CODEGEN = "com.squareup.moshi:moshi-kotlin-codegen:$VERSION"
-}
-
 object Retrofit {
     private const val VERSION = "2.6.1"
     private const val SERIALIZATION_VERSION = "0.4.0"

@@ -120,10 +120,6 @@ dependencies {
     kapt Dagger.COMPILER
     kapt Dagger.ANDROID_PROCESSOR
 
-    // Moshi
-    implementation Moshi.MOSHI
-    kapt Moshi.KOTLIN_CODEGEN
-
     // Retrofit + ( Converters and Adapters )
     implementation Retrofit.RETROFIT
     implementation Retrofit.CONVERTER_MOSHI

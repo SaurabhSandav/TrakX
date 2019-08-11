@@ -37,8 +37,7 @@ allprojects {
         kotlinOptions.freeCompilerArgs += [
                 '-progressive',
                 '-Xnew-inference',
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
-                '-Xuse-experimental=kotlin.Experimental' // For JsonConfiguration.Default from Serialization
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi'
         ]
     }
 }

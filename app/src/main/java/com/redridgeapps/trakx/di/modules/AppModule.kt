@@ -11,7 +11,6 @@ import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.SqLiteDriverCallback
-import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
@@ -22,7 +21,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -58,21 +56,7 @@ object AppModule {
             .retainDataFor(GanderInterceptor.Period.FOREVER)
     }
 
-    @JvmStatic
-    @Provides
-    @Singleton
-    fun provideMoshi(): Moshi {
-        return Moshi.Builder().build()
-    }
-
-    @JvmStatic
-    @Provides
-    @Singleton
-    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
-        return MoshiConverterFactory.create(moshi)
-    }
-
-    @UseExperimental(UnstableDefault::class)
+    @UnstableDefault
     @JvmStatic
     @Provides
     @Singleton
