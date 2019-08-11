@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlinx-serialization'
     id 'kotlin-kapt'
     id 'com.squareup.sqldelight'
     id 'androidx.navigation.safeargs.kotlin'
@@ -75,6 +76,7 @@ dependencies {
     // Kotlin
     implementation Kotlin.STDLIB
     implementation Kotlin.COROUTINES
+    implementation Kotlin.SERIALIZATION_RUNTIME
 
     // Testing
     testImplementation JUnit.JUNIT
