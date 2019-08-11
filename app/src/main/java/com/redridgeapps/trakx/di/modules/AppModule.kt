@@ -5,17 +5,22 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import com.ashokvarma.gander.GanderInterceptor
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.SqLiteDriverCallback
-import com.redridgeapps.trakx.utils.moshi.LongDateAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
+import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -57,9 +62,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi {
-        return Moshi.Builder()
-            .add(LongDateAdapter())
-            .build()
+        return Moshi.Builder().build()
     }
 
     @JvmStatic
@@ -67,6 +70,16 @@ object AppModule {
     @Singleton
     fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory {
         return MoshiConverterFactory.create(moshi)
+    }
+
+    @UseExperimental(UnstableDefault::class)
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideSerializationConverterFactory(): Converter.Factory {
+        val contentType = "application/json".toMediaType()
+        val configuration = JsonConfiguration.Default.copy(strictMode = false)
+        return Json(configuration).asConverterFactory(contentType)
     }
 
     @JvmStatic
@@ -88,12 +101,12 @@ object AppModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        moshiCon: MoshiConverterFactory
+        serializationCon: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(TMDbService.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(moshiCon)
+            .addConverterFactory(serializationCon)
             .build()
     }
 

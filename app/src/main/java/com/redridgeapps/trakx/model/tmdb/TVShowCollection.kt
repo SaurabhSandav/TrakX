@@ -1,20 +1,20 @@
 package com.redridgeapps.trakx.model.tmdb
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TVShowCollection(
 
-    @Json(name = "page")
+    @SerialName("page")
     val page: Int,
 
-    @Json(name = "total_results")
+    @SerialName("total_results")
     val totalResults: Int,
 
-    @Json(name = "total_pages")
+    @SerialName("total_pages")
     val totalPages: Int,
 
-    @Json(name = "results")
+    @SerialName("results")
     val results: List<TVShow>
 )

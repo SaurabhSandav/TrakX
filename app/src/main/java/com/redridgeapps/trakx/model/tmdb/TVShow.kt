@@ -2,41 +2,41 @@ package com.redridgeapps.trakx.model.tmdb
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
-import com.redridgeapps.trakx.utils.moshi.LongDate
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.redridgeapps.trakx.utils.moshi.LongDateSerializer
 import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Parcelize
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TVShow(
 
-    @Json(name = "id")
+    @SerialName("id")
     val id: Int,
 
-    @Json(name = "original_name")
+    @SerialName("original_name")
     val originalName: String,
 
-    @Json(name = "name")
+    @SerialName("name")
     val name: String,
 
-    @Json(name = "popularity")
+    @SerialName("popularity")
     val popularity: Float,
 
-    @LongDate
-    @Json(name = "first_air_date")
+    @Serializable(with = LongDateSerializer::class)
+    @SerialName("first_air_date")
     val firstAirDate: Long,
 
-    @Json(name = "backdrop_path")
+    @SerialName("backdrop_path")
     val backdropPath: String?,
 
-    @Json(name = "overview")
+    @SerialName("overview")
     val overview: String,
 
-    @Json(name = "poster_path")
+    @SerialName("poster_path")
     val posterPath: String?,
 
-    @Json(name = "vote_average")
+    @SerialName("vote_average")
     val voteAverage: Float
 ) : Parcelable {
 

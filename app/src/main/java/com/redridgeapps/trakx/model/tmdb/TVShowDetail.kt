@@ -1,44 +1,44 @@
 package com.redridgeapps.trakx.model.tmdb
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class TVShowDetail(
 
-    @Json(name = "id")
+    @SerialName("id")
     val id: Int,
 
-    @Json(name = "backdrop_path")
+    @SerialName("backdrop_path")
     val backdropPath: String?,
 
-    @Json(name = "name")
+    @SerialName("name")
     val name: String,
 
-    @Json(name = "number_of_episodes")
+    @SerialName("number_of_episodes")
     val numberOfEpisodes: Int,
 
-    @Json(name = "number_of_seasons")
+    @SerialName("number_of_seasons")
     val numberOfSeasons: Int,
 
-    @Json(name = "original_name")
+    @SerialName("original_name")
     val originalName: String,
 
-    @Json(name = "overview")
+    @SerialName("overview")
     val overview: String,
 
-    @Json(name = "popularity")
+    @SerialName("popularity")
     val popularity: Float,
 
-    @Json(name = "poster_path")
+    @SerialName("poster_path")
     val posterPath: String?,
 
-    @Json(name = "seasons")
+    @SerialName("seasons")
     val seasons: List<Season>,
 
-    @Json(name = "status")
+    @SerialName("status")
     val status: String,
 
-    @Json(name = "vote_average")
+    @SerialName("vote_average")
     val voteAverage: Float
 )

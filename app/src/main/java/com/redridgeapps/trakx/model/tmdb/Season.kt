@@ -1,31 +1,31 @@
 package com.redridgeapps.trakx.model.tmdb
 
-import com.redridgeapps.trakx.utils.moshi.LongDate
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.redridgeapps.trakx.utils.moshi.LongDateSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Season(
 
-    @Json(name = "id")
+    @SerialName("id")
     val id: Int,
 
-    @LongDate
-    @Json(name = "air_date")
+    @Serializable(with = LongDateSerializer::class)
+    @SerialName("air_date")
     val airDate: Long,
 
-    @Json(name = "episode_count")
+    @SerialName("episode_count")
     val episodeCount: Int,
 
-    @Json(name = "name")
+    @SerialName("name")
     val name: String,
 
-    @Json(name = "overview")
+    @SerialName("overview")
     val overview: String?,
 
-    @Json(name = "poster_path")
+    @SerialName("poster_path")
     val posterPath: String?,
 
-    @Json(name = "season_number")
+    @SerialName("season_number")
     val seasonNumber: Int
 )

@@ -1,39 +1,39 @@
 package com.redridgeapps.trakx.model.tmdb
 
 import androidx.recyclerview.widget.DiffUtil
-import com.redridgeapps.trakx.utils.moshi.LongDate
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.redridgeapps.trakx.utils.moshi.LongDateSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Episode(
 
-    @Json(name = "id")
+    @SerialName("id")
     val id: Int,
 
-    @LongDate
-    @Json(name = "air_date")
+    @Serializable(with = LongDateSerializer::class)
+    @SerialName("air_date")
     val airDate: Long,
 
-    @Json(name = "episode_number")
+    @SerialName("episode_number")
     val episodeNumber: Int,
 
-    @Json(name = "name")
+    @SerialName("name")
     val name: String,
 
-    @Json(name = "overview")
+    @SerialName("overview")
     val overview: String,
 
-    @Json(name = "season_number")
+    @SerialName("season_number")
     val seasonNumber: Int,
 
-    @Json(name = "show_id")
+    @SerialName("show_id")
     val showId: Int,
 
-    @Json(name = "still_path")
+    @SerialName("still_path")
     val stillPath: String?,
 
-    @Json(name = "vote_average")
+    @SerialName("vote_average")
     val voteAverage: Double
 ) {
 
