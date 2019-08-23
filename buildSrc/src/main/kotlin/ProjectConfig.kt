@@ -1,15 +1,15 @@
 @file:Suppress("unused")
 
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha03"
+    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha07"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
 
 object Kotlin {
-    private const val VERSION = "1.3.41"
-    private const val COROUTINES_VERSION = "1.2.2"
-    private const val SERIALIZATION_VERSION = "0.11.1"
+    private const val VERSION = "1.3.50"
+    private const val COROUTINES_VERSION = "1.3.0"
+    private const val SERIALIZATION_VERSION = "0.12.0"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
     const val SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$VERSION"
@@ -52,9 +52,9 @@ object Jetpack {
     private const val CORE_KTX_VERSION = "1.2.0-alpha03"
     private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha02"
     private const val PREFERENCE_KTX_VERSION = "1.1.0-rc01"
-    private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha02"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-beta02"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta2"
+    private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-beta03"
+    private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -90,7 +90,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.2.0-rc01"
+    private const val VERSION = "2.2.0"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
@@ -121,13 +121,13 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "4.0.1"
+    private const val VERSION = "4.1.0"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
 
 object LeakCanary {
-    private const val VERSION = "2.0-beta-2"
+    private const val VERSION = "2.0-beta-3"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
