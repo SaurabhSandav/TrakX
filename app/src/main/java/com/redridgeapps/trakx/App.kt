@@ -2,8 +2,6 @@ package com.redridgeapps.trakx
 
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import com.ashokvarma.gander.Gander
-import com.ashokvarma.gander.persistence.GanderPersistence
 import com.redridgeapps.trakx.di.DaggerAppComponent
 import com.redridgeapps.trakx.work.BaseWorkerFactory
 import dagger.android.AndroidInjector
@@ -18,7 +16,6 @@ class App : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        Gander.setGanderStorage(GanderPersistence.getInstance(this))
         setupWorkManager()
     }
 

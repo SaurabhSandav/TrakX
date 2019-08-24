@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
-import com.ashokvarma.gander.GanderInterceptor
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.InMemoryCacheDatabase
@@ -50,10 +50,8 @@ object AppModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideGanderInterceptor(app: Application): GanderInterceptor {
-        return GanderInterceptor(app)
-            .showNotification(true)
-            .retainDataFor(GanderInterceptor.Period.FOREVER)
+    fun provideChuckerInterceptor(app: Application): ChuckerInterceptor {
+        return ChuckerInterceptor(app)
     }
 
     @UnstableDefault
@@ -71,12 +69,12 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(
         tmDbInterceptor: TMDbInterceptor,
-        ganderInterceptor: GanderInterceptor
+        chuckerInterceptor: ChuckerInterceptor
     ): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
             .addInterceptor(tmDbInterceptor)
-            .addInterceptor(ganderInterceptor)
+            .addInterceptor(chuckerInterceptor)
             .build()
     }
 

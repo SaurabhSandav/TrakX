@@ -134,13 +134,12 @@ dependencies {
     // LeakCanary
     debugImplementation LeakCanary.ANDROID
 
-    // Gander
-    debugImplementation Gander.GANDER
-    debugImplementation Gander.GANDER_PERSISTENCE
-    releaseImplementation Gander.GANDER_NO_OP
-
     // SQLDelight
     implementation SQLDelight.ANDROID_DRIVER
     implementation SQLDelight.ANDROID_PAGING_EXTENSIONS
     implementation SQLDelight.COROUTINES_EXTENSIONS
+
+    // Chucker
+    debugImplementation Chucker.CHUCKER
+    releaseImplementation Chucker.CHUCKER_NO_OP
 }

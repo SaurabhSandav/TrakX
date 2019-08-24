@@ -132,14 +132,6 @@ object LeakCanary {
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
 
-object Gander {
-    private const val VERSION = "3.1.0"
-
-    const val GANDER = "com.ashokvarma.android:gander:$VERSION"
-    const val GANDER_NO_OP = "com.ashokvarma.android:gander-no-op:$VERSION"
-    const val GANDER_PERSISTENCE = "com.ashokvarma.android:gander-persistence:$VERSION"
-}
-
 object SQLDelight {
     private const val VERSION = "1.1.4"
 
@@ -147,4 +139,11 @@ object SQLDelight {
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
     const val ANDROID_PAGING_EXTENSIONS = "com.squareup.sqldelight:android-paging-extensions:$VERSION"
     const val COROUTINES_EXTENSIONS = "com.squareup.sqldelight:coroutines-extensions-jvm:$VERSION"
+}
+
+object Chucker {
+    private const val VERSION = "3.0.1"
+
+    const val CHUCKER = "com.github.ChuckerTeam.Chucker:library:$VERSION"
+    const val CHUCKER_NO_OP = "com.github.ChuckerTeam.Chucker:library-no-op:$VERSION"
 }
