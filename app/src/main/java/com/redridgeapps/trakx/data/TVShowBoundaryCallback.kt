@@ -16,14 +16,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 class TVShowBoundaryCallback(
     tmDbService: TMDbService,
+    coroutineScope: CoroutineScope,
     private val inMemoryCacheDatabase: InMemoryCacheDatabase,
-    override val coroutineContext: CoroutineContext,
     private val requestType: RequestType
-) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope {
+) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope by coroutineScope {
 
     private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
     private val request: suspend (Int) -> TVShowCollection

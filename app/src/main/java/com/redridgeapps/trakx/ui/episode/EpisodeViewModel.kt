@@ -2,6 +2,7 @@ package com.redridgeapps.trakx.ui.episode
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.EpisodeDetail
 import com.redridgeapps.trakx.ui.base.BaseViewModel
@@ -19,7 +20,11 @@ class EpisodeViewModel @Inject constructor(
         fetchEpisodeDetail(tvShowId, seasonNumber, episodeNumber)
     }
 
-    private fun fetchEpisodeDetail(tvShowId: Int, seasonNumber: Int, episodeNumber: Int) = launch {
+    private fun fetchEpisodeDetail(
+        tvShowId: Int,
+        seasonNumber: Int,
+        episodeNumber: Int
+    ) = viewModelScope.launch {
         val episodeDetail = tmDbService.getEpisodeDetail(tvShowId, seasonNumber, episodeNumber)
         _episodeDetailLiveData.setValue(episodeDetail)
     }

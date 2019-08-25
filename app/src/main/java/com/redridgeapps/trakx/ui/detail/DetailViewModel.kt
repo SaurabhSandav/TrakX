@@ -2,6 +2,7 @@ package com.redridgeapps.trakx.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
@@ -40,11 +41,11 @@ class DetailViewModel @Inject constructor(
     fun setTVShow(newTVShow: TVShow) {
         tvShow = newTVShow
 
-        launch { isShowTracked() }
+        viewModelScope.launch { isShowTracked() }
         fetchTVShowDetail()
     }
 
-    fun trackShow(enableTracking: Boolean) = launch {
+    fun trackShow(enableTracking: Boolean) = viewModelScope.launch {
 
         withContext(Dispatchers.IO) {
             if (!enableTracking) trackedShowQueries.deleteWithID(tvShow.id)
@@ -63,7 +64,7 @@ class DetailViewModel @Inject constructor(
             }
     }
 
-    private fun fetchTVShowDetail() = launch {
+    private fun fetchTVShowDetail() = viewModelScope.launch {
         val tvShowDetail = tmDbService.getTVDetail(tvShow.id)
         _tvShowDetailLiveData.setValue(tvShowDetail)
     }
