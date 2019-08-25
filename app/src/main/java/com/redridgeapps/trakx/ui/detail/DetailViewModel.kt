@@ -16,7 +16,8 @@ import com.redridgeapps.trakx.utils.DateTimeUtils
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -41,7 +42,7 @@ class DetailViewModel @Inject constructor(
     fun setTVShow(newTVShow: TVShow) {
         tvShow = newTVShow
 
-        viewModelScope.launch { isShowTracked() }
+        isShowTracked()
         fetchTVShowDetail()
     }
 
@@ -55,13 +56,14 @@ class DetailViewModel @Inject constructor(
         fetchUpcomingEpisodes(enableTracking)
     }
 
-    private suspend fun isShowTracked() {
+    private fun isShowTracked() {
         trackedShowQueries.getShow(tvShow.id)
             .asFlow()
             .mapToList()
-            .collect {
+            .onEach {
                 _isShowTrackedLiveData.postValue(it.isNotEmpty())
             }
+            .launchIn(viewModelScope)
     }
 
     private fun fetchTVShowDetail() = viewModelScope.launch {
