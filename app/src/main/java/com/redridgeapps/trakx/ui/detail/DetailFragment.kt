@@ -1,7 +1,5 @@
 package com.redridgeapps.trakx.ui.detail
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +17,6 @@ import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
-import com.redridgeapps.trakx.ui.widget.UpcomingEpisodeWidget
 import javax.inject.Inject
 
 class DetailFragment @Inject constructor(
@@ -51,7 +48,6 @@ class DetailFragment @Inject constructor(
             isTracked = it
             setTracked(it)
         }
-        viewModel.upcomingEpisodeUpdatedLiveData.observe(viewLifecycleOwner) { updateWidgets() }
     }
 
     private fun setupLayout(tvShow: TVShow) {
@@ -83,16 +79,6 @@ class DetailFragment @Inject constructor(
                     .toEpisodeListFragment(args.tvShow, season.seasonNumber, season.name)
                     .navigateWith(navController)
             }
-        }
-    }
-
-    private fun updateWidgets() {
-
-        val name = ComponentName(requireContext(), UpcomingEpisodeWidget::class.java)
-        val appWidgetManager = AppWidgetManager.getInstance(requireContext())
-
-        for (widgetId in appWidgetManager.getAppWidgetIds(name)) {
-            UpcomingEpisodeWidget.updateAppWidget(requireContext(), appWidgetManager, widgetId)
         }
     }
 

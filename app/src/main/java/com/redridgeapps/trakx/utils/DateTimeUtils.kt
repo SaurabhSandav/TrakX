@@ -1,7 +1,6 @@
 package com.redridgeapps.trakx.utils
 
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 object DateTimeUtils {
 
@@ -16,21 +15,6 @@ object DateTimeUtils {
 
     fun isUpcoming(todayCalendar: Calendar, airCalendar: Calendar): Boolean {
         return airCalendar.after(todayCalendar) || isToday(todayCalendar, airCalendar)
-    }
-
-    fun humanReadableTimeToGo(airDate: Long): String {
-        val today = todayDateInstance.timeInMillis
-        val diffDuration = airDate - today
-
-        val testCalendar = Calendar.getInstance()
-        testCalendar.timeInMillis = airDate
-
-        if (diffDuration >= 1) {
-            val diffInDays = TimeUnit.MILLISECONDS.toDays(diffDuration) + 1
-            return if (diffInDays == 1L) "Tomorrow" else "In $diffInDays days"
-        }
-
-        return "Today"
     }
 
     private fun isToday(todayCalendar: Calendar, airCalendar: Calendar): Boolean {

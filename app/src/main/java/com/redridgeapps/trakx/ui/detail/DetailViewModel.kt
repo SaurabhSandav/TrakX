@@ -31,12 +31,10 @@ class DetailViewModel @Inject constructor(
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
     private val _isShowTrackedLiveData = MutableLiveData<Boolean>()
-    private val _upcomingEpisodesUpdatedLiveData = MutableLiveData<Unit>()
     private val _tvShowDetailLiveData = MutableLiveData<TVShowDetail>()
     private lateinit var tvShow: TVShow
 
     val isShowTrackedLiveData: LiveData<Boolean> = _isShowTrackedLiveData
-    val upcomingEpisodeUpdatedLiveData: LiveData<Unit> = _upcomingEpisodesUpdatedLiveData
     val tvShowDetailLiveData: LiveData<TVShowDetail> = _tvShowDetailLiveData
 
     fun setTVShow(newTVShow: TVShow) {
@@ -90,8 +88,6 @@ class DetailViewModel @Inject constructor(
 
             upcomingEpisodesQueries.clearAndInsertOfShowToDB(upcomingEpisodes)
         }
-
-        _upcomingEpisodesUpdatedLiveData.postValue(Unit)
     }
 
     private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(
