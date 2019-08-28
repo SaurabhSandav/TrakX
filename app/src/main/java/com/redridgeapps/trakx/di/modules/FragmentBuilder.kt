@@ -2,7 +2,7 @@ package com.redridgeapps.trakx.di.modules
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
-import com.redridgeapps.trakx.ui.base.dagger.DaggerFragmentFactory
+import com.redridgeapps.trakx.ui.common.dagger.DaggerFragmentFactory
 import com.redridgeapps.trakx.ui.detail.DetailFragment
 import com.redridgeapps.trakx.ui.episode.EpisodeFragment
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListFragment

@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.ui.base.dagger
+package com.redridgeapps.trakx.ui.common.dagger
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
