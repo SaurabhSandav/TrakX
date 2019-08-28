@@ -18,6 +18,12 @@ object Kotlin {
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
 }
 
+object GradleVersionsPlugin {
+    private const val VERSION = "0.22.0"
+
+    const val GRADLE_PLUGIN = "com.github.ben-manes:gradle-versions-plugin:$VERSION"
+}
+
 object JUnit {
     private const val JUNIT_VERSION = "4.12"
 
