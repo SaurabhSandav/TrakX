@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha07"
+    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha09"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -96,7 +96,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.2.0"
+    private const val VERSION = "2.3.0-alpha01"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
