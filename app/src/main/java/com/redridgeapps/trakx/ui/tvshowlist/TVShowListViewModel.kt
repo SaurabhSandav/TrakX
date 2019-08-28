@@ -1,6 +1,7 @@
 package com.redridgeapps.trakx.ui.tvshowlist
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Config
 import androidx.paging.DataSource
@@ -11,7 +12,6 @@ import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
-import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
 import com.squareup.sqldelight.android.paging.QueryDataSourceFactory
@@ -21,7 +21,7 @@ class TVShowListViewModel @Inject constructor(
     private val tmDbService: TMDbService,
     private val inMemoryCacheDatabase: InMemoryCacheDatabase,
     appDatabase: AppDatabase
-) : BaseViewModel() {
+) : ViewModel() {
 
     lateinit var tvShowPagedListLiveData: LiveData<PagedList<TVShow>>
 

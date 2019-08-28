@@ -2,16 +2,16 @@ package com.redridgeapps.trakx.ui.episodelist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.SeasonDetail
-import com.redridgeapps.trakx.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EpisodeListViewModel @Inject constructor(
     private val tmDbService: TMDbService
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _seasonDetailLiveData = MutableLiveData<SeasonDetail>()
     val seasonDetailLiveData: LiveData<SeasonDetail> = _seasonDetailLiveData

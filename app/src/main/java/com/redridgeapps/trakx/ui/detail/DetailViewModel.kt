@@ -2,6 +2,7 @@ package com.redridgeapps.trakx.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
@@ -11,7 +12,6 @@ import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
-import com.redridgeapps.trakx.ui.base.BaseViewModel
 import com.redridgeapps.trakx.utils.DateTimeUtils
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val tmDbService: TMDbService,
     appDatabase: AppDatabase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
