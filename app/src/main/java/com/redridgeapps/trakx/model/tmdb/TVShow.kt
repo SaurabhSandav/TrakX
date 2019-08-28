@@ -2,7 +2,7 @@ package com.redridgeapps.trakx.model.tmdb
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
-import com.redridgeapps.trakx.utils.moshi.LongDateSerializer
+import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
 import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

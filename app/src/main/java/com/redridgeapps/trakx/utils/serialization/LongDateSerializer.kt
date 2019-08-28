@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.utils.moshi
+package com.redridgeapps.trakx.utils.serialization
 
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder

@@ -1,7 +1,7 @@
 package com.redridgeapps.trakx.model.tmdb
 
 import androidx.recyclerview.widget.DiffUtil
-import com.redridgeapps.trakx.utils.moshi.LongDateSerializer
+import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
