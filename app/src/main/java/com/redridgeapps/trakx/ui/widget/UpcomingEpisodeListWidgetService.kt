@@ -19,7 +19,7 @@ class UpcomingEpisodeListWidgetService : RemoteViewsService() {
         super.onCreate()
     }
 
-    override fun onGetViewFactory(intent: Intent): RemoteViewsService.RemoteViewsFactory {
+    override fun onGetViewFactory(intent: Intent): RemoteViewsFactory {
         return UpcomingEpisodeViewsFactory(packageName, appDatabase)
     }
 

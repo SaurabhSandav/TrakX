@@ -59,7 +59,9 @@ class TVShowListViewModel @Inject constructor(
 
     private fun buildTrackedDataSource(): DataSource.Factory<Int, TVShow> {
         return QueryDataSourceFactory(
-            queryProvider = { limit, offset -> trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow) },
+            queryProvider = { limit, offset ->
+                trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow)
+            },
             countQuery = trackedShowQueries.countTrackedShows()
         )
     }

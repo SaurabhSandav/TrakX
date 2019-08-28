@@ -55,7 +55,9 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
         }
     }
 
-    private fun UpcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes: List<Episode>) = transaction {
+    private fun UpcomingEpisodesQueries.clearAndInsertToDB(
+        upcomingEpisodes: List<Episode>
+    ) = transaction {
         deleteAll()
         upcomingEpisodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
@@ -66,7 +68,10 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
         private val appDatabase: AppDatabase
     ) : BaseWorker.Factory {
 
-        override fun create(appContext: Context, params: WorkerParameters): UpcomingEpisodeSyncWorker {
+        override fun create(
+            appContext: Context,
+            params: WorkerParameters
+        ): UpcomingEpisodeSyncWorker {
             return UpcomingEpisodeSyncWorker(tmDbService, appDatabase, appContext, params)
         }
     }

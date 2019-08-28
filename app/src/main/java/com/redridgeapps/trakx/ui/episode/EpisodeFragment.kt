@@ -23,7 +23,11 @@ class EpisodeFragment @Inject constructor(
     private val viewModel by viewModels<EpisodeViewModel> { viewModelFactory }
     private val args: EpisodeFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = inflater.dataBindingInflate(R.layout.fragment_episode, container)
 
         return binding.root

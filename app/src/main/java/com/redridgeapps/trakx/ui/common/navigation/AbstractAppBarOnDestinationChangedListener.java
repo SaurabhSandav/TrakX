@@ -22,6 +22,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -62,10 +63,6 @@ abstract class AbstractAppBarOnDestinationChangedListener implements NavControll
         }
     }
 
-    protected abstract void setTitle(CharSequence title);
-
-    protected abstract void setNavigationIcon(Drawable icon, @StringRes int contentDescription);
-
     private static boolean matchDestinations(@NonNull NavDestination destination,
                                              @NonNull Set<Integer> destinationIds) {
         NavDestination currentDestination = destination;
@@ -77,6 +74,10 @@ abstract class AbstractAppBarOnDestinationChangedListener implements NavControll
         } while (currentDestination != null);
         return false;
     }
+
+    protected abstract void setTitle(CharSequence title);
+
+    protected abstract void setNavigationIcon(Drawable icon, @StringRes int contentDescription);
 
     private void setActionBarUpIndicator(boolean showAsDrawerIndicator) {
         boolean animate = true;

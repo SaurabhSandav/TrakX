@@ -14,7 +14,8 @@ object Kotlin {
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
     const val SERIALIZATION_PLUGIN = "org.jetbrains.kotlin:kotlin-serialization:$VERSION"
     const val STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$VERSION"
-    const val SERIALIZATION_RUNTIME = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
+    const val SERIALIZATION_RUNTIME =
+        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
 }
 
@@ -69,7 +70,8 @@ object Jetpack {
     const val PREFERENCE_KTX = "androidx.preference:preference-ktx:$PREFERENCE_KTX_VERSION"
     const val DRAWERLAYOUT = "androidx.drawerlayout:drawerlayout:$DRAWERLAYOUT_VERSION"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview:$RECYCLERVIEW_VERSION"
-    const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
+    const val CONSTRAINT_LAYOUT =
+        "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 }
 
 object Lifecycle {
@@ -86,7 +88,8 @@ object Navigation {
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
-    const val SAFE_ARGS_GRADLE_PLUGIN = "androidx.navigation:navigation-safe-args-gradle-plugin:$VERSION"
+    const val SAFE_ARGS_GRADLE_PLUGIN =
+        "androidx.navigation:navigation-safe-args-gradle-plugin:$VERSION"
 }
 
 object Paging {
@@ -143,7 +146,8 @@ object SQLDelight {
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
-    const val ANDROID_PAGING_EXTENSIONS = "com.squareup.sqldelight:android-paging-extensions:$VERSION"
+    const val ANDROID_PAGING_EXTENSIONS =
+        "com.squareup.sqldelight:android-paging-extensions:$VERSION"
     const val COROUTINES_EXTENSIONS = "com.squareup.sqldelight:coroutines-extensions-jvm:$VERSION"
 }
 

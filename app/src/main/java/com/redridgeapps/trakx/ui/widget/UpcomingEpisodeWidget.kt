@@ -8,7 +8,11 @@ import com.redridgeapps.trakx.R
 
 class UpcomingEpisodeWidget : AppWidgetProvider() {
 
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray
+    ) {
         for (appWidgetId in appWidgetIds)
             updateAppWidget(context, appWidgetManager, appWidgetId)
     }
@@ -31,10 +35,10 @@ class UpcomingEpisodeWidget : AppWidgetProvider() {
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.episode_list)
         }
 
-        private fun Context.getApplicationName(): String {
-            val applicationInfo = applicationInfo
-            val stringId = applicationInfo.labelRes
-            return if (stringId == 0) applicationInfo.nonLocalizedLabel.toString() else getString(stringId)
-        }
+        private fun Context.getApplicationName(): String =
+            when (val stringId = applicationInfo.labelRes) {
+                0 -> applicationInfo.nonLocalizedLabel.toString()
+                else -> getString(stringId)
+            }
     }
 }

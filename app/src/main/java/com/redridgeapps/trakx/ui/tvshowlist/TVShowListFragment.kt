@@ -34,7 +34,11 @@ class TVShowListFragment @Inject constructor(
     private var binding by AutoClearedValue<FragmentTvShowListBinding>()
     private val viewModel by viewModels<TVShowListViewModel> { viewModelFactory }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = inflater.dataBindingInflate(R.layout.fragment_tv_show_list, container)
 
         return binding.root
@@ -58,11 +62,11 @@ class TVShowListFragment @Inject constructor(
         requireActivity().title = item.title
 
         val requestType = when (item.itemId) {
-            R.id.category_my_shows -> Constants.RequestType.TRACKED
-            R.id.category_popular -> Constants.RequestType.POPULAR
-            R.id.category_top_rated -> Constants.RequestType.TOP_RATED
-            R.id.category_on_the_air -> Constants.RequestType.ON_THE_AIR
-            R.id.category_airing_today -> Constants.RequestType.AIRING_TODAY
+            R.id.category_my_shows -> RequestType.TRACKED
+            R.id.category_popular -> RequestType.POPULAR
+            R.id.category_top_rated -> RequestType.TOP_RATED
+            R.id.category_on_the_air -> RequestType.ON_THE_AIR
+            R.id.category_airing_today -> RequestType.AIRING_TODAY
             else -> return false
         }
 
@@ -87,7 +91,8 @@ class TVShowListFragment @Inject constructor(
         val navController = findNavController()
 
         tvShowListAdapter = TVShowListAdapter { tvShow ->
-            TVShowListFragmentDirections.toDetailFragment(tvShow, tvShow.name).navigateWith(navController)
+            TVShowListFragmentDirections.toDetailFragment(tvShow, tvShow.name)
+                .navigateWith(navController)
         }
 
         binding.recyclerView.apply {

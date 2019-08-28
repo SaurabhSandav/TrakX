@@ -23,6 +23,7 @@ import kotlin.reflect.KClass
 @MapKey
 internal annotation class FragmentKey(val value: KClass<out Fragment>)
 
+@Suppress("unused")
 @Module
 abstract class FragmentBuilder {
 

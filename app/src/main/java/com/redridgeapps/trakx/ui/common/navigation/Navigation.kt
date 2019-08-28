@@ -43,5 +43,7 @@ private fun Fragment.setupWithNavigation(
 
     toolbar.setNavigationOnClickListener { navController.navigateUp(appBarConfiguration) }
 
-    viewLifecycleOwner.lifecycle.addObserver(ToolbarNavigationLifecycleObserver(navController, listener))
+    viewLifecycleOwner.lifecycle.addObserver(
+        ToolbarNavigationLifecycleObserver(navController, listener)
+    )
 }

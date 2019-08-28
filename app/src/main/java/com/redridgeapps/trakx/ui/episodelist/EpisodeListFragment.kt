@@ -27,7 +27,11 @@ class EpisodeListFragment @Inject constructor(
     private val viewModel by viewModels<EpisodeListViewModel> { viewModelFactory }
     private val args: EpisodeListFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = inflater.dataBindingInflate(R.layout.fragment_episode_list, container)
 
         return binding.root
@@ -54,12 +58,18 @@ class EpisodeListFragment @Inject constructor(
 
         val episodeListAdapter = EpisodeListAdapter { episode ->
             EpisodeListFragmentDirections
-                .toEpisodeFragment(args.tvShow, args.seasonNumber, episode.episodeNumber, episode.name)
+                .toEpisodeFragment(
+                    args.tvShow,
+                    args.seasonNumber,
+                    episode.episodeNumber,
+                    episode.name
+                )
                 .navigateWith(navController)
         }
 
         val linearLayoutManager = LinearLayoutManager(requireContext())
-        val itemDecoration = DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
+        val itemDecoration =
+            DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
 
         binding.recyclerView.apply {
             layoutManager = linearLayoutManager
@@ -68,6 +78,8 @@ class EpisodeListFragment @Inject constructor(
             addItemDecoration(itemDecoration)
         }
 
-        viewModel.seasonDetailLiveData.observe(viewLifecycleOwner) { episodeListAdapter.submitList(it.episodes) }
+        viewModel.seasonDetailLiveData.observe(viewLifecycleOwner) {
+            episodeListAdapter.submitList(it.episodes)
+        }
     }
 }

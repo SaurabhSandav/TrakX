@@ -71,7 +71,9 @@ class DetailViewModel @Inject constructor(
         _tvShowDetailLiveData.setValue(tvShowDetail)
     }
 
-    private suspend fun fetchUpcomingEpisodes(enableTracking: Boolean) = withContext(Dispatchers.IO) {
+    private suspend fun fetchUpcomingEpisodes(
+        enableTracking: Boolean
+    ) = withContext(Dispatchers.IO) {
         if (!enableTracking || tvShowDetailLiveData.value == null) {
             upcomingEpisodesQueries.deleteOfShowID(tvShow.id)
         } else {
@@ -92,7 +94,9 @@ class DetailViewModel @Inject constructor(
         _upcomingEpisodesUpdatedLiveData.postValue(Unit)
     }
 
-    private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(episodes: List<Episode>) = transaction {
+    private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(
+        episodes: List<Episode>
+    ) = transaction {
         deleteOfShowID(tvShow.id)
         episodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }

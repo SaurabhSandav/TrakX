@@ -24,7 +24,8 @@ class BaseWorkerFactory @Inject constructor(
         val modelClass: Class<out BaseWorker>
 
         try {
-            modelClass = Class.forName(workerClassName).asSubclass(BaseWorker::class.java) as Class<out BaseWorker>
+            modelClass = Class.forName(workerClassName)
+                .asSubclass(BaseWorker::class.java) as Class<out BaseWorker>
         } catch (e: ClassNotFoundException) {
             return null
         }

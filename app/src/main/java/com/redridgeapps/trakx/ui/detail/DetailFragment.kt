@@ -31,7 +31,11 @@ class DetailFragment @Inject constructor(
     private val viewModel by viewModels<DetailViewModel> { viewModelFactory }
     private val args: DetailFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = inflater.dataBindingInflate(R.layout.fragment_detail, container)
 
         return binding.root

@@ -55,7 +55,8 @@ class TVShowBoundaryCallback(
 
     private suspend fun fetchTVShows() = withContext(Dispatchers.IO) {
 
-        val previousPage = lastPage ?: cachedCollectionQueries.getLastPage(requestType.name).executeAsOneOrNull()
+        val previousPage =
+            lastPage ?: cachedCollectionQueries.getLastPage(requestType.name).executeAsOneOrNull()
         val newPage = if (previousPage != null) previousPage + 1 else 1
 
         val tvShowList = request(newPage).results
