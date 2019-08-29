@@ -143,4 +143,7 @@ dependencies {
     // Chucker
     debugImplementation Chucker.CHUCKER
     releaseImplementation Chucker.CHUCKER_NO_OP
+
+    // ThreeTenABP
+    implementation ThreeTenABP.THREE_TEN_ABP
 }
