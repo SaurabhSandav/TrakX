@@ -42,6 +42,7 @@ allprojects {
         kotlinOptions.freeCompilerArgs += [
                 '-progressive',
                 '-Xnew-inference',
+                '-XXLanguage:+InlineClasses',
                 '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi' // TODO (REMOVE) For Kotlin Flow
         ]
     }
