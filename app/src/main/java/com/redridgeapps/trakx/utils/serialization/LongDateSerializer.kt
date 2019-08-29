@@ -1,40 +1,51 @@
 package com.redridgeapps.trakx.utils.serialization
 
+import com.redridgeapps.trakx.utils.Constants.ZONE_ID_UTC
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.NullableSerializer
 import kotlinx.serialization.serializer
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
 import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Serializer(forClass = Long::class)
 object LongDateSerializer : KSerializer<Long> {
 
-    private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    private val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+    private val zoneId = ZONE_ID_UTC
     private val serializer = NullableSerializer(String.serializer())
 
     override fun serialize(encoder: Encoder, obj: Long) {
-        val convertedStr = if (obj == -1L) null else simpleDateFormat.format(obj)
+        val convertedStr = if (obj == -1L) null else obj.asISODate()
 
         encoder.encodeSerializableValue(serializer, convertedStr)
     }
 
     override fun deserialize(decoder: Decoder): Long {
-        val dateStr = decoder.decodeSerializableValue(serializer) ?: return -1L
+        val result = -1L
+        val dateStr = decoder.decodeSerializableValue(serializer) ?: return result
 
-        var result = -1L
-
-        try {
-            simpleDateFormat.parse(dateStr)
-                ?.time
-                ?.let { result = it }
+        return try {
+            dateStr.asEpochSeconds()
         } catch (e: ParseException) {
-            // Ignore
+            result
         }
+    }
 
-        return result
+    private fun Long.asISODate(): String {
+        return Instant.ofEpochSecond(this)
+            .atZone(zoneId)
+            .toLocalDate()
+            .format(formatter)
+    }
+
+    private fun String.asEpochSeconds(): Long {
+        return LocalDate.parse(this, formatter)
+            .atStartOfDay(zoneId)
+            .toEpochSecond()
     }
 }
