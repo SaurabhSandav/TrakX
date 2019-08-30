@@ -2,10 +2,13 @@ package com.redridgeapps.trakx.model.tmdb
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
+import com.redridgeapps.trakx.model.EventDate
 import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Parcelize
 @Serializable
@@ -39,6 +42,10 @@ data class TVShow(
     @SerialName("vote_average")
     val voteAverage: Float
 ) : Parcelable {
+
+    @IgnoredOnParcel
+    @Transient
+    val firstAirEventDate: EventDate = EventDate(firstAirDate)
 
     object DiffCallback : DiffUtil.ItemCallback<TVShow>() {
 

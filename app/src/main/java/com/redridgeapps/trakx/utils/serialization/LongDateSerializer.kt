@@ -1,5 +1,6 @@
 package com.redridgeapps.trakx.utils.serialization
 
+import com.redridgeapps.trakx.model.EventDate
 import com.redridgeapps.trakx.utils.Constants.ZONE_ID_UTC
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -20,13 +21,13 @@ object LongDateSerializer : KSerializer<Long> {
     private val serializer = NullableSerializer(String.serializer())
 
     override fun serialize(encoder: Encoder, obj: Long) {
-        val convertedStr = if (obj == -1L) null else obj.asISODate()
+        val convertedStr = if (obj == EventDate.NO_DATE.longDate) null else obj.asISODate()
 
         encoder.encodeSerializableValue(serializer, convertedStr)
     }
 
     override fun deserialize(decoder: Decoder): Long {
-        val result = -1L
+        val result = EventDate.NO_DATE.longDate
         val dateStr = decoder.decodeSerializableValue(serializer) ?: return result
 
         return try {

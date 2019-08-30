@@ -1,8 +1,10 @@
 package com.redridgeapps.trakx.model.tmdb
 
+import com.redridgeapps.trakx.model.EventDate
 import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class EpisodeDetail(
@@ -31,4 +33,8 @@ data class EpisodeDetail(
 
     @SerialName("vote_average")
     val voteAverage: Float
-)
+) {
+
+    @Transient
+    val airEventDate: EventDate = EventDate(airDate)
+}

@@ -1,8 +1,10 @@
 package com.redridgeapps.trakx.model.tmdb
 
+import com.redridgeapps.trakx.model.EventDate
 import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 data class Season(
@@ -28,4 +30,8 @@ data class Season(
 
     @SerialName("season_number")
     val seasonNumber: Int
-)
+) {
+
+    @Transient
+    val airEventDate: EventDate = EventDate(airDate)
+}
