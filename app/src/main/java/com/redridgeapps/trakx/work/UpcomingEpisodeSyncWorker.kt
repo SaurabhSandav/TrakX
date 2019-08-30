@@ -11,11 +11,10 @@ import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
+import com.redridgeapps.trakx.model.isUpcoming
 import com.redridgeapps.trakx.model.tmdb.Episode
-import com.redridgeapps.trakx.utils.DateTimeUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,21 +37,11 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
             .map { tmDbService.getTVDetail(it.id) }
             .map { tmDbService.getSeasonDetail(it.id, it.seasons.last().seasonNumber) }
             .flatMap { it.episodes }
-            .filterUpcoming()
+            .filter { it.airEventDate.isUpcoming() }
 
         upcomingEpisodesQueries.clearAndInsertToDB(upcomingEpisodes)
 
         return@withContext Result.success()
-    }
-
-    private fun List<Episode>.filterUpcoming(): List<Episode> {
-        val todayCalendar = DateTimeUtils.todayDateInstance
-        val airCalendar = Calendar.getInstance()
-
-        return filter {
-            airCalendar.timeInMillis = it.airDate
-            DateTimeUtils.isUpcoming(todayCalendar, airCalendar)
-        }
     }
 
     private fun UpcomingEpisodesQueries.clearAndInsertToDB(

@@ -9,10 +9,10 @@ import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toTrackedShow
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
+import com.redridgeapps.trakx.model.isUpcoming
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
-import com.redridgeapps.trakx.utils.DateTimeUtils
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +20,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
@@ -77,14 +76,7 @@ class DetailViewModel @Inject constructor(
         } else {
             val lastSeason = tvShowDetailLiveData.value!!.seasons.last()
             val seasonDetail = tmDbService.getSeasonDetail(tvShow.id, lastSeason.seasonNumber)
-
-            val todayCalendar = DateTimeUtils.todayDateInstance
-            val airCalendar = Calendar.getInstance()
-
-            val upcomingEpisodes = seasonDetail.episodes.filter {
-                airCalendar.timeInMillis = it.airDate
-                DateTimeUtils.isUpcoming(todayCalendar, airCalendar)
-            }
+            val upcomingEpisodes = seasonDetail.episodes.filter { it.airEventDate.isUpcoming() }
 
             upcomingEpisodesQueries.clearAndInsertOfShowToDB(upcomingEpisodes)
         }
