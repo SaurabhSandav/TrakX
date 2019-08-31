@@ -163,3 +163,10 @@ object ThreeTenABP {
 
     const val THREE_TEN_ABP = "com.jakewharton.threetenabp:threetenabp:$VERSION"
 }
+
+object AssistedInject {
+    private const val VERSION = "0.5.0"
+
+    const val ANNOTATIONS = "com.squareup.inject:assisted-inject-annotations-dagger2:$VERSION"
+    const val PROCESSOR = "com.squareup.inject:assisted-inject-processor-dagger2:$VERSION"
+}

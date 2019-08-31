@@ -146,4 +146,8 @@ dependencies {
 
     // ThreeTenABP
     implementation ThreeTenABP.THREE_TEN_ABP
+
+    // AssistedInject
+    compileOnly AssistedInject.ANNOTATIONS
+    kapt AssistedInject.PROCESSOR
 }
