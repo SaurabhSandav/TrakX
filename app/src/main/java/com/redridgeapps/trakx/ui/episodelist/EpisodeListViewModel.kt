@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.model.tmdb.SeasonDetail
 import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
+import com.redridgeapps.trakx.ui.common.viewModelArgs
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
@@ -17,15 +18,16 @@ class EpisodeListViewModel @AssistedInject constructor(
     private val tmDbService: TMDbService
 ) : ViewModel() {
 
+    private val args by viewModelArgs<EpisodeListViewModelArgs>(handle)
     private val _seasonDetailLiveData = MutableLiveData<SeasonDetail>()
     val seasonDetailLiveData: LiveData<SeasonDetail> = _seasonDetailLiveData
 
-    fun setTVSeason(tvShowId: Int, seasonNumber: Int) {
-        fetchSeasonDetail(tvShowId, seasonNumber)
+    init {
+        fetchSeasonDetail()
     }
 
-    private fun fetchSeasonDetail(tvShowId: Int, seasonNumber: Int) = viewModelScope.launch {
-        val seasonDetail = tmDbService.getSeasonDetail(tvShowId, seasonNumber)
+    private fun fetchSeasonDetail() = viewModelScope.launch {
+        val seasonDetail = tmDbService.getSeasonDetail(args.tvShowId, args.seasonNumber)
         _seasonDetailLiveData.setValue(seasonDetail)
     }
 

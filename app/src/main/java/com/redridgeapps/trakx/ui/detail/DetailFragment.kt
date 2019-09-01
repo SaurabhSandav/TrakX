@@ -26,7 +26,12 @@ class DetailFragment @Inject constructor(
     private var isTracked = false
     private var binding by AutoClearedValue<FragmentDetailBinding>()
     private val args: DetailFragmentArgs by navArgs()
-    private val viewModel by savedStateViewModels<DetailViewModel>(vmfg)
+
+    private val viewModel by savedStateViewModels<DetailViewModel>(vmfg) {
+        DetailViewModelArgs(
+            tvShow = args.tvShow
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +46,6 @@ class DetailFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setTVShow(args.tvShow)
         setupLayout(args.tvShow)
 
         viewModel.isShowTrackedLiveData.observe(viewLifecycleOwner) {

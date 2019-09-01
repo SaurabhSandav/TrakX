@@ -21,7 +21,14 @@ class EpisodeFragment @Inject constructor(
 
     private var binding by AutoClearedValue<FragmentEpisodeBinding>()
     private val args: EpisodeFragmentArgs by navArgs()
-    private val viewModel by savedStateViewModels<EpisodeViewModel>(vmfg)
+
+    private val viewModel by savedStateViewModels<EpisodeViewModel>(vmfg) {
+        EpisodeViewModelArgs(
+            tvShowId = args.tvShow.id,
+            seasonNumber = args.seasonNumber,
+            episodeNumber = args.episodeNumber
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +43,6 @@ class EpisodeFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setTVEpisode(args.tvShow.id, args.seasonNumber, args.episodeNumber)
         setupLayout()
     }
 

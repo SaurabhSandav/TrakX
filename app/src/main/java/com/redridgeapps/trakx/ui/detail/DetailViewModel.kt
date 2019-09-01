@@ -12,9 +12,9 @@ import com.redridgeapps.trakx.db.mapper.toTrackedShow
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.isUpcoming
 import com.redridgeapps.trakx.model.tmdb.Episode
-import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
 import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
+import com.redridgeapps.trakx.ui.common.viewModelArgs
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import com.squareup.sqldelight.runtime.coroutines.asFlow
@@ -31,18 +31,16 @@ class DetailViewModel @AssistedInject constructor(
     appDatabase: AppDatabase
 ) : ViewModel() {
 
+    private val args by viewModelArgs<DetailViewModelArgs>(handle)
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
     private val _isShowTrackedLiveData = MutableLiveData<Boolean>()
     private val _tvShowDetailLiveData = MutableLiveData<TVShowDetail>()
-    private lateinit var tvShow: TVShow
 
     val isShowTrackedLiveData: LiveData<Boolean> = _isShowTrackedLiveData
     val tvShowDetailLiveData: LiveData<TVShowDetail> = _tvShowDetailLiveData
 
-    fun setTVShow(newTVShow: TVShow) {
-        tvShow = newTVShow
-
+    init {
         isShowTracked()
         fetchTVShowDetail()
     }
@@ -50,15 +48,15 @@ class DetailViewModel @AssistedInject constructor(
     fun trackShow(enableTracking: Boolean) = viewModelScope.launch {
 
         withContext(Dispatchers.IO) {
-            if (!enableTracking) trackedShowQueries.deleteWithID(tvShow.id)
-            else trackedShowQueries.insert(tvShow.toTrackedShow())
+            if (!enableTracking) trackedShowQueries.deleteWithID(args.tvShow.id)
+            else trackedShowQueries.insert(args.tvShow.toTrackedShow())
         }
 
         fetchUpcomingEpisodes(enableTracking)
     }
 
     private fun isShowTracked() {
-        trackedShowQueries.getShow(tvShow.id)
+        trackedShowQueries.getShow(args.tvShow.id)
             .asFlow()
             .mapToList()
             .onEach {
@@ -68,7 +66,7 @@ class DetailViewModel @AssistedInject constructor(
     }
 
     private fun fetchTVShowDetail() = viewModelScope.launch {
-        val tvShowDetail = tmDbService.getTVDetail(tvShow.id)
+        val tvShowDetail = tmDbService.getTVDetail(args.tvShow.id)
         _tvShowDetailLiveData.setValue(tvShowDetail)
     }
 
@@ -76,10 +74,10 @@ class DetailViewModel @AssistedInject constructor(
         enableTracking: Boolean
     ) = withContext(Dispatchers.IO) {
         if (!enableTracking || tvShowDetailLiveData.value == null) {
-            upcomingEpisodesQueries.deleteOfShowID(tvShow.id)
+            upcomingEpisodesQueries.deleteOfShowID(args.tvShow.id)
         } else {
             val lastSeason = tvShowDetailLiveData.value!!.seasons.last()
-            val seasonDetail = tmDbService.getSeasonDetail(tvShow.id, lastSeason.seasonNumber)
+            val seasonDetail = tmDbService.getSeasonDetail(args.tvShow.id, lastSeason.seasonNumber)
             val upcomingEpisodes = seasonDetail.episodes.filter { it.airEventDate.isUpcoming() }
 
             upcomingEpisodesQueries.clearAndInsertOfShowToDB(upcomingEpisodes)
@@ -89,7 +87,7 @@ class DetailViewModel @AssistedInject constructor(
     private fun UpcomingEpisodesQueries.clearAndInsertOfShowToDB(
         episodes: List<Episode>
     ) = transaction {
-        deleteOfShowID(tvShow.id)
+        deleteOfShowID(args.tvShow.id)
         episodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
 
