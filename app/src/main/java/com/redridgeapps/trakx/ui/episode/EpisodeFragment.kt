@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentEpisodeBinding
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
+import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
+import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
 import javax.inject.Inject
 
 class EpisodeFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    vmfg: ViewModelFactoryGenerator
 ) : Fragment() {
 
     private var binding by AutoClearedValue<FragmentEpisodeBinding>()
-    private val viewModel by viewModels<EpisodeViewModel> { viewModelFactory }
     private val args: EpisodeFragmentArgs by navArgs()
+    private val viewModel by savedStateViewModels<EpisodeViewModel>(vmfg)
 
     override fun onCreateView(
         inflater: LayoutInflater,

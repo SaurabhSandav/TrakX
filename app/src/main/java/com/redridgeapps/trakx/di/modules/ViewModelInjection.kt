@@ -1,12 +1,12 @@
 package com.redridgeapps.trakx.di.modules
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.redridgeapps.trakx.ui.common.dagger.DaggerViewModelFactory
+import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
 import com.redridgeapps.trakx.ui.detail.DetailViewModel
 import com.redridgeapps.trakx.ui.episode.EpisodeViewModel
 import com.redridgeapps.trakx.ui.episodelist.EpisodeListViewModel
 import com.redridgeapps.trakx.ui.tvshowlist.TVShowListViewModel
+import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -24,29 +24,35 @@ import kotlin.reflect.KClass
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 @Suppress("unused")
-@Module
+@AssistedModule
+@Module(includes = [AssistedInject_ViewModelFactoryModule::class])
 abstract class ViewModelFactoryModule {
-
-    @Binds
-    abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
 
     @Binds
     @IntoMap
     @ViewModelKey(TVShowListViewModel::class)
-    abstract fun bindTVShowListViewModel(viewModel: TVShowListViewModel): ViewModel
+    abstract fun bindTVShowListViewModelFactory(
+        viewModel: TVShowListViewModel.Factory
+    ): AssistedViewModelFactory
 
     @Binds
     @IntoMap
     @ViewModelKey(DetailViewModel::class)
-    abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
+    abstract fun bindDetailViewModelFactory(
+        viewModel: DetailViewModel.Factory
+    ): AssistedViewModelFactory
 
     @Binds
     @IntoMap
     @ViewModelKey(EpisodeListViewModel::class)
-    abstract fun bindEpisodeListViewModel(viewModel: EpisodeListViewModel): ViewModel
+    abstract fun bindEpisodeListViewModelFactory(
+        viewModel: EpisodeListViewModel.Factory
+    ): AssistedViewModelFactory
 
     @Binds
     @IntoMap
     @ViewModelKey(EpisodeViewModel::class)
-    abstract fun bindEpisodeViewModel(viewModel: EpisodeViewModel): ViewModel
+    abstract fun bindEpisodeViewModelFactory(
+        viewModel: EpisodeViewModel.Factory
+    ): AssistedViewModelFactory
 }

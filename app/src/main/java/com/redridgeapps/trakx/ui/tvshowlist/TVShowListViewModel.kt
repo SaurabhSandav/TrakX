@@ -1,6 +1,7 @@
 package com.redridgeapps.trakx.ui.tvshowlist
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Config
@@ -12,12 +13,15 @@ import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
+import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import com.squareup.sqldelight.android.paging.QueryDataSourceFactory
-import javax.inject.Inject
 
-class TVShowListViewModel @Inject constructor(
+class TVShowListViewModel @AssistedInject constructor(
+    @Assisted private val handle: SavedStateHandle,
     private val tmDbService: TMDbService,
     private val inMemoryCacheDatabase: InMemoryCacheDatabase,
     appDatabase: AppDatabase
@@ -74,6 +78,9 @@ class TVShowListViewModel @Inject constructor(
             countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
         )
     }
+
+    @AssistedInject.Factory
+    interface Factory : AssistedViewModelFactory
 }
 
 private const val PAGE_SIZE = 20

@@ -10,14 +10,14 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentTvShowListBinding
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
+import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
+import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
@@ -26,13 +26,13 @@ import com.redridgeapps.trakx.utils.Constants.RequestType
 import javax.inject.Inject
 
 class TVShowListFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    vmfg: ViewModelFactoryGenerator
 ) : Fragment(),
     NavigationView.OnNavigationItemSelectedListener {
 
     private var tvShowListAdapter by AutoClearedValue<TVShowListAdapter>()
     private var binding by AutoClearedValue<FragmentTvShowListBinding>()
-    private val viewModel by viewModels<TVShowListViewModel> { viewModelFactory }
+    private val viewModel by savedStateViewModels<TVShowListViewModel>(vmfg)
 
     override fun onCreateView(
         inflater: LayoutInflater,

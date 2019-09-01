@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,19 +12,21 @@ import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
+import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
+import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
 import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
 import javax.inject.Inject
 
 class DetailFragment @Inject constructor(
-    viewModelFactory: ViewModelProvider.Factory
+    vmfg: ViewModelFactoryGenerator
 ) : Fragment() {
 
     private var isTracked = false
     private var binding by AutoClearedValue<FragmentDetailBinding>()
-    private val viewModel by viewModels<DetailViewModel> { viewModelFactory }
     private val args: DetailFragmentArgs by navArgs()
+    private val viewModel by savedStateViewModels<DetailViewModel>(vmfg)
 
     override fun onCreateView(
         inflater: LayoutInflater,

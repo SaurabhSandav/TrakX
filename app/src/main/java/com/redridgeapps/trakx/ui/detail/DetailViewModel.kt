@@ -2,6 +2,7 @@ package com.redridgeapps.trakx.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.AppDatabase
@@ -13,6 +14,9 @@ import com.redridgeapps.trakx.model.isUpcoming
 import com.redridgeapps.trakx.model.tmdb.Episode
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.model.tmdb.TVShowDetail
+import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
@@ -20,9 +24,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class DetailViewModel @Inject constructor(
+class DetailViewModel @AssistedInject constructor(
+    @Assisted private val handle: SavedStateHandle,
     private val tmDbService: TMDbService,
     appDatabase: AppDatabase
 ) : ViewModel() {
@@ -88,4 +92,7 @@ class DetailViewModel @Inject constructor(
         deleteOfShowID(tvShow.id)
         episodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
+
+    @AssistedInject.Factory
+    interface Factory : AssistedViewModelFactory
 }
