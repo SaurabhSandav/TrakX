@@ -7,6 +7,7 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
+import com.redridgeapps.trakx.ui.common.ViewModelArgs
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
@@ -53,11 +54,13 @@ class ViewModelFactoryGenerator @Inject constructor(
 
 inline fun <reified VM : ViewModel> Fragment.savedStateViewModels(
     factoryGenerator: ViewModelFactoryGenerator? = null,
-    defaultArgs: Bundle? = null
+    noinline defaultArgs: (() -> ViewModelArgs)? = null
 ): Lazy<VM> {
 
     val factoryProducer = when {
-        factoryGenerator != null -> { -> factoryGenerator.generate(this, defaultArgs) }
+        factoryGenerator != null -> { ->
+            factoryGenerator.generate(this, defaultArgs?.invoke()?.asBundle())
+        }
         else -> null
     }
 

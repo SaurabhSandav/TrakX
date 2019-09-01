@@ -4,6 +4,8 @@ import org.threeten.bp.ZoneId
 
 object Constants {
 
+    const val KEY_VIEWMODEL_ARGS = "VIEWMODEL_ARGS"
+
     val DEFAULT_CATEGORY_MAIN = RequestType.POPULAR
     val ZONE_ID_UTC: ZoneId = ZoneId.of("UTC")
 
