@@ -1,9 +1,9 @@
 package com.redridgeapps.trakx.ui.detail
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.redridgeapps.trakx.AppDatabase
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
@@ -20,8 +20,7 @@ import com.squareup.inject.assisted.AssistedInject
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -34,15 +33,19 @@ class DetailViewModel @AssistedInject constructor(
     private val args by viewModelArgs<DetailViewModelArgs>(handle)
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val upcomingEpisodesQueries = appDatabase.upcomingEpisodesQueries
-    private val _isShowTrackedLiveData = MutableLiveData<Boolean>()
-    private val _tvShowDetailLiveData = MutableLiveData<TVShowDetail>()
 
-    val isShowTrackedLiveData: LiveData<Boolean> = _isShowTrackedLiveData
-    val tvShowDetailLiveData: LiveData<TVShowDetail> = _tvShowDetailLiveData
+    val isShowTrackedLiveData: LiveData<Boolean> = liveData {
+        trackedShowQueries.getShow(args.tvShow.id)
+            .asFlow()
+            .mapToList()
+            .collect {
+                emit(it.isNotEmpty())
+            }
+    }
 
-    init {
-        isShowTracked()
-        fetchTVShowDetail()
+    val tvShowDetailLiveData: LiveData<TVShowDetail> = liveData {
+        val tvShowDetail = tmDbService.getTVDetail(args.tvShow.id)
+        emit(tvShowDetail)
     }
 
     fun trackShow(enableTracking: Boolean) = viewModelScope.launch {
@@ -53,21 +56,6 @@ class DetailViewModel @AssistedInject constructor(
         }
 
         fetchUpcomingEpisodes(enableTracking)
-    }
-
-    private fun isShowTracked() {
-        trackedShowQueries.getShow(args.tvShow.id)
-            .asFlow()
-            .mapToList()
-            .onEach {
-                _isShowTrackedLiveData.postValue(it.isNotEmpty())
-            }
-            .launchIn(viewModelScope)
-    }
-
-    private fun fetchTVShowDetail() = viewModelScope.launch {
-        val tvShowDetail = tmDbService.getTVDetail(args.tvShow.id)
-        _tvShowDetailLiveData.setValue(tvShowDetail)
     }
 
     private suspend fun fetchUpcomingEpisodes(
