@@ -26,8 +26,6 @@ class TVShowBoundaryCallback(
 
     private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
     private val request: suspend (Int) -> TVShowCollection
-    private var position = 1
-    private var lastPage: Int? = null
 
     init {
         request = buildRequest(tmDbService)
@@ -55,21 +53,19 @@ class TVShowBoundaryCallback(
 
     private suspend fun fetchTVShows() = withContext(Dispatchers.IO) {
 
-        val previousPage =
-            lastPage ?: cachedCollectionQueries.getLastPage(requestType.name).executeAsOneOrNull()
-        val newPage = if (previousPage != null) previousPage + 1 else 1
+        val lastRow = cachedCollectionQueries.getLastRow(requestType.name).executeAsOneOrNull()
+        val page = lastRow?.page?.plus(1) ?: 1
+        var position = lastRow?.position ?: 0
 
-        val tvShowList = request(newPage).results
+        val tvShowList = request(page).results
         val cachedCollection = tvShowList.map<TVShow, CachedCollection> {
             CachedCollection.Impl(
                 showId = it.id,
-                position = position++,
-                page = newPage,
+                position = ++position,
+                page = page,
                 cacheCategory = requestType.name
             )
         }
-
-        lastPage = newPage
 
         inMemoryCacheDatabase.cacheCategory(tvShowList, cachedCollection)
     }

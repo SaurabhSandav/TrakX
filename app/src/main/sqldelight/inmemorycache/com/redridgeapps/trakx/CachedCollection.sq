@@ -14,8 +14,8 @@ INSERT OR REPLACE
 INTO CachedCollection
 VALUES ?;
 
-getLastPage:
-SELECT page FROM CachedCollection WHERE cacheCategory = :category ORDER BY page DESC LIMIT 1;
+getLastRow:
+SELECT * FROM CachedCollection WHERE cacheCategory = :category ORDER BY position DESC LIMIT 1;
 
 countCachedShowPaged:
 SELECT count(*) FROM CachedCollection
