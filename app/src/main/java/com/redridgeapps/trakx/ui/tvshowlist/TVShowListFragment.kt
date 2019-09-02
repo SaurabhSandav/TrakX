@@ -47,10 +47,11 @@ class TVShowListFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.setRequestType(Constants.DEFAULT_CATEGORY_MAIN)
-
         setupLayout()
         setupDrawer()
+
+        viewModel.tvShowPagedListLiveData.observe(viewLifecycleOwner, tvShowListAdapter::submitList)
+        requestTypeChanged(Constants.DEFAULT_CATEGORY_MAIN)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -102,11 +103,6 @@ class TVShowListFragment @Inject constructor(
             setHasFixedSize(true)
             adapter = tvShowListAdapter
         }
-
-        viewModel.tvShowPagedListLiveData.apply {
-            removeObservers(viewLifecycleOwner)
-            observe(viewLifecycleOwner, tvShowListAdapter::submitList)
-        }
     }
 
     private fun setupDrawer() {
@@ -128,11 +124,6 @@ class TVShowListFragment @Inject constructor(
 
     private fun requestTypeChanged(requestType: RequestType) {
         tvShowListAdapter.submitList(null)
-
-        viewModel.apply {
-            tvShowPagedListLiveData.removeObservers(viewLifecycleOwner)
-            setRequestType(requestType)
-            tvShowPagedListLiveData.observe(viewLifecycleOwner, tvShowListAdapter::submitList)
-        }
+        viewModel.setRequestType(requestType)
     }
 }

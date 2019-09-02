@@ -1,6 +1,5 @@
 package com.redridgeapps.trakx.ui.tvshowlist
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +12,7 @@ import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
+import com.redridgeapps.trakx.ui.common.SwapSourceLiveData
 import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
 import com.redridgeapps.trakx.utils.Constants.RequestType
 import com.redridgeapps.trakx.utils.Constants.RequestType.TRACKED
@@ -27,7 +27,7 @@ class TVShowListViewModel @AssistedInject constructor(
     appDatabase: AppDatabase
 ) : ViewModel() {
 
-    lateinit var tvShowPagedListLiveData: LiveData<PagedList<TVShow>>
+    val tvShowPagedListLiveData = SwapSourceLiveData<PagedList<TVShow>>()
 
     private lateinit var requestType: RequestType
     private val trackedShowQueries = appDatabase.trackedShowQueries
@@ -58,7 +58,7 @@ class TVShowListViewModel @AssistedInject constructor(
             livePagedListBuilder.setBoundaryCallback(boundaryCallback)
         }
 
-        tvShowPagedListLiveData = livePagedListBuilder.build()
+        tvShowPagedListLiveData.swapSource(livePagedListBuilder.build())
     }
 
     private fun buildTrackedDataSource(): DataSource.Factory<Int, TVShow> {
