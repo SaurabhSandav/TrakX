@@ -12,16 +12,18 @@ import com.redridgeapps.trakx.utils.Constants.RequestType.AIRING_TODAY
 import com.redridgeapps.trakx.utils.Constants.RequestType.ON_THE_AIR
 import com.redridgeapps.trakx.utils.Constants.RequestType.POPULAR
 import com.redridgeapps.trakx.utils.Constants.RequestType.TOP_RATED
+import dagger.Reusable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 class TVShowBoundaryCallback(
-    tmDbService: TMDbService,
-    coroutineScope: CoroutineScope,
     private val cacheDB: CacheDB,
-    private val requestType: RequestType
+    private val requestType: RequestType,
+    tmDbService: TMDbService,
+    coroutineScope: CoroutineScope
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope by coroutineScope {
 
     private val cachedCollectionQueries = cacheDB.cachedCollectionQueries
@@ -76,5 +78,17 @@ class TVShowBoundaryCallback(
     ) = transaction {
         tvShowList.map(TVShow::toCachedShow).forEach(cachedShowQueries::insert)
         cachedCollection.forEach(cachedCollectionQueries::insert)
+    }
+
+    @Reusable
+    class Factory @Inject constructor(
+        private val tmDbService: TMDbService,
+        private val cacheDB: CacheDB
+    ) {
+
+        fun create(
+            coroutineScope: CoroutineScope,
+            requestType: RequestType
+        ) = TVShowBoundaryCallback(cacheDB, requestType, tmDbService, coroutineScope)
     }
 }

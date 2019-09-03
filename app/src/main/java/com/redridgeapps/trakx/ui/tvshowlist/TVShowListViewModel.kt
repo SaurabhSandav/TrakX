@@ -9,7 +9,6 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.redridgeapps.trakx.AppDB
 import com.redridgeapps.trakx.CacheDB
-import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.SwapSourceLiveData
@@ -22,8 +21,8 @@ import com.squareup.sqldelight.android.paging.QueryDataSourceFactory
 
 class TVShowListViewModel @AssistedInject constructor(
     @Assisted private val handle: SavedStateHandle,
-    private val tmDbService: TMDbService,
-    private val cacheDB: CacheDB,
+    private val tvShowBoundaryCallbackFactory: TVShowBoundaryCallback.Factory,
+    cacheDB: CacheDB,
     appDB: AppDB
 ) : ViewModel() {
 
@@ -43,14 +42,7 @@ class TVShowListViewModel @AssistedInject constructor(
         val livePagedListBuilder = LivePagedListBuilder(dataSourceFactory, config)
 
         if (requestType !== TRACKED) {
-            val boundaryCallback =
-                TVShowBoundaryCallback(
-                    tmDbService,
-                    viewModelScope,
-                    cacheDB,
-                    requestType
-                )
-
+            val boundaryCallback = tvShowBoundaryCallbackFactory.create(viewModelScope, requestType)
             livePagedListBuilder.setBoundaryCallback(boundaryCallback)
         }
 
