@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
+import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
 private typealias WorkerFactoryMap = Map<Class<out BaseWorker>, @JvmSuppressWildcards Provider<BaseWorker.Factory>>
 
-@Singleton
+@Reusable
 class BaseWorkerFactory @Inject constructor(
     private val creators: WorkerFactoryMap
 ) : WorkerFactory() {

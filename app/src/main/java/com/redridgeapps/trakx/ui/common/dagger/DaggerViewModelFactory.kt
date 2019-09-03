@@ -8,9 +8,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
 import com.redridgeapps.trakx.ui.common.ViewModelArgs
+import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
 private typealias ViewModelFactoryMap =
         Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<AssistedViewModelFactory>>
@@ -41,7 +41,7 @@ class SavedStateVMFactory(
     }
 }
 
-@Singleton
+@Reusable
 class ViewModelFactoryGenerator @Inject constructor(
     private val creators: ViewModelFactoryMap
 ) {

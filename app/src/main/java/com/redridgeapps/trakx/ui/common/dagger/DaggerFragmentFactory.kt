@@ -3,11 +3,11 @@ package com.redridgeapps.trakx.ui.common.dagger
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.fragment.NavHostFragment
+import dagger.Reusable
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
-@Singleton
+@Reusable
 class DaggerFragmentFactory @Inject constructor(
     private val creators: Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>
 ) : FragmentFactory() {

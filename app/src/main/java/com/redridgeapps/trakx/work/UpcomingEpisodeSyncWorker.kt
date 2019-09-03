@@ -13,11 +13,11 @@ import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toUpcomingEpisode
 import com.redridgeapps.trakx.model.isUpcoming
 import com.redridgeapps.trakx.model.tmdb.Episode
+import dagger.Reusable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class UpcomingEpisodeSyncWorker @Inject constructor(
     private val tmDbService: TMDbService,
@@ -49,7 +49,7 @@ class UpcomingEpisodeSyncWorker @Inject constructor(
         upcomingEpisodes.map(Episode::toUpcomingEpisode).forEach { insert(it) }
     }
 
-    @Singleton
+    @Reusable
     class Factory @Inject constructor(
         private val tmDbService: TMDbService,
         private val trackedShowQueries: TrackedShowQueries,
