@@ -25,7 +25,7 @@ annotation class FragmentKey(val value: KClass<out Fragment>)
 
 @Suppress("unused")
 @Module
-abstract class FragmentBuilder {
+abstract class FragmentModule {
 
     @Binds
     abstract fun bindFragmentFactory(factory: DaggerFragmentFactory): FragmentFactory

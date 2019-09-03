@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import com.redridgeapps.trakx.di.modules.android.AndroidComponentBuilder
-import com.redridgeapps.trakx.di.modules.android.FragmentBuilder
+import com.redridgeapps.trakx.di.modules.android.FragmentModule
 import com.redridgeapps.trakx.di.modules.android.ViewModelFactoryModule
 import com.redridgeapps.trakx.di.modules.android.WorkerFactoryModule
 import dagger.Module
@@ -17,7 +17,7 @@ import javax.inject.Singleton
     includes = [
         AndroidSupportInjectionModule::class,
         AndroidComponentBuilder::class,
-        FragmentBuilder::class,
+        FragmentModule::class,
         ViewModelFactoryModule::class,
         WorkerFactoryModule::class
     ]
