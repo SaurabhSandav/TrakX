@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.di.modules
+package com.redridgeapps.trakx.di.modules.android
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
 )
 @Retention(AnnotationRetention.RUNTIME)
 @MapKey
-internal annotation class FragmentKey(val value: KClass<out Fragment>)
+annotation class FragmentKey(val value: KClass<out Fragment>)
 
 @Suppress("unused")
 @Module

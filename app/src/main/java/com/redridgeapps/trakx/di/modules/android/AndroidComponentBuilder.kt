@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.di.modules
+package com.redridgeapps.trakx.di.modules.android
 
 import com.redridgeapps.trakx.di.PerActivity
 import com.redridgeapps.trakx.ui.activity.main.MainActivity

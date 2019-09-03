@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.di.modules
+package com.redridgeapps.trakx.di.modules.android
 
 import com.redridgeapps.trakx.work.BaseWorker
 import com.redridgeapps.trakx.work.UpcomingEpisodeSyncWorker

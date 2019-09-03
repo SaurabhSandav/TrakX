@@ -1,4 +1,4 @@
-package com.redridgeapps.trakx.di.modules
+package com.redridgeapps.trakx.di.modules.android
 
 import androidx.lifecycle.ViewModel
 import com.redridgeapps.trakx.ui.common.dagger.AssistedViewModelFactory
