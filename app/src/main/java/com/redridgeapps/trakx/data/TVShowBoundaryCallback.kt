@@ -20,9 +20,9 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TVShowBoundaryCallback(
+    private val tmDbService: TMDbService,
     private val cacheDB: CacheDB,
     private val requestType: RequestType,
-    tmDbService: TMDbService,
     coroutineScope: CoroutineScope
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope by coroutineScope {
 
@@ -30,7 +30,7 @@ class TVShowBoundaryCallback(
     private val request: suspend (Int) -> TVShowCollection
 
     init {
-        request = buildRequest(tmDbService)
+        request = buildRequest()
     }
 
     override fun onZeroItemsLoaded() {
@@ -43,7 +43,7 @@ class TVShowBoundaryCallback(
         launch { fetchTVShows() }
     }
 
-    private fun buildRequest(tmDbService: TMDbService): suspend (Int) -> TVShowCollection {
+    private fun buildRequest(): suspend (Int) -> TVShowCollection {
         return when (requestType) {
             POPULAR -> { page -> tmDbService.getPopular(page) }
             TOP_RATED -> { page -> tmDbService.getTopRated(page) }
@@ -89,6 +89,6 @@ class TVShowBoundaryCallback(
         fun create(
             coroutineScope: CoroutineScope,
             requestType: RequestType
-        ) = TVShowBoundaryCallback(cacheDB, requestType, tmDbService, coroutineScope)
+        ) = TVShowBoundaryCallback(tmDbService, cacheDB, requestType, coroutineScope)
     }
 }
