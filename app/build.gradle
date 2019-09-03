@@ -58,16 +58,16 @@ androidExtensions {
 
 sqldelight {
 
-    InMemoryCacheDatabase {
+    CacheDB {
         packageName = "com.redridgeapps.trakx"
-        sourceFolders = ["sqldelight/inmemorycache"]
-        schemaOutputDirectory = file("build/inmemorycache")
+        sourceFolders = ["sqldelight/cachedb"]
+        schemaOutputDirectory = file("build/cachedb")
     }
 
-    AppDatabase {
+    AppDB {
         packageName = "com.redridgeapps.trakx"
-        sourceFolders = ["sqldelight/appdatabase"]
-        schemaOutputDirectory = file("build/appdatabase")
+        sourceFolders = ["sqldelight/appdb"]
+        schemaOutputDirectory = file("build/appdb")
     }
 }
 

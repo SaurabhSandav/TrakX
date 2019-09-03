@@ -6,8 +6,8 @@ import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.redridgeapps.trakx.AppDatabase
-import com.redridgeapps.trakx.InMemoryCacheDatabase
+import com.redridgeapps.trakx.AppDB
+import com.redridgeapps.trakx.CacheDB
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.SqLiteDriverCallback
@@ -102,24 +102,24 @@ object AppModule {
     @JvmStatic
     @Provides
     @Singleton
-    fun provideInMemoryCacheDatabase(app: Application): InMemoryCacheDatabase {
+    fun provideCacheDB(app: Application): CacheDB {
 
-        val schema = InMemoryCacheDatabase.Schema
+        val schema = CacheDB.Schema
         val callback = SqLiteDriverCallback(schema)
         val driver = AndroidSqliteDriver(schema, app, callback = callback)
 
-        return InMemoryCacheDatabase(driver)
+        return CacheDB(driver)
     }
 
     @JvmStatic
     @Provides
     @Singleton
-    fun provideAppDatabase(app: Application): AppDatabase {
+    fun provideAppDB(app: Application): AppDB {
 
-        val schema = AppDatabase.Schema
+        val schema = AppDB.Schema
         val callback = SqLiteDriverCallback(schema)
-        val driver = AndroidSqliteDriver(schema, app, "AppDatabase.db", callback = callback)
+        val driver = AndroidSqliteDriver(schema, app, "AppDB.db", callback = callback)
 
-        return AppDatabase(driver)
+        return AppDB(driver)
     }
 }

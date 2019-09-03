@@ -1,8 +1,8 @@
 package com.redridgeapps.trakx.data
 
 import androidx.paging.PagedList
+import com.redridgeapps.trakx.CacheDB
 import com.redridgeapps.trakx.CachedCollection
-import com.redridgeapps.trakx.InMemoryCacheDatabase
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toCachedShow
 import com.redridgeapps.trakx.model.tmdb.TVShow
@@ -20,11 +20,11 @@ import kotlinx.coroutines.withContext
 class TVShowBoundaryCallback(
     tmDbService: TMDbService,
     coroutineScope: CoroutineScope,
-    private val inMemoryCacheDatabase: InMemoryCacheDatabase,
+    private val cacheDB: CacheDB,
     private val requestType: RequestType
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope by coroutineScope {
 
-    private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
+    private val cachedCollectionQueries = cacheDB.cachedCollectionQueries
     private val request: suspend (Int) -> TVShowCollection
 
     init {
@@ -67,10 +67,10 @@ class TVShowBoundaryCallback(
             )
         }
 
-        inMemoryCacheDatabase.cacheCategory(tvShowList, cachedCollection)
+        cacheDB.cacheCategory(tvShowList, cachedCollection)
     }
 
-    private fun InMemoryCacheDatabase.cacheCategory(
+    private fun CacheDB.cacheCategory(
         tvShowList: List<TVShow>,
         cachedCollection: List<CachedCollection>
     ) = transaction {
