@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.redridgeapps.trakx.AppDB
+import com.redridgeapps.trakx.TrackedShowQueries
 import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toTrackedShow
@@ -27,12 +27,11 @@ import kotlinx.coroutines.withContext
 class DetailViewModel @AssistedInject constructor(
     @Assisted private val handle: SavedStateHandle,
     private val tmDbService: TMDbService,
-    appDB: AppDB
+    private val trackedShowQueries: TrackedShowQueries,
+    private val upcomingEpisodesQueries: UpcomingEpisodesQueries
 ) : ViewModel() {
 
     private val args by viewModelArgs<DetailViewModelArgs>(handle)
-    private val trackedShowQueries = appDB.trackedShowQueries
-    private val upcomingEpisodesQueries = appDB.upcomingEpisodesQueries
 
     val isShowTrackedLiveData: LiveData<Boolean> = liveData {
         trackedShowQueries.getShow(args.tvShow.id)

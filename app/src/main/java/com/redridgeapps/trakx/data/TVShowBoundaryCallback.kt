@@ -1,8 +1,9 @@
 package com.redridgeapps.trakx.data
 
 import androidx.paging.PagedList
-import com.redridgeapps.trakx.CacheDB
 import com.redridgeapps.trakx.CachedCollection
+import com.redridgeapps.trakx.CachedCollectionQueries
+import com.redridgeapps.trakx.CachedShowQueries
 import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.db.mapper.toCachedShow
 import com.redridgeapps.trakx.model.tmdb.TVShow
@@ -21,12 +22,12 @@ import javax.inject.Inject
 
 class TVShowBoundaryCallback(
     private val tmDbService: TMDbService,
-    private val cacheDB: CacheDB,
+    private val cachedCollectionQueries: CachedCollectionQueries,
+    private val cachedShowQueries: CachedShowQueries,
     private val requestType: RequestType,
     coroutineScope: CoroutineScope
 ) : PagedList.BoundaryCallback<TVShow>(), CoroutineScope by coroutineScope {
 
-    private val cachedCollectionQueries = cacheDB.cachedCollectionQueries
     private val request: suspend (Int) -> TVShowCollection
 
     init {
@@ -69,13 +70,13 @@ class TVShowBoundaryCallback(
             )
         }
 
-        cacheDB.cacheCategory(tvShowList, cachedCollection)
+        cacheCategory(tvShowList, cachedCollection)
     }
 
-    private fun CacheDB.cacheCategory(
+    private fun cacheCategory(
         tvShowList: List<TVShow>,
         cachedCollection: List<CachedCollection>
-    ) = transaction {
+    ) = cachedCollectionQueries.transaction {
         tvShowList.map(TVShow::toCachedShow).forEach(cachedShowQueries::insert)
         cachedCollection.forEach(cachedCollectionQueries::insert)
     }
@@ -83,12 +84,19 @@ class TVShowBoundaryCallback(
     @Reusable
     class Factory @Inject constructor(
         private val tmDbService: TMDbService,
-        private val cacheDB: CacheDB
+        private val cachedCollectionQueries: CachedCollectionQueries,
+        private val cachedShowQueries: CachedShowQueries
     ) {
 
         fun create(
             coroutineScope: CoroutineScope,
             requestType: RequestType
-        ) = TVShowBoundaryCallback(tmDbService, cacheDB, requestType, coroutineScope)
+        ) = TVShowBoundaryCallback(
+            tmDbService,
+            cachedCollectionQueries,
+            cachedShowQueries,
+            requestType,
+            coroutineScope
+        )
     }
 }

@@ -7,8 +7,8 @@ import androidx.paging.Config
 import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.redridgeapps.trakx.AppDB
-import com.redridgeapps.trakx.CacheDB
+import com.redridgeapps.trakx.CachedCollectionQueries
+import com.redridgeapps.trakx.TrackedShowQueries
 import com.redridgeapps.trakx.data.TVShowBoundaryCallback
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.SwapSourceLiveData
@@ -22,14 +22,12 @@ import com.squareup.sqldelight.android.paging.QueryDataSourceFactory
 class TVShowListViewModel @AssistedInject constructor(
     @Assisted private val handle: SavedStateHandle,
     private val tvShowBoundaryCallbackFactory: TVShowBoundaryCallback.Factory,
-    cacheDB: CacheDB,
-    appDB: AppDB
+    private val cachedCollectionQueries: CachedCollectionQueries,
+    private val trackedShowQueries: TrackedShowQueries
 ) : ViewModel() {
 
     val tvShowPagedListLiveData = SwapSourceLiveData<PagedList<TVShow>>()
 
-    private val trackedShowQueries = appDB.trackedShowQueries
-    private val cachedCollectionQueries = cacheDB.cachedCollectionQueries
     private val config = Config(pageSize = PAGE_SIZE, initialLoadSizeHint = PAGE_SIZE * 2)
 
     fun setRequestType(requestType: RequestType) {

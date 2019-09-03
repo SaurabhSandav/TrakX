@@ -3,6 +3,10 @@ package com.redridgeapps.trakx.di.modules
 import android.app.Application
 import com.redridgeapps.trakx.AppDB
 import com.redridgeapps.trakx.CacheDB
+import com.redridgeapps.trakx.CachedCollectionQueries
+import com.redridgeapps.trakx.CachedShowQueries
+import com.redridgeapps.trakx.TrackedShowQueries
+import com.redridgeapps.trakx.UpcomingEpisodesQueries
 import com.redridgeapps.trakx.db.SqLiteDriverCallback
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
@@ -11,6 +15,8 @@ import javax.inject.Singleton
 
 @Module
 object DBModule {
+
+    // region CacheDB
 
     @JvmStatic
     @Provides
@@ -27,6 +33,24 @@ object DBModule {
     @JvmStatic
     @Provides
     @Singleton
+    fun provideCachedCollectionQueries(cacheDB: CacheDB): CachedCollectionQueries {
+        return cacheDB.cachedCollectionQueries
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideCachedShowQueries(cacheDB: CacheDB): CachedShowQueries {
+        return cacheDB.cachedShowQueries
+    }
+
+    // endregion CacheDB
+
+    // region AppDB
+
+    @JvmStatic
+    @Provides
+    @Singleton
     fun provideAppDB(app: Application): AppDB {
 
         val schema = AppDB.Schema
@@ -35,4 +59,20 @@ object DBModule {
 
         return AppDB(driver)
     }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideTrackedShowQueries(appDB: AppDB): TrackedShowQueries {
+        return appDB.trackedShowQueries
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideUpcomingEpisodesQueries(appDB: AppDB): UpcomingEpisodesQueries {
+        return appDB.upcomingEpisodesQueries
+    }
+
+    // endregion AppDB
 }
