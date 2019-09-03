@@ -29,30 +29,26 @@ class TVShowListViewModel @AssistedInject constructor(
 
     val tvShowPagedListLiveData = SwapSourceLiveData<PagedList<TVShow>>()
 
-    private lateinit var requestType: RequestType
     private val trackedShowQueries = appDatabase.trackedShowQueries
     private val cachedCollectionQueries = inMemoryCacheDatabase.cachedCollectionQueries
     private val config = Config(pageSize = PAGE_SIZE, initialLoadSizeHint = PAGE_SIZE * 2)
 
-    private val shows: DataSource.Factory<Int, TVShow>
-        get() = when (requestType) {
+    fun setRequestType(requestType: RequestType) {
+
+        val dataSourceFactory = when (requestType) {
             TRACKED -> buildTrackedDataSource()
-            else -> buildCachedCollectionDataSource()
+            else -> buildCachedCollectionDataSource(requestType)
         }
 
-    fun setRequestType(newRequestType: RequestType) {
-        if (this::requestType.isInitialized && newRequestType === requestType) return
-        requestType = newRequestType
+        val livePagedListBuilder = LivePagedListBuilder(dataSourceFactory, config)
 
-        val livePagedListBuilder = LivePagedListBuilder(shows, config)
-
-        if (newRequestType !== TRACKED) {
+        if (requestType !== TRACKED) {
             val boundaryCallback =
                 TVShowBoundaryCallback(
                     tmDbService,
                     viewModelScope,
                     inMemoryCacheDatabase,
-                    newRequestType
+                    requestType
                 )
 
             livePagedListBuilder.setBoundaryCallback(boundaryCallback)
@@ -61,23 +57,21 @@ class TVShowListViewModel @AssistedInject constructor(
         tvShowPagedListLiveData.swapSource(livePagedListBuilder.build())
     }
 
-    private fun buildTrackedDataSource(): DataSource.Factory<Int, TVShow> {
-        return QueryDataSourceFactory(
-            queryProvider = { limit, offset ->
-                trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow)
-            },
-            countQuery = trackedShowQueries.countTrackedShows()
-        )
-    }
+    private fun buildTrackedDataSource(): DataSource.Factory<Int, TVShow> = QueryDataSourceFactory(
+        queryProvider = { limit, offset ->
+            trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow)
+        },
+        countQuery = trackedShowQueries.countTrackedShows()
+    )
 
-    private fun buildCachedCollectionDataSource(): DataSource.Factory<Int, TVShow> {
-        return QueryDataSourceFactory(
-            queryProvider = { limit, offset ->
-                cachedCollectionQueries.cachedShowPaged(requestType.name, limit, offset, ::TVShow)
-            },
-            countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
-        )
-    }
+    private fun buildCachedCollectionDataSource(
+        requestType: RequestType
+    ): DataSource.Factory<Int, TVShow> = QueryDataSourceFactory(
+        queryProvider = { limit, offset ->
+            cachedCollectionQueries.cachedShowPaged(requestType.name, limit, offset, ::TVShow)
+        },
+        countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
+    )
 
     @AssistedInject.Factory
     interface Factory : AssistedViewModelFactory
