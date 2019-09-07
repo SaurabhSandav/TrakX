@@ -1,14 +1,14 @@
 @file:Suppress("unused")
 
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha09"
+    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha12"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
 
 object Kotlin {
     private const val VERSION = "1.3.50"
-    private const val COROUTINES_VERSION = "1.3.0"
+    private const val COROUTINES_VERSION = "1.3.1"
     private const val SERIALIZATION_VERSION = "0.12.0"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
@@ -20,7 +20,7 @@ object Kotlin {
 }
 
 object GradleVersionsPlugin {
-    private const val VERSION = "0.22.0"
+    private const val VERSION = "0.25.0"
 
     const val GRADLE_PLUGIN = "com.github.ben-manes:gradle-versions-plugin:$VERSION"
 }
@@ -48,19 +48,19 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha09"
+    private const val VERSION = "1.1.0-alpha10"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha02"
-    private const val APPCOMPAT_VERSION = "1.1.0-rc01"
-    private const val CORE_KTX_VERSION = "1.2.0-alpha03"
-    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha02"
-    private const val PREFERENCE_KTX_VERSION = "1.1.0-rc01"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha03"
+    private const val APPCOMPAT_VERSION = "1.1.0"
+    private const val CORE_KTX_VERSION = "1.2.0-alpha04"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha03"
+    private const val PREFERENCE_KTX_VERSION = "1.1.0"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-beta03"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-beta04"
     private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
@@ -75,7 +75,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-alpha03"
+    private const val VERSION = "2.2.0-alpha04"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -84,7 +84,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.2.0-alpha01"
+    private const val VERSION = "2.2.0-alpha02"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -114,7 +114,7 @@ object Dagger {
 }
 
 object Retrofit {
-    private const val VERSION = "2.6.1"
+    private const val VERSION = "2.6.2"
     private const val SERIALIZATION_VERSION = "0.4.0"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
@@ -130,7 +130,7 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "4.1.0"
+    private const val VERSION = "4.2.0"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
@@ -142,7 +142,7 @@ object LeakCanary {
 }
 
 object SQLDelight {
-    private const val VERSION = "1.1.4"
+    private const val VERSION = "1.2.0"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
