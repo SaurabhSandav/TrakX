@@ -34,7 +34,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://kotlin.bintray.com/kotlinx" } // TODO (REMOVE) For Serialization
+        maven { url "https://kotlin.bintray.com/kotlinx" } // FIXME (REMOVE) For Serialization
         maven { url "https://jitpack.io" } // For Chucker
     }
 
@@ -43,7 +43,7 @@ allprojects {
                 '-progressive',
                 '-Xnew-inference',
                 '-XXLanguage:+InlineClasses',
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi' // TODO (REMOVE) For Kotlin Flow
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi' // FIXME (REMOVE) For Kotlin Flow
         ]
     }
 }
