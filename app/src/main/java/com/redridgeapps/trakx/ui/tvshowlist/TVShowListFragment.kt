@@ -18,7 +18,6 @@ import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.AutoFitGridLayoutManager
 import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
 import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
-import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import com.redridgeapps.trakx.utils.Constants
@@ -39,7 +38,7 @@ class TVShowListFragment @Inject constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = inflater.dataBindingInflate(R.layout.fragment_tv_show_list, container)
+        binding = FragmentTvShowListBinding.inflate(inflater, container, false)
 
         return binding.root
     }

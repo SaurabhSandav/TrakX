@@ -38,10 +38,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -49,6 +45,8 @@ android {
     packagingOptions {
         pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
     }
+
+    viewBinding.enabled = true
 }
 
 androidExtensions {

@@ -2,9 +2,7 @@ package com.redridgeapps.trakx.ui.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.ItemSeasonBinding
 import com.redridgeapps.trakx.model.tmdb.Season
 
@@ -15,9 +13,8 @@ class SeasonListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
 
-        val binding = DataBindingUtil.inflate<ItemSeasonBinding>(
+        val binding = ItemSeasonBinding.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.item_season,
             parent,
             false
         )
@@ -44,8 +41,8 @@ class SeasonListAdapter(
 
         fun bind(season: Season) {
 
-            binding.seasonTitle = season.name
-            binding.episodeCount = season.episodeCount.toString() + " episodes"
+            binding.tvShowSeason.text = season.name
+            binding.tvShowSeasonEpisodeCount.text = "${season.episodeCount} episodes"
         }
     }
 }

@@ -9,12 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.redridgeapps.trakx.R
 import com.redridgeapps.trakx.databinding.FragmentEpisodeListBinding
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
 import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
-import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupToolbarWithNavigation
 import javax.inject.Inject
@@ -38,7 +36,7 @@ class EpisodeListFragment @Inject constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = inflater.dataBindingInflate(R.layout.fragment_episode_list, container)
+        binding = FragmentEpisodeListBinding.inflate(inflater, container, false)
 
         return binding.root
     }

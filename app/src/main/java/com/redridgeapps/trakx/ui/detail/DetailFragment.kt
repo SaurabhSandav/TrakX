@@ -9,14 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redridgeapps.trakx.R
+import com.redridgeapps.trakx.api.TMDbService
 import com.redridgeapps.trakx.databinding.FragmentDetailBinding
 import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.redridgeapps.trakx.ui.common.AutoClearedValue
 import com.redridgeapps.trakx.ui.common.dagger.ViewModelFactoryGenerator
 import com.redridgeapps.trakx.ui.common.dagger.savedStateViewModels
-import com.redridgeapps.trakx.ui.common.dataBindingInflate
 import com.redridgeapps.trakx.ui.common.navigateWith
 import com.redridgeapps.trakx.ui.common.navigation.setupCollapsingToolbarWithNavigation
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class DetailFragment @Inject constructor(
@@ -38,7 +39,7 @@ class DetailFragment @Inject constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = inflater.dataBindingInflate(R.layout.fragment_detail, container)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -58,7 +59,7 @@ class DetailFragment @Inject constructor(
 
         setupCollapsingToolbarWithNavigation(binding.collapsingToolbar, binding.toolbar)
 
-        binding.tvShow = tvShow
+        bindData(tvShow)
 
         binding.btTrackShow.setOnClickListener {
             isTracked = !isTracked
@@ -66,6 +67,25 @@ class DetailFragment @Inject constructor(
         }
 
         setupRecyclerView()
+    }
+
+    private fun bindData(tvShow: TVShow) = with(binding) {
+
+        tvShowBackdrop.contentDescription = "${tvShow.name} Backdrop"
+        tvShow.backdropPath?.let {
+            val url = TMDbService.buildBackdropURL(it)
+            Picasso.get().load(url).fit().into(tvShowBackdrop)
+        }
+
+        tvShowPoster.contentDescription = "${tvShow.name} Poster"
+        tvShow.posterPath?.let {
+            val url = TMDbService.buildPosterURL(it)
+            Picasso.get().load(url).fit().into(tvShowPoster)
+        }
+
+        tvShowTitle.text = tvShow.name
+        tvShowRating.rating = tvShow.voteAverage
+        tvShowDescription.text = tvShow.overview
     }
 
     private fun setupRecyclerView() {

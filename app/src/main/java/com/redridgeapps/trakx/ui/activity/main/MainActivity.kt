@@ -2,7 +2,6 @@ package com.redridgeapps.trakx.ui.activity.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.findNavController
 import com.redridgeapps.trakx.R
@@ -27,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         // Schedule Sync
         UpcomingEpisodeSyncWorker.scheduleDaily(applicationContext)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
