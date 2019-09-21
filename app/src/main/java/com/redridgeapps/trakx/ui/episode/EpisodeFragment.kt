@@ -47,9 +47,9 @@ class EpisodeFragment @Inject constructor(
         setupLayout()
     }
 
-    private fun setupLayout() {
+    private fun setupLayout() = with(binding) {
 
-        setupCollapsingToolbarWithNavigation(binding.collapsingToolbar, binding.toolbar)
+        setupCollapsingToolbarWithNavigation(collapsingToolbar, toolbar)
 
         viewModel.episodeDetailLiveData.observe(viewLifecycleOwner) { bindData(it) }
     }

@@ -47,7 +47,6 @@ class TVShowListFragment @Inject constructor(
         super.onViewCreated(view, savedInstanceState)
 
         setupLayout()
-        setupDrawer()
 
         viewModel.tvShowPagedListLiveData.observe(viewLifecycleOwner, tvShowListAdapter::submitList)
         requestTypeChanged(Constants.DEFAULT_CATEGORY_MAIN)
@@ -75,18 +74,19 @@ class TVShowListFragment @Inject constructor(
         return true
     }
 
-    private fun setupLayout() {
+    private fun setupLayout() = with(binding) {
 
-        setupToolbarWithNavigation(binding.toolbar, binding.drawerLayout)
+        setupToolbarWithNavigation(toolbar, drawerLayout)
 
         requireActivity().setTitle(R.string.drawer_sort_popular)
 
-        binding.navView.setNavigationItemSelectedListener(this)
+        navView.setNavigationItemSelectedListener(this@TVShowListFragment)
 
         setupRecyclerView()
+        setupDrawer()
     }
 
-    private fun setupRecyclerView() {
+    private fun FragmentTvShowListBinding.setupRecyclerView() {
 
         val navController = findNavController()
 
@@ -95,7 +95,7 @@ class TVShowListFragment @Inject constructor(
                 .navigateWith(navController)
         }
 
-        binding.recyclerView.apply {
+        recyclerView.apply {
             val maxColumnWidth = resources.getDimension(R.dimen.default_tv_show_poster_width)
 
             layoutManager = AutoFitGridLayoutManager(requireContext(), maxColumnWidth)
@@ -104,17 +104,17 @@ class TVShowListFragment @Inject constructor(
         }
     }
 
-    private fun setupDrawer() {
+    private fun FragmentTvShowListBinding.setupDrawer() {
         val callback = object : OnBackPressedCallback(false) {
             override fun handleOnBackPressed() {
-                binding.drawerLayout.closeDrawer(GravityCompat.START)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 isEnabled = false
             }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
-        binding.drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
+        drawerLayout.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
             override fun onDrawerOpened(drawerView: View) {
                 callback.isEnabled = true
             }

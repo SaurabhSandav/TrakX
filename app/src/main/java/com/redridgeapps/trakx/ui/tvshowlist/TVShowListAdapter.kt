@@ -40,16 +40,16 @@ class TVShowListAdapter(
         private val binding: ItemTvShowListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(tvShow: TVShow?) {
-            binding.root.isClickable = tvShow != null
-            binding.root.isFocusable = tvShow != null
+        fun bindTo(tvShow: TVShow?): Unit = with(binding) {
+            root.isClickable = tvShow != null
+            root.isFocusable = tvShow != null
 
-            if (tvShow == null) return
+            if (tvShow == null) return@with
 
-            binding.ivTvShowListPoster.contentDescription = "${tvShow.name} Backdrop"
+            ivTvShowListPoster.contentDescription = "${tvShow.name} Backdrop"
             tvShow.posterPath?.let {
                 val url = TMDbService.buildPosterURL(it)
-                Picasso.get().load(url).fit().into(binding.ivTvShowListPoster)
+                Picasso.get().load(url).fit().into(ivTvShowListPoster)
             }
         }
     }

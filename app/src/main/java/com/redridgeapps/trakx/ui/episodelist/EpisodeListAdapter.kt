@@ -37,8 +37,8 @@ class EpisodeListAdapter(
         private val binding: ItemEpisodeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(episode: Episode) {
-            binding.tvShowEpisode.text = "${episode.episodeNumber}. ${episode.name}"
+        fun bind(episode: Episode) = with(binding) {
+            tvShowEpisode.text = "${episode.episodeNumber}. ${episode.name}"
         }
     }
 }

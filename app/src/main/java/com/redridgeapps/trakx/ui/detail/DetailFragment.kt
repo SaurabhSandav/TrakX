@@ -51,17 +51,16 @@ class DetailFragment @Inject constructor(
 
         viewModel.isShowTrackedLiveData.observe(viewLifecycleOwner) {
             isTracked = it
-            setTracked(it)
+            binding.setTracked(it)
         }
     }
 
-    private fun setupLayout(tvShow: TVShow) {
+    private fun setupLayout(tvShow: TVShow) = with(binding) {
 
-        setupCollapsingToolbarWithNavigation(binding.collapsingToolbar, binding.toolbar)
-
+        setupCollapsingToolbarWithNavigation(collapsingToolbar, toolbar)
         bindData(tvShow)
 
-        binding.btTrackShow.setOnClickListener {
+        btTrackShow.setOnClickListener {
             isTracked = !isTracked
             viewModel.trackShow(isTracked)
         }
@@ -69,7 +68,7 @@ class DetailFragment @Inject constructor(
         setupRecyclerView()
     }
 
-    private fun bindData(tvShow: TVShow) = with(binding) {
+    private fun FragmentDetailBinding.bindData(tvShow: TVShow) {
 
         tvShowBackdrop.contentDescription = "${tvShow.name} Backdrop"
         tvShow.backdropPath?.let {
@@ -88,9 +87,9 @@ class DetailFragment @Inject constructor(
         tvShowDescription.text = tvShow.overview
     }
 
-    private fun setupRecyclerView() {
+    private fun FragmentDetailBinding.setupRecyclerView() {
 
-        binding.recyclerView.apply {
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(false)
         }
@@ -98,7 +97,7 @@ class DetailFragment @Inject constructor(
         val navController = findNavController()
 
         viewModel.tvShowDetailLiveData.observe(viewLifecycleOwner) {
-            binding.recyclerView.adapter = SeasonListAdapter(it.seasons) { season ->
+            recyclerView.adapter = SeasonListAdapter(it.seasons) { season ->
                 DetailFragmentDirections
                     .toEpisodeListFragment(args.tvShow, season.seasonNumber, season.name)
                     .navigateWith(navController)
@@ -106,10 +105,10 @@ class DetailFragment @Inject constructor(
         }
     }
 
-    private fun setTracked(isTracked: Boolean) {
+    private fun FragmentDetailBinding.setTracked(isTracked: Boolean) {
         val trackText = if (isTracked) R.string.text_stop_tracking else R.string.text_track
 
-        binding.btTrackShow.setText(trackText)
-        binding.btTrackShow.visibility = View.VISIBLE
+        btTrackShow.setText(trackText)
+        btTrackShow.visibility = View.VISIBLE
     }
 }

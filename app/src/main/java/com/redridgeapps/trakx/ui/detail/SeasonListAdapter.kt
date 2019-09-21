@@ -39,10 +39,10 @@ class SeasonListAdapter(
         private val binding: ItemSeasonBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(season: Season) {
+        fun bind(season: Season) = with(binding) {
 
-            binding.tvShowSeason.text = season.name
-            binding.tvShowSeasonEpisodeCount.text = "${season.episodeCount} episodes"
+            tvShowSeason.text = season.name
+            tvShowSeasonEpisodeCount.text = "${season.episodeCount} episodes"
         }
     }
 }

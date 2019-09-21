@@ -47,14 +47,13 @@ class EpisodeListFragment @Inject constructor(
         setupLayout()
     }
 
-    private fun setupLayout() {
+    private fun setupLayout() = with(binding) {
 
-        setupToolbarWithNavigation(binding.toolbar)
-
+        setupToolbarWithNavigation(toolbar)
         setupRecyclerView()
     }
 
-    private fun setupRecyclerView() {
+    private fun FragmentEpisodeListBinding.setupRecyclerView() {
 
         val navController = findNavController()
 
@@ -73,7 +72,7 @@ class EpisodeListFragment @Inject constructor(
         val itemDecoration =
             DividerItemDecoration(requireContext(), linearLayoutManager.orientation)
 
-        binding.recyclerView.apply {
+        recyclerView.apply {
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
             adapter = episodeListAdapter
