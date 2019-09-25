@@ -36,6 +36,10 @@ allprojects {
         mavenCentral()
         maven { url "https://kotlin.bintray.com/kotlinx" } // FIXME (REMOVE) For Serialization
         maven { url "https://jitpack.io" } // For Chucker
+        jcenter {
+            // AGP
+            content { includeGroup "org.jetbrains.trove4j" }
+        }
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
