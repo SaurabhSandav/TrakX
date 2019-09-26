@@ -47,7 +47,6 @@ allprojects {
                 '-progressive',
                 '-Xnew-inference',
                 '-XXLanguage:+InlineClasses',
-                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi' // FIXME (REMOVE) For Kotlin Flow
         ]
     }
 }

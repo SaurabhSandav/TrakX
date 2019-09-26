@@ -8,7 +8,7 @@ object Android {
 
 object Kotlin {
     private const val VERSION = "1.3.50"
-    private const val COROUTINES_VERSION = "1.3.1"
+    private const val COROUTINES_VERSION = "1.3.2"
     private const val SERIALIZATION_VERSION = "0.13.0"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
