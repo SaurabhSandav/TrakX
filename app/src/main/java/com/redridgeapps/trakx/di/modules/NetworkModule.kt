@@ -5,13 +5,16 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.redridgeapps.trakx.api.TMDbInterceptor
 import com.redridgeapps.trakx.api.TMDbService
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
+import okhttp3.Call.Factory
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Converter
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -61,12 +64,17 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        okHttpClient: OkHttpClient,
+        okHttpClient: Lazy<OkHttpClient>,
         serializationCon: Converter.Factory
     ): Retrofit {
+
+        val callFactory = object : Factory {
+            override fun newCall(request: Request) = okHttpClient.get().newCall(request)
+        }
+
         return Retrofit.Builder()
             .baseUrl(TMDbService.BASE_URL)
-            .client(okHttpClient)
+            .callFactory(callFactory)
             .addConverterFactory(serializationCon)
             .build()
     }
