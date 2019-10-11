@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.6.0-alpha12"
+    private const val GRADLE_PLUGIN_VERSION = "3.6.0-beta01"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
@@ -48,19 +48,19 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-alpha10"
+    private const val VERSION = "1.1.0-beta01"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.1.0-alpha03"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0-beta01"
     private const val APPCOMPAT_VERSION = "1.1.0"
-    private const val CORE_KTX_VERSION = "1.2.0-alpha04"
-    private const val FRAGMENT_KTX_VERSION = "1.2.0-alpha03"
+    private const val CORE_KTX_VERSION = "1.2.0-beta01"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0-beta02"
     private const val PREFERENCE_KTX_VERSION = "1.1.0"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-beta04"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-beta05"
     private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
@@ -75,7 +75,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-alpha04"
+    private const val VERSION = "2.2.0-beta01"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -84,7 +84,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.2.0-alpha02"
+    private const val VERSION = "2.2.0-beta01"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -99,7 +99,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.3.0-alpha01"
+    private const val VERSION = "2.3.0-alpha02"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
@@ -129,7 +129,7 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "4.2.0"
+    private const val VERSION = "4.2.2"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
