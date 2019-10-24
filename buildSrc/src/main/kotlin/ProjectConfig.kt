@@ -20,7 +20,7 @@ object Kotlin {
 }
 
 object GradleVersionsPlugin {
-    private const val VERSION = "0.25.0"
+    private const val VERSION = "0.27.0"
 
     const val GRADLE_PLUGIN = "com.github.ben-manes:gradle-versions-plugin:$VERSION"
 }
@@ -48,20 +48,20 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.1.0-beta01"
+    private const val VERSION = "1.2.0-alpha01"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.1.0-beta01"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0-rc01"
     private const val APPCOMPAT_VERSION = "1.1.0"
     private const val CORE_KTX_VERSION = "1.2.0-beta01"
-    private const val FRAGMENT_KTX_VERSION = "1.2.0-beta02"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0-rc01"
     private const val PREFERENCE_KTX_VERSION = "1.1.0"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
-    private const val RECYCLERVIEW_VERSION = "1.1.0-beta05"
-    private const val CONSTRAINT_LAYOUT_VERSION = "1.1.3"
+    private const val RECYCLERVIEW_VERSION = "1.1.0-rc01"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -75,7 +75,7 @@ object Jetpack {
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-beta01"
+    private const val VERSION = "2.2.0-rc01"
 
     const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
@@ -84,7 +84,7 @@ object Lifecycle {
 }
 
 object Navigation {
-    private const val VERSION = "2.2.0-beta01"
+    private const val VERSION = "2.2.0-rc01"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -99,7 +99,7 @@ object Paging {
 }
 
 object WorkManager {
-    private const val VERSION = "2.3.0-alpha02"
+    private const val VERSION = "2.3.0-alpha03"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
