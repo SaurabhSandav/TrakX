@@ -157,12 +157,6 @@ object Chucker {
     const val CHUCKER_NO_OP = "com.github.ChuckerTeam.Chucker:library-no-op:$VERSION"
 }
 
-object ThreeTenABP {
-    private const val VERSION = "1.2.1"
-
-    const val THREE_TEN_ABP = "com.jakewharton.threetenabp:threetenabp:$VERSION"
-}
-
 object AssistedInject {
     private const val VERSION = "0.5.0"
 

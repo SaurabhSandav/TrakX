@@ -143,9 +143,6 @@ dependencies {
     debugImplementation Chucker.CHUCKER
     releaseImplementation Chucker.CHUCKER_NO_OP
 
-    // ThreeTenABP
-    implementation ThreeTenABP.THREE_TEN_ABP
-
     // AssistedInject
     compileOnly AssistedInject.ANNOTATIONS
     kapt AssistedInject.PROCESSOR

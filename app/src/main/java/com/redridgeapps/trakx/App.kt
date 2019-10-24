@@ -2,7 +2,6 @@ package com.redridgeapps.trakx
 
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import com.jakewharton.threetenabp.AndroidThreeTen
 import com.redridgeapps.trakx.di.DaggerAppComponent
 import com.redridgeapps.trakx.work.BaseWorkerFactory
 import dagger.android.AndroidInjector
@@ -17,7 +16,6 @@ class App : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        AndroidThreeTen.init(this)
         setupWorkManager()
     }
 
