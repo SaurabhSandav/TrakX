@@ -105,7 +105,7 @@ object WorkManager {
 }
 
 object Dagger {
-    private const val VERSION = "2.24"
+    private const val VERSION = "2.25.2"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"

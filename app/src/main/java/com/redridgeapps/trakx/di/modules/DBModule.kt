@@ -18,7 +18,6 @@ object DBModule {
 
     // region CacheDB
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideCacheDB(app: Application): CacheDB {
@@ -30,14 +29,12 @@ object DBModule {
         return CacheDB(driver)
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideCachedCollectionQueries(cacheDB: CacheDB): CachedCollectionQueries {
         return cacheDB.cachedCollectionQueries
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideCachedShowQueries(cacheDB: CacheDB): CachedShowQueries {
@@ -48,7 +45,6 @@ object DBModule {
 
     // region AppDB
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideAppDB(app: Application): AppDB {
@@ -60,14 +56,12 @@ object DBModule {
         return AppDB(driver)
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideTrackedShowQueries(appDB: AppDB): TrackedShowQueries {
         return appDB.trackedShowQueries
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideUpcomingEpisodesQueries(appDB: AppDB): UpcomingEpisodesQueries {

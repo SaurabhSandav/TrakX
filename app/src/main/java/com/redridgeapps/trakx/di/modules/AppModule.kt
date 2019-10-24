@@ -24,14 +24,12 @@ import javax.inject.Singleton
 )
 object AppModule {
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideResources(app: Application): Resources {
         return app.resources
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideSharedPreferences(app: Application): SharedPreferences {

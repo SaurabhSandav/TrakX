@@ -22,14 +22,12 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideTMDbInterceptor(): TMDbInterceptor {
         return TMDbInterceptor()
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideChuckerInterceptor(app: Application): ChuckerInterceptor {
@@ -37,7 +35,6 @@ object NetworkModule {
     }
 
     @UnstableDefault
-    @JvmStatic
     @Provides
     @Singleton
     fun provideSerializationConverterFactory(): Converter.Factory {
@@ -46,7 +43,6 @@ object NetworkModule {
         return Json(configuration).asConverterFactory(contentType)
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideOkHttpClient(
@@ -60,7 +56,6 @@ object NetworkModule {
             .build()
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -79,7 +74,6 @@ object NetworkModule {
             .build()
     }
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideTMDbService(retrofit: Retrofit): TMDbService {
