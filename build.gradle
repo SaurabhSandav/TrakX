@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
         jcenter {
             content {
                 // AGP
@@ -34,6 +35,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
         maven { url "https://kotlin.bintray.com/kotlinx" } // FIXME (REMOVE) For Serialization
         maven { url "https://jitpack.io" } // For Chucker
         jcenter {

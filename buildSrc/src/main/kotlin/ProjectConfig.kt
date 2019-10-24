@@ -1,7 +1,7 @@
 @file:Suppress("unused")
 
 object Android {
-    private const val GRADLE_PLUGIN_VERSION = "3.6.0-beta01"
+    private const val GRADLE_PLUGIN_VERSION = "4.0.0-alpha01"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
 }
