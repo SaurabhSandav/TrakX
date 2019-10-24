@@ -8,10 +8,10 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.nullable
 import kotlinx.serialization.serializer
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDate
-import org.threeten.bp.format.DateTimeFormatter
 import java.text.ParseException
+import java.time.Instant
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Serializer(forClass = Long::class)
 object LongDateSerializer : KSerializer<Long> {

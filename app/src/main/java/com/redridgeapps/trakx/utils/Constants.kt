@@ -1,6 +1,6 @@
 package com.redridgeapps.trakx.utils
 
-import org.threeten.bp.ZoneId
+import java.time.ZoneId
 
 object Constants {
 
