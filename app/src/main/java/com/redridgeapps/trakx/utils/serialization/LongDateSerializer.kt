@@ -8,7 +8,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.nullable
 import kotlinx.serialization.serializer
-import java.text.ParseException
 import java.time.Instant
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -27,14 +26,11 @@ object LongDateSerializer : KSerializer<Long> {
     }
 
     override fun deserialize(decoder: Decoder): Long {
-        val result = EventDate.NO_DATE.longDate
-        val dateStr = decoder.decodeSerializableValue(serializer) ?: return result
+        val defaultResult = EventDate.NO_DATE.longDate
 
-        return try {
-            dateStr.asEpochSeconds()
-        } catch (e: ParseException) {
-            result
-        }
+        return kotlin.runCatching {
+            decoder.decodeSerializableValue(serializer)!!.asEpochSeconds()
+        }.getOrDefault(defaultResult)
     }
 
     private fun Long.asISODate(): String {
