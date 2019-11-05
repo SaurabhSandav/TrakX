@@ -1,5 +1,6 @@
 package com.redridgeapps.trakx.model.tmdb
 
+import androidx.recyclerview.widget.DiffUtil
 import com.redridgeapps.trakx.model.EventDate
 import com.redridgeapps.trakx.utils.serialization.LongDateSerializer
 import kotlinx.serialization.SerialName
@@ -34,4 +35,11 @@ data class Season(
 
     @Transient
     val airEventDate: EventDate = EventDate(airDate)
+
+    object DiffCallback : DiffUtil.ItemCallback<Season>() {
+
+        override fun areItemsTheSame(oldItem: Season, newItem: Season) = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Season, newItem: Season) = true
+    }
 }

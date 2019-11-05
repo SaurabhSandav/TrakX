@@ -2,6 +2,7 @@ package com.redridgeapps.trakx.ui.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.redridgeapps.trakx.databinding.ItemSeasonBinding
 import com.redridgeapps.trakx.model.tmdb.Season
@@ -9,7 +10,7 @@ import com.redridgeapps.trakx.model.tmdb.Season
 class SeasonListAdapter(
     private val seasonList: List<Season>,
     private val seasonClickListener: (Season) -> Unit
-) : RecyclerView.Adapter<SeasonListAdapter.SeasonViewHolder>() {
+) : ListAdapter<Season, SeasonListAdapter.SeasonViewHolder>(Season.DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
 
