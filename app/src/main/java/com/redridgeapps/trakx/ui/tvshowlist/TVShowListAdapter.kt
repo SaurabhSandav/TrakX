@@ -10,7 +10,7 @@ import com.redridgeapps.trakx.model.tmdb.TVShow
 import com.squareup.picasso.Picasso
 
 class TVShowListAdapter(
-    private val clickListener: (TVShow) -> Unit
+    private val tvShowClickListener: (TVShow) -> Unit
 ) : PagedListAdapter<TVShow, TVShowListAdapter.TVShowListViewHolder>(TVShow.DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowListViewHolder {
@@ -21,15 +21,7 @@ class TVShowListAdapter(
             false
         )
 
-        val viewHolder = TVShowListViewHolder(binding)
-
-        viewHolder.itemView.setOnClickListener {
-            if (viewHolder.adapterPosition != RecyclerView.NO_POSITION) {
-                getItem(viewHolder.adapterPosition)?.let { localTVShow -> clickListener(localTVShow) }
-            }
-        }
-
-        return viewHolder
+        return TVShowListViewHolder(binding, tvShowClickListener, this::getItem)
     }
 
     override fun onBindViewHolder(holder: TVShowListViewHolder, position: Int) {
@@ -37,8 +29,18 @@ class TVShowListAdapter(
     }
 
     class TVShowListViewHolder(
-        private val binding: ItemTvShowListBinding
+        private val binding: ItemTvShowListBinding,
+        tvShowClickListener: (TVShow) -> Unit,
+        getItem: (Int) -> TVShow?
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                if (adapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+
+                getItem(adapterPosition)?.let { localTVShow -> tvShowClickListener(localTVShow) }
+            }
+        }
 
         fun bindTo(tvShow: TVShow?): Unit = with(binding) {
             root.isClickable = tvShow != null

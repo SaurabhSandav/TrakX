@@ -19,14 +19,7 @@ class EpisodeListAdapter(
             false
         )
 
-        val viewHolder = EpisodeItemViewHolder(binding)
-
-        binding.root.setOnClickListener {
-            if (viewHolder.adapterPosition != RecyclerView.NO_POSITION)
-                episodeClickListener(getItem(viewHolder.adapterPosition))
-        }
-
-        return viewHolder
+        return EpisodeItemViewHolder(binding, episodeClickListener, this::getItem)
     }
 
     override fun onBindViewHolder(holder: EpisodeItemViewHolder, position: Int) {
@@ -34,8 +27,17 @@ class EpisodeListAdapter(
     }
 
     class EpisodeItemViewHolder(
-        private val binding: ItemEpisodeBinding
+        private val binding: ItemEpisodeBinding,
+        episodeClickListener: (Episode) -> Unit,
+        getItem: (Int) -> Episode
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION)
+                    episodeClickListener(getItem(adapterPosition))
+            }
+        }
 
         fun bind(episode: Episode) = with(binding) {
             tvShowEpisode.text = "${episode.episodeNumber}. ${episode.name}"
