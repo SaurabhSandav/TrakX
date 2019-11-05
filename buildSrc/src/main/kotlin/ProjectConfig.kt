@@ -1,9 +1,12 @@
 @file:Suppress("unused")
 
-object Android {
+object AndroidTools {
     private const val GRADLE_PLUGIN_VERSION = "4.0.0-alpha01"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta3"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
+    const val CONSTRAINT_LAYOUT =
+        "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 }
 
 object Kotlin {
@@ -61,7 +64,6 @@ object Jetpack {
     private const val PREFERENCE_KTX_VERSION = "1.1.0"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
     private const val RECYCLERVIEW_VERSION = "1.1.0-rc01"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta3"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -70,8 +72,6 @@ object Jetpack {
     const val PREFERENCE_KTX = "androidx.preference:preference-ktx:$PREFERENCE_KTX_VERSION"
     const val DRAWERLAYOUT = "androidx.drawerlayout:drawerlayout:$DRAWERLAYOUT_VERSION"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview:$RECYCLERVIEW_VERSION"
-    const val CONSTRAINT_LAYOUT =
-        "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 }
 
 object Lifecycle {

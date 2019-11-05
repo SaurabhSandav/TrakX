@@ -79,6 +79,9 @@ dependencies {
     implementation Kotlin.COROUTINES
     implementation Kotlin.SERIALIZATION_RUNTIME
 
+    // Android Tools
+    implementation(AndroidTools.CONSTRAINT_LAYOUT)
+
     // Testing
     testImplementation JUnit.JUNIT
     androidTestImplementation AndroidXTest.CORE_KTX
@@ -97,7 +100,6 @@ dependencies {
     implementation Jetpack.PREFERENCE_KTX
     implementation Jetpack.DRAWERLAYOUT
     implementation Jetpack.RECYCLERVIEW
-    implementation Jetpack.CONSTRAINT_LAYOUT
 
     // ViewModel and LiveData
     implementation Lifecycle.EXTENSIONS
