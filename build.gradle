@@ -5,7 +5,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
+
+        // Kotlin EAP
+        if (Kotlin.enableKotlinEAP)
+            maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
+
         jcenter {
             content {
                 // AGP
@@ -31,8 +35,15 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
-        maven { url "https://kotlin.bintray.com/kotlinx" } // FIXME (REMOVE) For Serialization
+
+        // Kotlin EAP
+        if (Kotlin.enableKotlinEAP)
+            maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
+
+        // KotlinX EAP
+        if (Kotlin.enableKotlinXEAP)
+            maven { url "https://kotlin.bintray.com/kotlinx" }
+
         maven { url "https://jitpack.io" } // For Chucker
         jcenter {
             // AGP

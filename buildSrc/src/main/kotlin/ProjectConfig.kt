@@ -20,6 +20,9 @@ object Kotlin {
     const val SERIALIZATION_RUNTIME =
         "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
+
+    const val enableKotlinEAP = true
+    const val enableKotlinXEAP = true
 }
 
 object JUnit {
