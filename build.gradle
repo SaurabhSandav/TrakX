@@ -6,16 +6,12 @@ buildscript {
         google()
         mavenCentral()
 
+        // AGP
+        maven { url "https://jetbrains.bintray.com/trove4j" }
+
         // Kotlin EAP
         if (Kotlin.enableKotlinEAP)
             maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
-
-        jcenter {
-            content {
-                // AGP
-                includeGroup "org.jetbrains.trove4j"
-            }
-        }
     }
 
     dependencies {
@@ -36,6 +32,9 @@ allprojects {
         google()
         mavenCentral()
 
+        // AGP
+        maven { url "https://jetbrains.bintray.com/trove4j" }
+
         // Kotlin EAP
         if (Kotlin.enableKotlinEAP)
             maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
@@ -44,11 +43,8 @@ allprojects {
         if (Kotlin.enableKotlinXEAP)
             maven { url "https://kotlin.bintray.com/kotlinx" }
 
-        maven { url "https://jitpack.io" } // For Chucker
-        jcenter {
-            // AGP
-            content { includeGroup "org.jetbrains.trove4j" }
-        }
+        // For Chucker
+        maven { url "https://jitpack.io" }
     }
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
