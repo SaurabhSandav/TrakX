@@ -48,7 +48,9 @@ android {
         pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
     }
 
-    viewBinding.enabled = true
+    buildFeatures {
+        viewBinding = true
+    }
 
     sourceSets {
         main {
