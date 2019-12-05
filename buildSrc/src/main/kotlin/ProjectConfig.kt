@@ -1,17 +1,19 @@
 @file:Suppress("unused")
 
 object AndroidTools {
-    private const val GRADLE_PLUGIN_VERSION = "4.0.0-alpha04"
-    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta3"
+    private const val GRADLE_PLUGIN_VERSION = "4.0.0-alpha09"
+    private const val DESUGAR_JDK_LIBS_VERSION = "1.0.4"
+    private const val CONSTRAINT_LAYOUT_VERSION = "2.0.0-beta4"
 
     const val GRADLE_PLUGIN = "com.android.tools.build:gradle:$GRADLE_PLUGIN_VERSION"
+    const val DESUGAR_JDK_LIBS = "com.android.tools:desugar_jdk_libs:$DESUGAR_JDK_LIBS_VERSION"
     const val CONSTRAINT_LAYOUT =
         "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
 }
 
 object Kotlin {
     private const val VERSION = "1.3.61"
-    private const val COROUTINES_VERSION = "1.3.2-1.3.60"
+    private const val COROUTINES_VERSION = "1.3.3"
     private const val SERIALIZATION_VERSION = "0.14.0"
 
     const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$VERSION"
@@ -21,12 +23,12 @@ object Kotlin {
         "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$SERIALIZATION_VERSION"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
 
-    const val enableKotlinEAP = true
-    const val enableKotlinXEAP = true
+    const val enableKotlinEAP = false
+    const val enableKotlinXEAP = false
 }
 
 object JUnit {
-    private const val JUNIT_VERSION = "4.12"
+    private const val JUNIT_VERSION = "4.13"
 
     const val JUNIT = "junit:junit:$JUNIT_VERSION"
 }
@@ -48,19 +50,20 @@ object Espresso {
 }
 
 object Material {
-    private const val VERSION = "1.2.0-alpha02"
+    private const val VERSION = "1.2.0-alpha04"
 
     const val MATERIAL = "com.google.android.material:material:$VERSION"
 }
 
 object Jetpack {
-    private const val ACTIVITY_KTX_VERSION = "1.1.0-rc02"
-    private const val APPCOMPAT_VERSION = "1.1.0"
+    private const val ACTIVITY_KTX_VERSION = "1.1.0"
+    private const val APPCOMPAT_VERSION = "1.2.0-alpha01"
     private const val CORE_KTX_VERSION = "1.2.0-rc01"
-    private const val FRAGMENT_KTX_VERSION = "1.2.0-rc02"
+    private const val FRAGMENT_KTX_VERSION = "1.2.0"
     private const val PREFERENCE_KTX_VERSION = "1.1.0"
     private const val DRAWERLAYOUT_VERSION = "1.1.0-alpha03"
-    private const val RECYCLERVIEW_VERSION = "1.1.0"
+    private const val COORDINATORLAYOUT_VERSION = "1.1.0"
+    private const val RECYCLERVIEW_VERSION = "1.2.0-alpha01"
 
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:$ACTIVITY_KTX_VERSION"
     const val APPCOMPAT = "androidx.appcompat:appcompat:$APPCOMPAT_VERSION"
@@ -68,20 +71,21 @@ object Jetpack {
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:$FRAGMENT_KTX_VERSION"
     const val PREFERENCE_KTX = "androidx.preference:preference-ktx:$PREFERENCE_KTX_VERSION"
     const val DRAWERLAYOUT = "androidx.drawerlayout:drawerlayout:$DRAWERLAYOUT_VERSION"
+    const val COORDINATORLAYOUT =
+        "androidx.coordinatorlayout:coordinatorlayout:$COORDINATORLAYOUT_VERSION"
     const val RECYCLERVIEW = "androidx.recyclerview:recyclerview:$RECYCLERVIEW_VERSION"
 }
 
 object Lifecycle {
-    private const val VERSION = "2.2.0-rc02"
+    private const val VERSION = "2.2.0"
 
-    const val EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:$VERSION"
     const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
     const val VIEWMODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:$VERSION"
     const val COMMON_JAVA8 = "androidx.lifecycle:lifecycle-common-java8:$VERSION"
 }
 
 object Navigation {
-    private const val VERSION = "2.2.0-rc02"
+    private const val VERSION = "2.2.0"
 
     const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
     const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
@@ -90,19 +94,19 @@ object Navigation {
 }
 
 object Paging {
-    private const val VERSION = "2.1.0"
+    private const val VERSION = "2.1.1"
 
     const val RUNTIME_KTX = "androidx.paging:paging-runtime-ktx:$VERSION"
 }
 
 object WorkManager {
-    private const val VERSION = "2.3.0-beta01"
+    private const val VERSION = "2.3.0"
 
     const val RUNTIME_KTX = "androidx.work:work-runtime-ktx:$VERSION"
 }
 
 object Dagger {
-    private const val VERSION = "2.25.2"
+    private const val VERSION = "2.25.4"
 
     const val DAGGER = "com.google.dagger:dagger:$VERSION"
     const val ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:$VERSION"
@@ -111,7 +115,7 @@ object Dagger {
 }
 
 object Retrofit {
-    private const val VERSION = "2.6.2"
+    private const val VERSION = "2.7.1"
     private const val SERIALIZATION_VERSION = "0.4.0"
 
     const val RETROFIT = "com.squareup.retrofit2:retrofit:$VERSION"
@@ -126,19 +130,19 @@ object Picasso {
 }
 
 object OkHttp {
-    private const val VERSION = "4.2.2"
+    private const val VERSION = "4.3.1"
 
     const val OKHTTP = "com.squareup.okhttp3:okhttp:$VERSION"
 }
 
 object LeakCanary {
-    private const val VERSION = "2.0"
+    private const val VERSION = "2.1"
 
     const val ANDROID = "com.squareup.leakcanary:leakcanary-android:$VERSION"
 }
 
 object SQLDelight {
-    private const val VERSION = "1.2.0"
+    private const val VERSION = "1.2.1"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
@@ -148,7 +152,7 @@ object SQLDelight {
 }
 
 object Chucker {
-    private const val VERSION = "3.0.1"
+    private const val VERSION = "3.1.1"
 
     const val CHUCKER = "com.github.ChuckerTeam.Chucker:library:$VERSION"
     const val CHUCKER_NO_OP = "com.github.ChuckerTeam.Chucker:library-no-op:$VERSION"

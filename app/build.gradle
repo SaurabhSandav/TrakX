@@ -85,6 +85,8 @@ sqldelight {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    coreLibraryDesugaring AndroidTools.DESUGAR_JDK_LIBS
+
     // Kotlin
     implementation Kotlin.STDLIB
     implementation Kotlin.COROUTINES
@@ -110,10 +112,10 @@ dependencies {
     implementation Jetpack.FRAGMENT_KTX
     implementation Jetpack.PREFERENCE_KTX
     implementation Jetpack.DRAWERLAYOUT
+    implementation Jetpack.COORDINATORLAYOUT
     implementation Jetpack.RECYCLERVIEW
 
     // ViewModel and LiveData
-    implementation Lifecycle.EXTENSIONS
     implementation Lifecycle.LIVEDATA_KTX
     implementation Lifecycle.VIEWMODEL_KTX
     implementation Lifecycle.COMMON_JAVA8
