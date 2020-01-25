@@ -51,7 +51,8 @@ class TVShowListViewModel @AssistedInject constructor(
         queryProvider = { limit, offset ->
             trackedShowQueries.trackedShowPaged(limit, offset, ::TVShow)
         },
-        countQuery = trackedShowQueries.countTrackedShows()
+        countQuery = trackedShowQueries.countTrackedShows(),
+        transacter = trackedShowQueries
     )
 
     private fun buildCachedCollectionDataSource(
@@ -60,7 +61,8 @@ class TVShowListViewModel @AssistedInject constructor(
         queryProvider = { limit, offset ->
             cachedCollectionQueries.cachedShowPaged(requestType.name, limit, offset, ::TVShow)
         },
-        countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name)
+        countQuery = cachedCollectionQueries.countCachedShowPaged(requestType.name),
+        transacter = cachedCollectionQueries
     )
 
     @AssistedInject.Factory

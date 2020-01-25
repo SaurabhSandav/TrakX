@@ -142,7 +142,7 @@ object LeakCanary {
 }
 
 object SQLDelight {
-    private const val VERSION = "1.2.1"
+    private const val VERSION = "1.2.2"
 
     const val GRADLE_PLUGIN = "com.squareup.sqldelight:gradle-plugin:$VERSION"
     const val ANDROID_DRIVER = "com.squareup.sqldelight:android-driver:$VERSION"
